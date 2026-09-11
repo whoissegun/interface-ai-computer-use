@@ -272,8 +272,20 @@ async function readForm(req) {
   return new URLSearchParams(Buffer.concat(chunks).toString("utf8"));
 }
 
-async function handleRequest(req, res) {
+function requestUrl(req) {
   const url = new URL(req.url, `http://${req.headers.host || "localhost"}`);
+  const rewrittenPath = url.searchParams.get("__path");
+
+  if (rewrittenPath !== null) {
+    url.pathname = rewrittenPath.startsWith("/") ? rewrittenPath : `/${rewrittenPath}`;
+    url.searchParams.delete("__path");
+  }
+
+  return url;
+}
+
+async function handleRequest(req, res) {
+  const url = requestUrl(req);
   const state = readState(req);
 
   if (req.method === "GET" && url.pathname === "/") return send(res, 200, shell());

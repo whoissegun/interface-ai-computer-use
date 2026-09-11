@@ -33,6 +33,20 @@ test("root exposes a framed legacy workspace", async () => {
   assert.match(body, /\/app\/home/);
 });
 
+test("Vercel catch-all rewrite preserves nested application routes", async () => {
+  let response = await request("/api/index.js?__path=/legacy-banner");
+  assert.equal(response.status, 200);
+  assert.match(await response.text(), /NORTHSTAR CU/);
+
+  response = await request("/api/index.js?__path=/app/home");
+  assert.equal(response.status, 200);
+  assert.match(await response.text(), /Operations Menu/);
+
+  response = await request("/api/index.js?__path=/assets/legacy.css");
+  assert.equal(response.status, 200);
+  assert.match(response.headers.get("content-type"), /text\/css/);
+});
+
 test("normal flow reads a balance and safely simulates a sub-account review", async () => {
   let cookie = "";
   let response = await request("/app/member-search", {
