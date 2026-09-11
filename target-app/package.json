@@ -1,0 +1,14 @@
+{
+  "name": "northstar-legacy-ops",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Fictional legacy credit-union UI target for computer-use automation",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js",
+    "test": "node --test test/*.test.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
