@@ -75,6 +75,12 @@ export type Scenario = {
   prompt: string;
   expected: string;
   allowFinalSubmission: boolean;
+  humanHandoff?: {
+    reasonCode: string;
+    triggerText: string;
+    resolvedText: string;
+    instructions: string;
+  };
 };
 
 export type RunStatus = "completed" | "max_steps" | "failed";
@@ -92,5 +98,12 @@ export type RunSummary = {
   startedAt: string;
   finishedAt: string;
   elapsedMs: number;
+  humanHandoff?: {
+    reasonCode: string;
+    status: "resumed";
+    requestedAt: string;
+    resolvedAt: string;
+    checks: number;
+  };
   error?: string;
 };

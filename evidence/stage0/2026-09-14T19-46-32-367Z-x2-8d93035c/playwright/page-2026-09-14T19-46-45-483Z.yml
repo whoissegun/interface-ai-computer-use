@@ -1,0 +1,55 @@
+- generic [ref=e1]:
+  - iframe [ref=e2]:
+    - generic [ref=f1e1]:
+      - text: NORTHSTAR CU
+      - link "HOME" [ref=f1e2] [cursor=pointer]:
+        - /url: /app/home
+      - link "MEMBER LOOKUP" [ref=f1e3] [cursor=pointer]:
+        - /url: /app/member-search
+      - link "OPS HELP" [ref=f1e4] [cursor=pointer]:
+        - /url: /app/help
+      - text: "BRANCH 019 | USER: DEMO7"
+  - iframe [active] [ref=e3]:
+    - generic [active] [ref=f2e1]:
+      - text: Member Relationship Summary COREBANK / TELLER 7.4
+      - table [ref=f2e2]:
+        - rowgroup [ref=f2e3]:
+          - row [ref=f2e4]:
+            - 'rowheader "Member #" [ref=f2e5]'
+            - cell "300088" [ref=f2e6]
+            - rowheader "Status" [ref=f2e7]
+            - cell "Active — enhanced review flag" [ref=f2e8]
+          - row [ref=f2e9]:
+            - rowheader "Name" [ref=f2e10]
+            - cell "Casey Fiction" [ref=f2e11]
+            - rowheader "Member since" [ref=f2e12]
+            - cell "2024-06-21" [ref=f2e13]
+          - row [ref=f2e14]:
+            - rowheader "Address" [ref=f2e15]
+            - cell "8 Demonstration Court, Testville, ON C3C 3C3" [ref=f2e16]
+          - row [ref=f2e17]:
+            - rowheader "Telephone" [ref=f2e18]
+            - cell "(555) 010-0088" [ref=f2e19]
+      - generic [ref=f2e20]: "RELATIONSHIP ALERT R17: A supervisor must review new-product requests for this member."
+      - heading "Deposit Relationships" [level=2] [ref=f2e21]
+      - table [ref=f2e22]:
+        - rowgroup [ref=f2e23]:
+          - row [ref=f2e24]:
+            - columnheader "Account" [ref=f2e25]
+            - columnheader "Product" [ref=f2e26]
+            - columnheader "Current Balance" [ref=f2e27]
+            - columnheader "Available Balance" [ref=f2e28]
+            - columnheader "Action" [ref=f2e29]
+          - row [ref=f2e30]:
+            - cell "S-0088-01" [ref=f2e31]
+            - cell "Regular Savings" [ref=f2e32]
+            - cell "$10,500.00" [ref=f2e33]
+            - cell "$10,500.00" [ref=f2e34]
+            - cell [ref=f2e35]:
+              - link "INQUIRE" [ref=f2e36] [cursor=pointer]:
+                - /url: /app/account?acct=S-0088-01
+      - button "F9 - Open New Share/Sub-account" [ref=f2e38]
+      - paragraph [ref=f2e39]:
+        - link "F4 - New member lookup" [ref=f2e40] [cursor=pointer]:
+          - /url: /app/member-search
+      - generic [ref=f2e41]: Northstar Community Credit Union — TRAINING SYSTEM — fictitious data only

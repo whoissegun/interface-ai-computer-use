@@ -8,6 +8,7 @@
   },
   "scripts": {
     "stage0": "tsx src/stage0/cli.ts",
+    "stage0:hitl": "npm run stage0 -- --scenario x2 --headed --wait-for-human",
     "test": "tsx --test 'src/**/*.test.ts'",
     "typecheck": "tsc --noEmit"
   },

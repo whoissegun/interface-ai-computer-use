@@ -7,6 +7,9 @@ and Playwright MCP artifacts.
 The repeated 39-run experiment is summarized in
 [Stage 0 Stability Experiment — 2026-09-14](./stability-2026-09-14.md).
 
+The three same-session supervisor handoff runs are summarized in
+[Stage 0 Live Human Handoff Experiment — 2026-09-14](./hitl-2026-09-14.md).
+
 ## First atomic task: A1
 
 | Run | Model | Outcome | Finding |

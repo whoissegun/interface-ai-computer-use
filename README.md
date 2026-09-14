@@ -14,3 +14,7 @@ The executable exploration harness and its commands are described in the
 [Stage 0 runner guide](./docs/stage-0-runner.md). The reasoning behind the
 browser and model choices is recorded in
 [ADR 0001](./docs/decisions/0001-stage-0-discovery-approach.md).
+
+The same-session human-review design, safety boundary, alternatives, and
+validation are recorded in
+[ADR 0002](./docs/decisions/0002-live-human-handoff.md).

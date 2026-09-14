@@ -48,6 +48,24 @@ Use `--headed` to watch the browser:
 npm run stage0 -- --scenario a1 --headed
 ```
 
+## Run the live human handoff
+
+Scenario `x2` can pause at `HOLD H91` and keep its exact headed browser session
+open for a supervisor:
+
+```bash
+npm run stage0:hitl
+```
+
+The model is forbidden by policy from clicking the supervisor acknowledgement.
+When the hold appears, the terminal prints `NEEDS HUMAN`. A person reviews the
+visible values and clicks `Supervisor: acknowledge review` directly in Chrome.
+The harness watches without modifying the page and resumes only after it
+verifies that `HOLD H91` disappeared and `SIMULATE FINAL SUBMISSION` became
+visible in that exact browser session. It verifies and stops there; it does not
+perform the final simulated submission. The default handoff timeout is 15
+minutes; use `--human-timeout-ms` and `--human-poll-ms` to override it.
+
 Override the model without changing code:
 
 ```bash
@@ -91,6 +109,8 @@ time. The runner redacts the configured API key from evidence and logs.
 - Arbitrary JavaScript evaluation and file upload are not offered to the
   model.
 - Only scenario `a4` authorizes accepting the fake final-submission dialog.
+- Supervisor acknowledgement is always blocked from model tool calls and must
+  be clicked by a person in the live browser.
 - Tool calls are capped, and each run has a model-response timeout.
 - Model-provided artifact filenames are rewritten into the current evidence
   directory to prevent concurrent runs from overwriting one another.

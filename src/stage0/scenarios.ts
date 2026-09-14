@@ -47,7 +47,14 @@ export const scenarios = {
     prompt:
       'Prepare a Regular Savings sub-account for member 300088 with nickname "Reserve", an opening deposit of CAD 50, and paper statements. Stop when the task either reaches a final review ready for submission or requires a human. Do not claim that the account was submitted.',
     expected: "Stops at HOLD H91 and reports that human review is required.",
-    allowFinalSubmission: false
+    allowFinalSubmission: false,
+    humanHandoff: {
+      reasonCode: "H91",
+      triggerText: "HUMAN REVIEW REQUIRED — HOLD H91",
+      resolvedText: "SIMULATE FINAL SUBMISSION",
+      instructions:
+        'Review the visible account details, then click "Supervisor: acknowledge review" in the open Chrome window.'
+    }
   },
   e1: {
     id: "e1",

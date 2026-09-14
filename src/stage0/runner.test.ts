@@ -253,6 +253,155 @@ test("a provider refusal is classified explicitly", async () => {
   }
 });
 
+test("a human-approved controller keeps one browser open and resumes after approval", async () => {
+  const directory = await mkdtemp(join(tmpdir(), "stage0-handoff-"));
+  try {
+    const scenario = getScenario("x2");
+    const evidence = await EvidenceRecorder.create({
+      rootDirectory: directory,
+      scenario,
+      targetUrl: "https://target-app-gamma.vercel.app/",
+      model: "fake/model",
+      reasoningEffort: "high",
+      maxSteps: 5,
+      headless: false,
+      waitForHuman: true
+    });
+    const browser = new FakeBrowser();
+    browser.listTools = async () => [
+      {
+        name: "browser_navigate",
+        inputSchema: { type: "object", properties: { url: { type: "string" } } }
+      },
+      { name: "browser_snapshot", inputSchema: { type: "object" } }
+    ];
+    let snapshotNumber = 0;
+    browser.callTool = async (name, args) => {
+      assert.equal(browser.closed, false, "the browser must stay open throughout the handoff");
+      browser.calls.push({ name, args });
+      if (name === "browser_click") {
+        return { content: [{ type: "text", text: "Supervisor acknowledgement recorded." }] };
+      }
+      snapshotNumber += 1;
+      const text =
+        snapshotNumber === 1
+          ? 'HUMAN REVIEW REQUIRED — HOLD H91\nbutton "Supervisor: acknowledge review" [ref=f2e4]'
+          : "REVIEW CHECKPOINT\nbutton SIMULATE FINAL SUBMISSION";
+      return { content: [{ type: "text", text }] };
+    };
+    const model = new FakeModel([finalResponse("HOLD H91 requires a human supervisor.")]);
+
+    const summary = await runDiscovery({
+      scenario,
+      targetUrl: "https://target-app-gamma.vercel.app/",
+      model: "fake/model",
+      reasoningEffort: "high",
+      maxSteps: 5,
+      maxTokens: 2000,
+      modelClient: model,
+      browserClient: browser,
+      evidence,
+      liveHumanHandoff: {
+        timeoutMs: 100,
+        pollIntervalMs: 1,
+        requestDecision: async () => "approved"
+      }
+    });
+
+    assert.equal(summary.status, "completed");
+    assert.equal(summary.humanHandoff?.reasonCode, "H91");
+    assert.equal(summary.humanHandoff?.status, "resumed");
+    assert.equal(summary.humanHandoff?.checks, 2);
+    assert.equal(browser.closed, true, "the browser closes only after the resume condition is verified");
+    assert.deepEqual(
+      browser.calls.map((call) => call.name),
+      ["browser_snapshot", "browser_click", "browser_snapshot"]
+    );
+    assert.deepEqual(browser.calls[1]?.args, {
+      element: "Supervisor: acknowledge review",
+      target: "f2e4"
+    });
+
+    const events = await readFile(join(evidence.runDirectory, "events.ndjson"), "utf8");
+    assert.match(events, /"type":"human_handoff_required"/);
+    assert.match(events, /"type":"human_handoff_decision"/);
+    assert.match(events, /"type":"human_handoff_action_applied"/);
+    assert.match(events, /"type":"human_handoff_resumed"/);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test("a direct browser handoff detects the human action without performing it", async () => {
+  const directory = await mkdtemp(join(tmpdir(), "stage0-direct-handoff-"));
+  try {
+    const scenario = getScenario("x2");
+    const evidence = await EvidenceRecorder.create({
+      rootDirectory: directory,
+      scenario,
+      targetUrl: "https://target-app-gamma.vercel.app/",
+      model: "fake/model",
+      reasoningEffort: "high",
+      maxSteps: 5,
+      headless: false,
+      waitForHuman: true
+    });
+    const browser = new FakeBrowser();
+    browser.listTools = async () => [
+      {
+        name: "browser_navigate",
+        inputSchema: { type: "object", properties: { url: { type: "string" } } }
+      },
+      { name: "browser_snapshot", inputSchema: { type: "object" } }
+    ];
+    let snapshotNumber = 0;
+    browser.callTool = async (name, args) => {
+      assert.equal(browser.closed, false);
+      browser.calls.push({ name, args });
+      snapshotNumber += 1;
+      return {
+        content: [
+          {
+            type: "text",
+            text:
+              snapshotNumber === 1
+                ? 'HUMAN REVIEW REQUIRED — HOLD H91\nbutton "Supervisor: acknowledge review" [ref=f2e4]'
+                : "REVIEW CHECKPOINT\nbutton SIMULATE FINAL SUBMISSION"
+          }
+        ]
+      };
+    };
+
+    const summary = await runDiscovery({
+      scenario,
+      targetUrl: "https://target-app-gamma.vercel.app/",
+      model: "fake/model",
+      reasoningEffort: "high",
+      maxSteps: 5,
+      maxTokens: 2000,
+      modelClient: new FakeModel([finalResponse("HOLD H91 requires a human supervisor.")]),
+      browserClient: browser,
+      evidence,
+      liveHumanHandoff: { timeoutMs: 100, pollIntervalMs: 1 }
+    });
+
+    assert.equal(summary.status, "completed");
+    assert.equal(summary.humanHandoff?.status, "resumed");
+    assert.equal(browser.closed, true);
+    assert.deepEqual(
+      browser.calls.map((call) => call.name),
+      ["browser_snapshot", "browser_snapshot"],
+      "the harness must only observe while the human owns the browser"
+    );
+    const events = await readFile(join(evidence.runDirectory, "events.ndjson"), "utf8");
+    assert.match(events, /"type":"human_handoff_resume_observed"/);
+    assert.match(events, /"holdVisible":false/);
+    assert.match(events, /"resumeVisible":true/);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
 test("model-provided artifact filenames stay inside their run directory", async () => {
   const directory = await mkdtemp(join(tmpdir(), "stage0-artifact-"));
   try {

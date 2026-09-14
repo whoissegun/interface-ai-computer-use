@@ -25,6 +25,9 @@ const parsed = parseArgs({
     "max-steps": { type: "string", default: "30" },
     "max-tokens": { type: "string", default: "12000" },
     headed: { type: "boolean", default: false },
+    "wait-for-human": { type: "boolean", default: false },
+    "human-timeout-ms": { type: "string", default: "900000" },
+    "human-poll-ms": { type: "string", default: "1000" },
     list: { type: "boolean", default: false }
   },
   strict: true
@@ -48,8 +51,23 @@ const reasoningEffort = parsed.values["reasoning-effort"] ?? "high";
 const targetUrl = new URL(parsed.values["target-url"] ?? "https://target-app-gamma.vercel.app/").toString();
 const maxSteps = Number.parseInt(parsed.values["max-steps"] ?? "30", 10);
 const maxTokens = Number.parseInt(parsed.values["max-tokens"] ?? "12000", 10);
+const waitForHuman = parsed.values["wait-for-human"] ?? false;
+const humanTimeoutMs = Number.parseInt(parsed.values["human-timeout-ms"] ?? "900000", 10);
+const humanPollMs = Number.parseInt(parsed.values["human-poll-ms"] ?? "1000", 10);
 if (!Number.isInteger(maxSteps) || maxSteps < 1) throw new Error("--max-steps must be a positive integer.");
 if (!Number.isInteger(maxTokens) || maxTokens < 1024) throw new Error("--max-tokens must be at least 1024.");
+if (!Number.isInteger(humanTimeoutMs) || humanTimeoutMs < 1000) {
+  throw new Error("--human-timeout-ms must be at least 1000.");
+}
+if (!Number.isInteger(humanPollMs) || humanPollMs < 100) {
+  throw new Error("--human-poll-ms must be at least 100.");
+}
+if (waitForHuman && !parsed.values.headed) {
+  throw new Error("--wait-for-human requires --headed so a person can access the live browser.");
+}
+if (waitForHuman && !scenario.humanHandoff) {
+  throw new Error(`Scenario ${scenario.id} does not define a live human handoff.`);
+}
 
 const startedAt = new Date();
 const evidence = await EvidenceRecorder.create(
@@ -61,6 +79,7 @@ const evidence = await EvidenceRecorder.create(
     reasoningEffort,
     maxSteps,
     headless: !parsed.values.headed,
+    waitForHuman,
     secrets: [apiKey]
   },
   startedAt
@@ -78,6 +97,7 @@ console.log(`Run: ${evidence.runId}`);
 console.log(`Scenario: ${scenario.id} — ${scenario.name}`);
 console.log(`Model: ${model} (${reasoningEffort} reasoning)`);
 console.log(`Evidence: ${evidence.runDirectory}`);
+if (waitForHuman) console.log(`Live human handoff: enabled (${humanTimeoutMs} ms timeout)`);
 
 try {
   const summary = await runDiscovery({
@@ -90,6 +110,14 @@ try {
     modelClient: new OpenRouterClient(apiKey),
     browserClient: browser,
     evidence,
+    ...(waitForHuman
+      ? {
+          liveHumanHandoff: {
+            timeoutMs: humanTimeoutMs,
+            pollIntervalMs: humanPollMs
+          }
+        }
+      : {}),
     startedAt,
     onProgress: console.log
   });
