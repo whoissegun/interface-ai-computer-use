@@ -10,7 +10,7 @@ import type {
   TokenUsage
 } from "./types.js";
 import { EvidenceRecorder } from "./evidence.js";
-import { offeredToolNames, policyDenial } from "./policy.js";
+import { classifyTools, policyDenial } from "./policy.js";
 
 const SYSTEM_PROMPT = `You are a QA analyst conducting an authorized browser-automation test against a fictional training website created specifically for this evaluation. The app cannot access real people, accounts, money, or production systems. This is ordinary UI functional testing, not security testing: do not probe, exploit, bypass access controls, or inspect infrastructure.
 
@@ -86,17 +86,15 @@ export async function runDiscovery(options: RunnerOptions): Promise<RunSummary> 
   try {
     await options.browserClient.connect();
     const allBrowserTools = await options.browserClient.listTools();
-    const browserTools = allBrowserTools.filter((tool) => offeredToolNames.has(tool.name));
+    const { offered: browserTools, withheld } = classifyTools(allBrowserTools);
     if (!browserTools.some((tool) => tool.name === "browser_navigate")) {
       throw new Error("Playwright MCP did not provide the required browser_navigate tool.");
     }
     const modelTools = browserTools.map(toModelTool);
-    await options.evidence.writeTools(modelTools);
+    await options.evidence.writeToolCatalog(allBrowserTools, modelTools, withheld);
     await options.evidence.record("tools_discovered", {
       offered: browserTools.map((tool) => tool.name),
-      withheld: allBrowserTools
-        .filter((tool) => !offeredToolNames.has(tool.name))
-        .map((tool) => tool.name)
+      withheld: withheld.map((tool) => ({ name: tool.name, reason: tool.reason }))
     });
 
     const messages: ChatMessage[] = [

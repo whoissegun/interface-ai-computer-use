@@ -1,7 +1,7 @@
 import { appendFile, mkdir, writeFile } from "node:fs/promises";
 import { extname, join } from "node:path";
 import { randomUUID } from "node:crypto";
-import type { BrowserToolResult, JsonObject, RunSummary, Scenario } from "./types.js";
+import type { BrowserTool, BrowserToolResult, JsonObject, ModelTool, RunSummary, Scenario } from "./types.js";
 
 type EvidenceConfig = {
   rootDirectory: string;
@@ -134,8 +134,22 @@ export class EvidenceRecorder {
     );
   }
 
-  async writeTools(tools: unknown): Promise<void> {
-    await writeFile(join(this.runDirectory, "offered-tools.json"), `${JSON.stringify(tools, null, 2)}\n`);
+  async writeToolCatalog(
+    discovered: BrowserTool[],
+    offered: ModelTool[],
+    withheld: Array<BrowserTool & { reason: string }>
+  ): Promise<void> {
+    await Promise.all([
+      writeFile(
+        join(this.runDirectory, "discovered-tools.json"),
+        `${JSON.stringify(discovered, null, 2)}\n`
+      ),
+      writeFile(join(this.runDirectory, "offered-tools.json"), `${JSON.stringify(offered, null, 2)}\n`),
+      writeFile(
+        join(this.runDirectory, "withheld-tools.json"),
+        `${JSON.stringify(withheld, null, 2)}\n`
+      )
+    ]);
   }
 
   async finish(summary: RunSummary): Promise<void> {

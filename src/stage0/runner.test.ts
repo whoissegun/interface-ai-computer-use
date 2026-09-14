@@ -141,6 +141,18 @@ test("the runner executes model-requested tools and records an inspectable resul
     assert.match(events, /"type":"tool_requested"/);
     assert.match(events, /"type":"tool_result"/);
     assert.match(events, /Avery Example/);
+    assert.match(
+      await readFile(join(evidence.runDirectory, "discovered-tools.json"), "utf8"),
+      /browser_evaluate/
+    );
+    assert.doesNotMatch(
+      await readFile(join(evidence.runDirectory, "offered-tools.json"), "utf8"),
+      /browser_evaluate/
+    );
+    assert.match(
+      await readFile(join(evidence.runDirectory, "withheld-tools.json"), "utf8"),
+      /Arbitrary page JavaScript/
+    );
   } finally {
     await rm(directory, { recursive: true, force: true });
   }

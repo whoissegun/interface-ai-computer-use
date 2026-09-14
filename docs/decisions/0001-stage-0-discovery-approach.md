@@ -29,8 +29,9 @@ We will:
    Kimi K2.6, and other tool-capable models.
 6. Save the prompt, offered tools, model turns, tool calls, tool results,
    snapshots/images, usage, timing, and final report for each run.
-7. Offer a constrained subset of Playwright MCP's generic browser tools. We do
-   not expose arbitrary JavaScript execution or file upload.
+7. Record every tool returned by Playwright MCP, then offer the explicitly
+   approved subset. Every withheld tool has a checked-in reason; we do not
+   expose arbitrary JavaScript execution or file upload.
 8. Restrict direct navigation to the target origin and require scenario-level
    authorization before accepting a final-submission dialog.
 
