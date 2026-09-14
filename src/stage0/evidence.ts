@@ -1,5 +1,5 @@
 import { appendFile, mkdir, writeFile } from "node:fs/promises";
-import { extname, join } from "node:path";
+import { basename, extname, join } from "node:path";
 import { randomUUID } from "node:crypto";
 import type { BrowserTool, BrowserToolResult, JsonObject, ModelTool, RunSummary, Scenario } from "./types.js";
 
@@ -160,6 +160,19 @@ export class EvidenceRecorder {
   async recordMcpStderr(text: string): Promise<void> {
     const safe = this.redact(text);
     await appendFile(join(this.runDirectory, "playwright-mcp.stderr.log"), String(safe));
+  }
+
+  toolArtifactPath(toolCallNumber: number, toolName: string, requestedFilename: string): string {
+    const extension = extname(requestedFilename);
+    const requestedStem = basename(requestedFilename, extension)
+      .replaceAll(/[^a-zA-Z0-9_-]/g, "-")
+      .slice(0, 80);
+    const safeStem = requestedStem || "artifact";
+    const safeToolName = toolName.replaceAll(/[^a-zA-Z0-9_-]/g, "-");
+    return join(
+      this.runDirectory,
+      `tool-${String(toolCallNumber).padStart(3, "0")}-${safeToolName}-${safeStem}${extension}`
+    );
   }
 
   describe(): JsonObject {

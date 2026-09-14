@@ -252,3 +252,25 @@ test("a provider refusal is classified explicitly", async () => {
     await rm(directory, { recursive: true, force: true });
   }
 });
+
+test("model-provided artifact filenames stay inside their run directory", async () => {
+  const directory = await mkdtemp(join(tmpdir(), "stage0-artifact-"));
+  try {
+    const scenario = getScenario("a1");
+    const evidence = await EvidenceRecorder.create({
+      rootDirectory: directory,
+      scenario,
+      targetUrl: "https://target-app-gamma.vercel.app/",
+      model: "fake/model",
+      reasoningEffort: "high",
+      maxSteps: 5,
+      headless: true
+    });
+    assert.equal(
+      evidence.toolArtifactPath(4, "browser_snapshot", "../../page result.yml"),
+      join(evidence.runDirectory, "tool-004-browser_snapshot-page-result.yml")
+    );
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});

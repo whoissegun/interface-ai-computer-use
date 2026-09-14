@@ -86,12 +86,12 @@
     "browser_take_screenshot": {
       "description": "Capture an image of the current page.",
       "decision": "offer",
-      "reason": "Screenshots provide visual evidence and can help when accessibility snapshots omit important presentation details."
+      "reason": "Screenshots provide visual evidence and can help when accessibility snapshots omit important presentation details. Model-provided filenames are rewritten into the current run directory."
     },
     "browser_snapshot": {
       "description": "Capture the structured accessibility representation of the current page.",
       "decision": "offer",
-      "reason": "Accessibility snapshots are the primary structured observation used to understand and verify the visible page."
+      "reason": "Accessibility snapshots are the primary structured observation used to understand and verify the visible page. Model-provided filenames are rewritten into the current run directory."
     },
     "browser_click": {
       "description": "Click a visible page element.",

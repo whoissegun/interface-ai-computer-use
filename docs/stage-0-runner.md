@@ -92,6 +92,8 @@ time. The runner redacts the configured API key from evidence and logs.
   model.
 - Only scenario `a4` authorizes accepting the fake final-submission dialog.
 - Tool calls are capped, and each run has a model-response timeout.
+- Model-provided artifact filenames are rewritten into the current evidence
+  directory to prevent concurrent runs from overwriting one another.
 - The target app contains only fictional training data and simulated writes.
 
 ## Verification

@@ -187,7 +187,25 @@ export async function runDiscovery(options: RunnerOptions): Promise<RunSummary> 
         }
 
         try {
-          const result = await options.browserClient.callTool(toolCall.function.name, args);
+          let executionArgs = args;
+          if (typeof args.filename === "string") {
+            executionArgs = {
+              ...args,
+              filename: options.evidence.toolArtifactPath(
+                toolCalls,
+                toolCall.function.name,
+                args.filename
+              )
+            };
+            await options.evidence.record("tool_arguments_adjusted", {
+              toolCallNumber: toolCalls,
+              toolName: toolCall.function.name,
+              reason: "Keep model-named artifacts inside this run's evidence directory.",
+              requestedFilename: args.filename,
+              executionFilename: executionArgs.filename
+            });
+          }
+          const result = await options.browserClient.callTool(toolCall.function.name, executionArgs);
           const content = await options.evidence.recordToolResult(toolCalls, toolCall.function.name, result);
           messages.push({ role: "tool", tool_call_id: toolCall.id, content });
         } catch (error) {
