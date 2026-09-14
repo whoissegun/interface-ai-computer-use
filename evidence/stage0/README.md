@@ -4,6 +4,9 @@ This directory contains raw, inspectable discovery trajectories. Each run has
 its exact configuration, offered browser tools, ordered event stream, summary,
 and Playwright MCP artifacts.
 
+The repeated 39-run experiment is summarized in
+[Stage 0 Stability Experiment — 2026-09-14](./stability-2026-09-14.md).
+
 ## First atomic task: A1
 
 | Run | Model | Outcome | Finding |

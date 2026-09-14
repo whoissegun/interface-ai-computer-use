@@ -1,0 +1,16 @@
+{
+  "runId": "2026-09-14T17-57-54-413Z-e7-9112bb0d",
+  "scenario": {
+    "id": "e7",
+    "name": "Host failure",
+    "prompt": "In the Northstar training system, try to find member APP-500. Report the exact visible result, including its code, and stop without claiming success.",
+    "expected": "Reports HTTP 500 / HOST X500 as a hard host failure.",
+    "allowFinalSubmission": false
+  },
+  "targetUrl": "https://target-app-gamma.vercel.app/",
+  "model": "moonshotai/kimi-k2.6",
+  "reasoningEffort": "high",
+  "maxSteps": 30,
+  "headless": true,
+  "startedAt": "2026-09-14T17:57:54.413Z"
+}

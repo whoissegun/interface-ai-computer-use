@@ -1,0 +1,24 @@
+{
+  "runId": "2026-09-14T17-44-36-422Z-a2-84c852fb",
+  "scenarioId": "a2",
+  "status": "completed",
+  "model": "moonshotai/kimi-k2.6",
+  "finalAnswer": "**QA Report**\n\n- **Member:** 100042 — Avery Example  \n- **Account opened:** S-0042-01 (Regular Savings)  \n- **Available balance:** **$2,381.37**\n\n**Visible evidence** (from the Account Balance Inquiry page):\n- *Account*: `S-0042-01`\n- *Product*: `Regular Savings`\n- *Ledger balance*: `$2,481.37`\n- *Available balance*: `$2,381.37`\n\nNo new-account operation was initiated; the account was accessed via the existing **INQUIRE** link on the Member Relationship Summary.",
+  "modelTurns": 11,
+  "toolCalls": 10,
+  "usedTools": {
+    "browser_navigate": 1,
+    "browser_snapshot": 5,
+    "browser_click": 3,
+    "browser_type": 1
+  },
+  "usage": {
+    "prompt_tokens": 42902,
+    "completion_tokens": 1097,
+    "total_tokens": 43999,
+    "cost": 0.01392299427
+  },
+  "startedAt": "2026-09-14T17:44:36.422Z",
+  "finishedAt": "2026-09-14T17:45:04.799Z",
+  "elapsedMs": 28377
+}

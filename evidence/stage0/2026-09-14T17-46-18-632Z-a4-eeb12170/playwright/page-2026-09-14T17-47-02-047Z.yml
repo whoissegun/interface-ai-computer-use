@@ -1,0 +1,27 @@
+- generic [ref=e1]:
+  - iframe [ref=e2]:
+    - generic [ref=f1e1]:
+      - text: NORTHSTAR CU
+      - link "HOME" [ref=f1e2] [cursor=pointer]:
+        - /url: /app/home
+      - link "MEMBER LOOKUP" [ref=f1e3] [cursor=pointer]:
+        - /url: /app/member-search
+      - link "OPS HELP" [ref=f1e4] [cursor=pointer]:
+        - /url: /app/help
+      - text: "BRANCH 019 | USER: DEMO7"
+  - iframe [active] [ref=e3]:
+    - generic [active] [ref=f2e1]:
+      - text: Simulation Complete COREBANK / TELLER 7.4
+      - generic [ref=f2e2]: SIMULATED SUCCESSNo account was opened and no funds moved.
+      - table [ref=f2e3]:
+        - rowgroup [ref=f2e4]:
+          - row [ref=f2e5]:
+            - rowheader "Training reference" [ref=f2e6]
+            - cell "TRAIN-100042-004000" [ref=f2e7]
+          - row [ref=f2e8]:
+            - rowheader "Result" [ref=f2e9]
+            - cell "Review flow completed in safe simulation mode" [ref=f2e10]
+      - paragraph [ref=f2e11]:
+        - link "Return to operations menu" [ref=f2e12] [cursor=pointer]:
+          - /url: /app/home
+      - generic [ref=f2e13]: Northstar Community Credit Union — TRAINING SYSTEM — fictitious data only

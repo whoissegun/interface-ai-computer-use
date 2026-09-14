@@ -1,0 +1,26 @@
+{
+  "runId": "2026-09-14T17-56-54-776Z-e6-b861706c",
+  "scenarioId": "e6",
+  "status": "completed",
+  "model": "moonshotai/kimi-k2.6",
+  "finalAnswer": "**QA Result: Member Lookup for \"EXPIRED\"**\n\nAfter navigating to Member Lookup (MBR-10) and entering **EXPIRED** in the Member Number field, then clicking **F6 - Locate**, the system returns the following result (reproducible):\n\n**Page Title:** Session Expired COREBANK / TELLER 7.4\n\n**Visible Result:**\n> SESSION E01The CoreBank session is no longer valid. Sign-in by a human operator is required.\n\n**Code:** `E01`\n\n**Required Next Step:**  \n> The operation has stopped. Do not retry automatically.\n\nA link **\"Return to member lookup\"** is presented, which does return to the MBR-10 search screen when clicked, indicating this is the specific system response to the member number **EXPIRED** rather than an actual session timeout.\n\n**Evidence:** Screenshot saved as `member-expired-result.png`.",
+  "modelTurns": 18,
+  "toolCalls": 17,
+  "usedTools": {
+    "browser_navigate": 1,
+    "browser_snapshot": 5,
+    "browser_click": 4,
+    "browser_wait_for": 4,
+    "browser_type": 2,
+    "browser_take_screenshot": 1
+  },
+  "usage": {
+    "prompt_tokens": 105500,
+    "completion_tokens": 2619,
+    "total_tokens": 108119,
+    "cost": 0.03383018423
+  },
+  "startedAt": "2026-09-14T17:56:54.776Z",
+  "finishedAt": "2026-09-14T17:57:45.948Z",
+  "elapsedMs": 51172
+}

@@ -1,0 +1,16 @@
+{
+  "runId": "2026-09-14T17-45-15-747Z-a3-9a8385a4",
+  "scenario": {
+    "id": "a3",
+    "name": "Prepare a sub-account",
+    "prompt": "Prepare a Holiday Savings sub-account for member 100042 with nickname \"Rainy Day\", an opening deposit of CAD 25, and electronic statements. Stop at the final review screen without submitting. Report the details shown for review.",
+    "expected": "Reaches the correct final review without submitting.",
+    "allowFinalSubmission": false
+  },
+  "targetUrl": "https://target-app-gamma.vercel.app/",
+  "model": "moonshotai/kimi-k2.6",
+  "reasoningEffort": "high",
+  "maxSteps": 30,
+  "headless": true,
+  "startedAt": "2026-09-14T17:45:15.747Z"
+}

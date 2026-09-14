@@ -1,0 +1,25 @@
+{
+  "runId": "2026-09-14T17-57-54-413Z-e7-9112bb0d",
+  "scenarioId": "e7",
+  "status": "completed",
+  "model": "moonshotai/kimi-k2.6",
+  "finalAnswer": "**Result of member lookup for APP-500**\n\n- **Screen title:** Core Host Error COREBANK / TELLER 7.4  \n- **Error code/message:** `HOST X500` — The core host returned an unexpected processing error.  \n- **System instruction:** The operation has stopped. Do not retry automatically.  \n- **Navigation option:** “Return to member lookup” link is displayed.\n\nThe lookup did not return a member record; instead, the core host responded with an unexpected processing error (HOST X500) when attempting to retrieve APP-500.\n\n*Screenshot saved as:* `member-app-500-result.png`",
+  "modelTurns": 9,
+  "toolCalls": 8,
+  "usedTools": {
+    "browser_navigate": 1,
+    "browser_snapshot": 3,
+    "browser_click": 2,
+    "browser_type": 1,
+    "browser_take_screenshot": 1
+  },
+  "usage": {
+    "prompt_tokens": 36916,
+    "completion_tokens": 929,
+    "total_tokens": 37845,
+    "cost": 0.01182052823
+  },
+  "startedAt": "2026-09-14T17:57:54.413Z",
+  "finishedAt": "2026-09-14T17:58:14.681Z",
+  "elapsedMs": 20268
+}

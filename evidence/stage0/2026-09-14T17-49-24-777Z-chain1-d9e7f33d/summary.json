@@ -1,0 +1,27 @@
+{
+  "runId": "2026-09-14T17-49-24-777Z-chain1-d9e7f33d",
+  "scenarioId": "chain1",
+  "status": "completed",
+  "model": "moonshotai/kimi-k2.6",
+  "finalAnswer": "**QA Report – Northstar training system**\n\n1. **Available balance of savings account S-0042-01**  \n   - **$2,381.37**  \n   *Evidence:* Member Relationship Summary page showed “Available Balance” cell for account **S-0042-01** as **$2,381.37**.\n\n2. **Holiday Savings sub-account setup – Final Review screen details**  \n   I selected product **S14 – Holiday Savings**, entered nickname **“Rainy Day”**, set opening deposit to **CAD 25.00**, and left statement delivery as **Electronic**. I then clicked **F8 – Continue to Review** and stopped at the review screen without pressing **SIMULATE FINAL SUBMISSION**.\n\n   Displayed review details:\n   - **Member:** 100042 — Avery Example  \n   - **Product:** S14 - Holiday Savings  \n   - **Nickname:** Rainy Day  \n   - **Opening deposit:** CAD 25.00  \n   - **Statements:** Electronic  \n   - **Posting mode:** SIMULATION — NO CORE WRITE  \n\n   *Evidence:* Snapshot of the “New Sub-account — Final Review” page captured the table above, and a full-page screenshot was saved as **`review-screen.png`**.",
+  "modelTurns": 16,
+  "toolCalls": 15,
+  "usedTools": {
+    "browser_navigate": 1,
+    "browser_snapshot": 6,
+    "browser_click": 4,
+    "browser_type": 1,
+    "browser_select_option": 1,
+    "browser_fill_form": 1,
+    "browser_take_screenshot": 1
+  },
+  "usage": {
+    "prompt_tokens": 86481,
+    "completion_tokens": 1716,
+    "total_tokens": 88197,
+    "cost": 0.02643954253
+  },
+  "startedAt": "2026-09-14T17:49:24.777Z",
+  "finishedAt": "2026-09-14T17:50:07.297Z",
+  "elapsedMs": 42520
+}

@@ -1,0 +1,26 @@
+{
+  "runId": "2026-09-14T17-45-15-747Z-a3-2f5922c8",
+  "scenarioId": "a3",
+  "status": "completed",
+  "model": "moonshotai/kimi-k2.6",
+  "finalAnswer": "QA Report: Holiday Savings Sub-account Setup — Final Review\n\n- **Member:** 100042 — Avery Example  \n- **Product:** S14 - Holiday Savings  \n- **Nickname:** Rainy Day  \n- **Opening deposit:** CAD 25.00  \n- **Statements:** Electronic  \n- **Posting mode:** SIMULATION — NO CORE WRITE  \n\nThe workflow was stopped at the “New Sub-account — Final Review” screen without submitting. The “SIMULATE FINAL SUBMISSION” button is visible and was not clicked.\n\n**Visible evidence:** Full-page screenshot saved as `review-screen.png`, and the page snapshot confirms the review details listed above.",
+  "modelTurns": 16,
+  "toolCalls": 15,
+  "usedTools": {
+    "browser_navigate": 1,
+    "browser_snapshot": 5,
+    "browser_click": 4,
+    "browser_type": 3,
+    "browser_select_option": 1,
+    "browser_take_screenshot": 1
+  },
+  "usage": {
+    "prompt_tokens": 80098,
+    "completion_tokens": 1197,
+    "total_tokens": 81295,
+    "cost": 0.02380110926
+  },
+  "startedAt": "2026-09-14T17:45:15.747Z",
+  "finishedAt": "2026-09-14T17:45:55.132Z",
+  "elapsedMs": 39385
+}

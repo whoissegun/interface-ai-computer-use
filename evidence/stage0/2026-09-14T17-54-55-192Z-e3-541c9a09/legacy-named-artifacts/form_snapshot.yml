@@ -1,0 +1,21 @@
+- generic [ref=f2e10]:
+  - text: Product Code
+  - combobox [ref=f2e11]:
+    - option "-- choose --"
+    - option "S01 - Regular Savings" [selected]
+    - option "S14 - Holiday Savings"
+    - option "S27 - Youth Savings"
+  - text: Account Nickname
+  - textbox [ref=f2e12]: Invalid Test
+  - text: Opening Deposit (CAD)
+  - textbox [ref=f2e13]: "-5"
+  - text: Statement Delivery
+  - generic [ref=f2e14]:
+    - radio "Electronic" [checked] [active] [ref=f2e15]
+    - text: Electronic
+  - generic [ref=f2e16]:
+    - radio "Paper" [ref=f2e17]
+    - text: Paper
+  - button "F8 - Continue to Review" [ref=f2e18]
+  - link "Cancel" [ref=f2e19] [cursor=pointer]:
+    - /url: /app/member/100042

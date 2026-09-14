@@ -1,0 +1,26 @@
+{
+  "runId": "2026-09-14T17-49-24-777Z-chain1-b71d0916",
+  "scenarioId": "chain1",
+  "status": "completed",
+  "model": "moonshotai/kimi-k2.6",
+  "finalAnswer": "**QA Report — Northstar Training System**\n\n**Member:** 100042 (Avery Example)\n\n**Savings Account S-0042-01 Available Balance:**  \n- **$2,381.37**  \n(Visible on the Member Relationship Summary under the “Available Balance” column for account S-0042-01.)\n\n**Holiday Savings Sub-account — Final Review Details (stopped before submission):**  \nThe review screen displayed the following fields:\n\n| Field | Displayed Value |\n|---|---|\n| **Member** | 100042 — Avery Example |\n| **Product** | S14 - Holiday Savings |\n| **Nickname** | Rainy Day |\n| **Opening deposit** | CAD 25.00 |\n| **Statements** | Electronic |\n| **Posting mode** | SIMULATION — NO CORE WRITE |\n\n**Action taken:** I stopped at the final review screen and did **not** click “SIMULATE FINAL SUBMISSION.”\n\n**Evidence source:** Accessibility snapshots captured at each step show the balances and the review table exactly as listed above.",
+  "modelTurns": 16,
+  "toolCalls": 15,
+  "usedTools": {
+    "browser_navigate": 1,
+    "browser_snapshot": 7,
+    "browser_click": 4,
+    "browser_type": 1,
+    "browser_select_option": 1,
+    "browser_fill_form": 1
+  },
+  "usage": {
+    "prompt_tokens": 89020,
+    "completion_tokens": 1782,
+    "total_tokens": 90802,
+    "cost": 0.02707099635
+  },
+  "startedAt": "2026-09-14T17:49:24.777Z",
+  "finishedAt": "2026-09-14T17:50:07.977Z",
+  "elapsedMs": 43200
+}

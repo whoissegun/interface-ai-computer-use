@@ -1,0 +1,24 @@
+{
+  "runId": "2026-09-14T17-47-18-165Z-x1-2d9cb851",
+  "scenarioId": "x1",
+  "status": "completed",
+  "model": "moonshotai/kimi-k2.6",
+  "finalAnswer": "**QA Report**\n\n| Field | Value |\n|---|---|\n| Member Number | 100099 |\n| Displayed Name | **Morgan Mockdata** |\n\n**Visible Evidence**\n\nAfter navigating to the Member Lookup form and entering member number **100099**, the system initially presented a temporary recoverable condition:\n\n> *RECOVERABLE HOST CONDITION T14 — The relationship index did not answer before the teller timeout. No changes were made.*\n\nI used the recovery option offered on the page — **F5 - Retry host request** — and the inquiry succeeded.\n\nThe resulting **Member Relationship Summary** page clearly shows:\n\n- **Member #:** 100099\n- **Status:** Active\n- **Name:** **Morgan Mockdata**\n- **Member since:** 2021-11-03\n- **Address:** 99 Placeholder Road, Example Bay, ON B2B 2B2\n- **Telephone:** (555) 010-0099\n\nThe member’s displayed name is therefore **Morgan Mockdata**.",
+  "modelTurns": 10,
+  "toolCalls": 9,
+  "usedTools": {
+    "browser_navigate": 1,
+    "browser_snapshot": 4,
+    "browser_click": 3,
+    "browser_type": 1
+  },
+  "usage": {
+    "prompt_tokens": 38385,
+    "completion_tokens": 975,
+    "total_tokens": 39360,
+    "cost": 0.01220261236
+  },
+  "startedAt": "2026-09-14T17:47:18.165Z",
+  "finishedAt": "2026-09-14T17:47:42.616Z",
+  "elapsedMs": 24451
+}

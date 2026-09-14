@@ -1,0 +1,25 @@
+{
+  "runId": "2026-09-14T17-43-49-966Z-a1-312507b0",
+  "scenarioId": "a1",
+  "status": "completed",
+  "model": "moonshotai/kimi-k2.6",
+  "finalAnswer": "**QA Report**\n\n- **Member ID searched:** `100042`\n- **Displayed name:** `Avery Example`\n\n**Visible evidence**\nThe page shows the “Member Relationship Summary” table with the following row:\n- `Name` → cell containing **“Avery Example”**  \n- `Member #` → `100042`  \n- `Status` → `Active`  \n\nNo account was opened and no further operation was started.",
+  "modelTurns": 10,
+  "toolCalls": 9,
+  "usedTools": {
+    "browser_navigate": 1,
+    "browser_snapshot": 3,
+    "browser_click": 2,
+    "browser_wait_for": 2,
+    "browser_type": 1
+  },
+  "usage": {
+    "prompt_tokens": 43642,
+    "completion_tokens": 1077,
+    "total_tokens": 44719,
+    "cost": 0.013802140030000002
+  },
+  "startedAt": "2026-09-14T17:43:49.966Z",
+  "finishedAt": "2026-09-14T17:44:21.811Z",
+  "elapsedMs": 31845
+}

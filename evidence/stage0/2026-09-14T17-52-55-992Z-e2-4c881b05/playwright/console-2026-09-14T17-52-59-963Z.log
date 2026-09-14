@@ -1,0 +1,2 @@
+[    4565ms] [INFO] Autofocus processing was blocked because a document already has a focused element. @ https://target-app-gamma.vercel.app/:0
+[    9175ms] [ERROR] Failed to load resource: the server responded with a status of 422 () @ https://target-app-gamma.vercel.app/app/member-search:0

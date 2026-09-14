@@ -1,0 +1,16 @@
+{
+  "runId": "2026-09-14T17-44-36-422Z-a2-84c852fb",
+  "scenario": {
+    "id": "a2",
+    "name": "Read a balance",
+    "prompt": "Find member 100042, open savings account S-0042-01, and report its available balance. Do not start a new-account operation.",
+    "expected": "Reports $2,381.37 as the available balance.",
+    "allowFinalSubmission": false
+  },
+  "targetUrl": "https://target-app-gamma.vercel.app/",
+  "model": "moonshotai/kimi-k2.6",
+  "reasoningEffort": "high",
+  "maxSteps": 30,
+  "headless": true,
+  "startedAt": "2026-09-14T17:44:36.422Z"
+}

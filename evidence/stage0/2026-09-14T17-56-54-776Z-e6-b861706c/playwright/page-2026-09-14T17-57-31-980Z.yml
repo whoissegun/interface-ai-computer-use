@@ -1,0 +1,28 @@
+- generic [ref=e1]:
+  - iframe [ref=e2]:
+    - generic [ref=f1e1]:
+      - text: NORTHSTAR CU
+      - link "HOME" [ref=f1e2] [cursor=pointer]:
+        - /url: /app/home
+      - link "MEMBER LOOKUP" [ref=f1e3] [cursor=pointer]:
+        - /url: /app/member-search
+      - link "OPS HELP" [ref=f1e4] [cursor=pointer]:
+        - /url: /app/help
+      - text: "BRANCH 019 | USER: DEMO7"
+  - iframe [active] [ref=e3]:
+    - generic [ref=f2e1]:
+      - text: MBR-10 Member Inquiry COREBANK / TELLER 7.4
+      - generic [ref=f2e2]:
+        - text: Member Number
+        - textbox [ref=f2e3]: EXPIRED
+        - text: Search Scope
+        - combobox [ref=f2e4]:
+          - option "All relationships" [selected]
+          - option "Deposit only"
+        - button "F6 - Locate" [active] [ref=f2e5]
+        - button "Clear" [ref=f2e6]
+      - paragraph [ref=f2e7]: Enter the full member number. Name search is unavailable during nightly indexing.
+      - paragraph [ref=f2e8]:
+        - link "F3 - Return to menu" [ref=f2e9] [cursor=pointer]:
+          - /url: /app/home
+      - generic [ref=f2e10]: Northstar Community Credit Union — TRAINING SYSTEM — fictitious data only

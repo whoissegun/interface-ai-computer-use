@@ -1,0 +1,25 @@
+{
+  "runId": "2026-09-14T17-52-19-173Z-e1-86d04ba5",
+  "scenarioId": "e1",
+  "status": "completed",
+  "model": "moonshotai/kimi-k2.6",
+  "finalAnswer": "**QA Report: Member 999999 Lookup**\n\n**Target URL:** https://target-app-gamma.vercel.app/  \n**Page:** Northstar CU CoreBank — Member Lookup (MBR-10 Member Inquiry)\n\n**Exact Visible Outcome:**\n> BUSINESS RESULT N04No member relationship matched 999999. No system error occurred.\n\n**Is it described as a system error?**  \nNo. The page explicitly states **“No system error occurred.”** Instead, the outcome is labeled a **BUSINESS RESULT** (code N04) indicating that no member relationship matched the entered number.\n\n**Test Status:** Lookup completed successfully; member 999999 not found.",
+  "modelTurns": 13,
+  "toolCalls": 12,
+  "usedTools": {
+    "browser_navigate": 1,
+    "browser_snapshot": 4,
+    "browser_find": 4,
+    "browser_click": 2,
+    "browser_type": 1
+  },
+  "usage": {
+    "prompt_tokens": 45202,
+    "completion_tokens": 963,
+    "total_tokens": 46165,
+    "cost": 0.013861165489999999
+  },
+  "startedAt": "2026-09-14T17:52:19.173Z",
+  "finishedAt": "2026-09-14T17:52:46.611Z",
+  "elapsedMs": 27438
+}

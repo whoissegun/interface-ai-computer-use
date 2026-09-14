@@ -1,0 +1,16 @@
+- generic [ref=f6e1]:
+  - text: MBR-10 Member Inquiry COREBANK / TELLER 7.4
+  - generic [ref=f6e2]:
+    - text: Member Number
+    - textbox [active] [ref=f6e3]
+    - text: Search Scope
+    - combobox [ref=f6e4]:
+      - option "All relationships" [selected]
+      - option "Deposit only"
+    - button "F6 - Locate" [ref=f6e5]
+    - button "Clear" [ref=f6e6]
+  - paragraph [ref=f6e7]: Enter the full member number. Name search is unavailable during nightly indexing.
+  - paragraph [ref=f6e8]:
+    - link "F3 - Return to menu" [ref=f6e9] [cursor=pointer]:
+      - /url: /app/home
+  - generic [ref=f6e10]: Northstar Community Credit Union — TRAINING SYSTEM — fictitious data only

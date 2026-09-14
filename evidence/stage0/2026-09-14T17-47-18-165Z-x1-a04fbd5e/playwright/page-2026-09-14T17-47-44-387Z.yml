@@ -1,0 +1,54 @@
+- generic [ref=e1]:
+  - iframe [ref=e2]:
+    - generic [ref=f1e1]:
+      - text: NORTHSTAR CU
+      - link "HOME" [ref=f1e2] [cursor=pointer]:
+        - /url: /app/home
+      - link "MEMBER LOOKUP" [ref=f1e3] [cursor=pointer]:
+        - /url: /app/member-search
+      - link "OPS HELP" [ref=f1e4] [cursor=pointer]:
+        - /url: /app/help
+      - text: "BRANCH 019 | USER: DEMO7"
+  - iframe [active] [ref=e3]:
+    - generic [active] [ref=f2e1]:
+      - text: Member Relationship Summary COREBANK / TELLER 7.4
+      - table [ref=f2e2]:
+        - rowgroup [ref=f2e3]:
+          - row [ref=f2e4]:
+            - 'rowheader "Member #" [ref=f2e5]'
+            - cell "100099" [ref=f2e6]
+            - rowheader "Status" [ref=f2e7]
+            - cell "Active" [ref=f2e8]
+          - row [ref=f2e9]:
+            - rowheader "Name" [ref=f2e10]
+            - cell "Morgan Mockdata" [ref=f2e11]
+            - rowheader "Member since" [ref=f2e12]
+            - cell "2021-11-03" [ref=f2e13]
+          - row [ref=f2e14]:
+            - rowheader "Address" [ref=f2e15]
+            - cell "99 Placeholder Road, Example Bay, ON B2B 2B2" [ref=f2e16]
+          - row [ref=f2e17]:
+            - rowheader "Telephone" [ref=f2e18]
+            - cell "(555) 010-0099" [ref=f2e19]
+      - heading "Deposit Relationships" [level=2] [ref=f2e20]
+      - table [ref=f2e21]:
+        - rowgroup [ref=f2e22]:
+          - row [ref=f2e23]:
+            - columnheader "Account" [ref=f2e24]
+            - columnheader "Product" [ref=f2e25]
+            - columnheader "Current Balance" [ref=f2e26]
+            - columnheader "Available Balance" [ref=f2e27]
+            - columnheader "Action" [ref=f2e28]
+          - row [ref=f2e29]:
+            - cell "S-0099-02" [ref=f2e30]
+            - cell "Regular Savings" [ref=f2e31]
+            - cell "$760.00" [ref=f2e32]
+            - cell "$760.00" [ref=f2e33]
+            - cell [ref=f2e34]:
+              - link "INQUIRE" [ref=f2e35] [cursor=pointer]:
+                - /url: /app/account?acct=S-0099-02
+      - button "F9 - Open New Share/Sub-account" [ref=f2e37]
+      - paragraph [ref=f2e38]:
+        - link "F4 - New member lookup" [ref=f2e39] [cursor=pointer]:
+          - /url: /app/member-search
+      - generic [ref=f2e40]: Northstar Community Credit Union — TRAINING SYSTEM — fictitious data only

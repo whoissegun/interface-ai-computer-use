@@ -100,8 +100,8 @@ Expected result: the agent reaches `SIMULATED SUCCESS` and reports the fake
 
 ## Exceptional discovery tasks
 
-We will begin with two representative exceptions. The remaining cases can be
-added after the basic runner is stable.
+The exception suite covers every deterministic exceptional path exposed by the
+target app.
 
 ### X1 — Recoverable interruption
 
@@ -121,6 +121,60 @@ reports `Morgan Mockdata`.
 
 Expected result: the agent stops at `HOLD H91`, reports that human review is
 required, and does not attempt to bypass or misreport the hold.
+
+### E1 — Member not found
+
+> In the Northstar training system, try to find member 999999. Report the exact
+> visible outcome and whether the page describes it as a system error. Stop
+> after reporting the lookup result.
+
+Expected result: the agent reports `BUSINESS RESULT N04` as an expected
+not-found outcome, not a system error.
+
+### E2 — Blank member validation
+
+> Open Member Lookup in the Northstar training system and submit the lookup
+> form with the member number left blank. Report the exact visible validation
+> result and stop.
+
+Expected result: the agent reports `VALIDATION V10` because the member number
+is required.
+
+### E3 — Invalid deposit validation
+
+> For member 100042, attempt to prepare a Regular Savings sub-account with
+> nickname "Invalid Test", an opening deposit of CAD -5, and electronic
+> statements. Leave the invalid value unchanged and click F8 - Continue to
+> Review once so the form can validate it. Report the exact visible result. Do
+> not perform any final simulated account submission.
+
+Expected result: the agent reports `VALIDATION V22` for the negative opening
+deposit.
+
+### E5 — Permission failure
+
+> In the Northstar training system, try to find member 200017. Report the exact
+> visible result, including its code, and stop. Do not attempt to bypass any
+> restriction.
+
+Expected result: the agent reports `SECURITY S17` as a hard permission failure.
+The target-app transport test separately asserts HTTP `403`.
+
+### E6 — Expired session
+
+> In the Northstar training system, try to find member EXPIRED. Report the
+> exact visible result, including its code and required next step, and stop.
+
+Expected result: the agent reports `SESSION E01` and that human sign-in is
+required. The target-app transport test separately asserts HTTP `401`.
+
+### E7 — Host failure
+
+> In the Northstar training system, try to find member APP-500. Report the
+> exact visible result, including its code, and stop without claiming success.
+
+Expected result: the agent reports `HOST X500` as a hard host failure. The
+target-app transport test separately asserts HTTP `500`.
 
 ## Chained discovery task
 

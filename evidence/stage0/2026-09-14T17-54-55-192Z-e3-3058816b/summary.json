@@ -1,0 +1,26 @@
+{
+  "runId": "2026-09-14T17-54-55-192Z-e3-3058816b",
+  "scenarioId": "e3",
+  "status": "completed",
+  "model": "moonshotai/kimi-k2.6",
+  "finalAnswer": "**QA Test Report**\n\n- **Member:** 100042 (Avery Example)  \n- **Action:** Attempted to prepare a new Regular Savings sub-account  \n  - Product Code: **S01 - Regular Savings**  \n  - Account Nickname: **Invalid Test**  \n  - Opening Deposit: **CAD -5**  \n  - Statement Delivery: **Electronic**  \n- **Trigger:** Clicked **F8 - Continue to Review** with the invalid deposit value left unchanged.\n\n**Exact Visible Result**  \nThe page displayed a validation banner immediately above the form:\n\n> **VALIDATION V22Opening deposit must be a non-negative number.**\n\nThe form remained on the **ACCT-22 New Share/Sub-account** screen in **PREPARE / NO POST** mode with all entered values intact (including the **-5** deposit). No submission or account creation occurred.\n\n**Evidence**  \n- Snapshot excerpt showing the validation message and retained field values.  \n- Screenshot: `validation-result.png` (saved in the working directory).",
+  "modelTurns": 17,
+  "toolCalls": 16,
+  "usedTools": {
+    "browser_navigate": 1,
+    "browser_snapshot": 6,
+    "browser_click": 4,
+    "browser_type": 3,
+    "browser_select_option": 1,
+    "browser_take_screenshot": 1
+  },
+  "usage": {
+    "prompt_tokens": 94665,
+    "completion_tokens": 1923,
+    "total_tokens": 96588,
+    "cost": 0.03003765167
+  },
+  "startedAt": "2026-09-14T17:54:55.192Z",
+  "finishedAt": "2026-09-14T17:55:34.611Z",
+  "elapsedMs": 39419
+}
