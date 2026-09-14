@@ -64,13 +64,21 @@ Every execution creates a unique directory under `evidence/stage0/`:
 ```text
 evidence/stage0/<timestamp>-<scenario>-<id>/
 ├── run.json
+├── discovered-tools.json
 ├── offered-tools.json
+├── withheld-tools.json
 ├── events.ndjson
 ├── summary.json
 ├── playwright-mcp.stderr.log
 ├── tool-*.png                  # when an image-producing tool is used
 └── playwright/                 # Playwright MCP session artifacts
 ```
+
+`discovered-tools.json` contains every tool returned by the pinned Playwright
+MCP server. `offered-tools.json` contains the filtered definitions sent to the
+model. `withheld-tools.json` contains the excluded definitions and a reason for
+every exclusion. The authoritative policy is
+`config/stage0-playwright-tool-policy.json`.
 
 `events.ndjson` is the ordered trajectory. `summary.json` is the quick result,
 including the used-tool counts, token use, cost when reported, and elapsed
@@ -84,6 +92,8 @@ time. The runner redacts the configured API key from evidence and logs.
   model.
 - Only scenario `a4` authorizes accepting the fake final-submission dialog.
 - Tool calls are capped, and each run has a model-response timeout.
+- Model-provided artifact filenames are rewritten into the current evidence
+  directory to prevent concurrent runs from overwriting one another.
 - The target app contains only fictional training data and simulated writes.
 
 ## Verification

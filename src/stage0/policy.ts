@@ -1,24 +1,46 @@
-import type { JsonObject, Scenario } from "./types.js";
+import { readFileSync } from "node:fs";
+import type { BrowserTool, JsonObject, Scenario } from "./types.js";
 
-// This is deliberately browser-level. We want Stage 0 to observe which of
-// these generic actions the model uses before we design domain capabilities.
-export const offeredToolNames = new Set([
-  "browser_navigate",
-  "browser_navigate_back",
-  "browser_snapshot",
-  "browser_click",
-  "browser_type",
-  "browser_fill_form",
-  "browser_select_option",
-  "browser_press_key",
-  "browser_wait_for",
-  "browser_handle_dialog",
-  "browser_take_screenshot",
-  "browser_hover",
-  "browser_tabs",
-  "browser_resize",
-  "browser_close"
-]);
+export type ToolDecision = {
+  description: string;
+  decision: "offer" | "withhold";
+  reason: string;
+};
+
+type ToolPolicyFile = {
+  schemaVersion: number;
+  playwrightMcpVersion: string;
+  capabilities: string[];
+  tools: Record<string, ToolDecision>;
+};
+
+const policyUrl = new URL("../../config/stage0-playwright-tool-policy.json", import.meta.url);
+export const toolPolicy = JSON.parse(readFileSync(policyUrl, "utf8")) as ToolPolicyFile;
+
+export const offeredToolNames = new Set(
+  Object.entries(toolPolicy.tools)
+    .filter(([, policy]) => policy.decision === "offer")
+    .map(([name]) => name)
+);
+
+export function classifyTools(tools: BrowserTool[]): {
+  offered: BrowserTool[];
+  withheld: Array<BrowserTool & { reason: string }>;
+} {
+  const unclassified = tools.filter((tool) => !toolPolicy.tools[tool.name]);
+  if (unclassified.length > 0) {
+    throw new Error(
+      `Playwright MCP returned tools without an explicit policy decision: ${unclassified.map((tool) => tool.name).join(", ")}`
+    );
+  }
+
+  return {
+    offered: tools.filter((tool) => toolPolicy.tools[tool.name]?.decision === "offer"),
+    withheld: tools
+      .filter((tool) => toolPolicy.tools[tool.name]?.decision === "withhold")
+      .map((tool) => ({ ...tool, reason: toolPolicy.tools[tool.name]?.reason ?? "No reason recorded." }))
+  };
+}
 
 export function policyDenial(
   scenario: Scenario,
@@ -40,6 +62,18 @@ export function policyDenial(
     }
     if (requested.origin !== targetUrl.origin) {
       return `Navigation is restricted to ${targetUrl.origin}.`;
+    }
+  }
+
+  if (toolName === "browser_tabs" && args.action === "new" && typeof args.url === "string") {
+    let requested: URL;
+    try {
+      requested = new URL(args.url, targetUrl);
+    } catch {
+      return "browser_tabs received an invalid new-tab URL.";
+    }
+    if (requested.origin !== targetUrl.origin) {
+      return `New-tab navigation is restricted to ${targetUrl.origin}.`;
     }
   }
 

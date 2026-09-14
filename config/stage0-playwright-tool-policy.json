@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 1,
+  "playwrightMcpVersion": "0.0.80",
+  "capabilities": ["core"],
+  "tools": {
+    "browser_close": {
+      "description": "Close the page.",
+      "decision": "withhold",
+      "reason": "The runner owns browser cleanup so it can finish writing evidence even when the model fails. Closing the browser is not part of a user task."
+    },
+    "browser_resize": {
+      "description": "Resize the browser window.",
+      "decision": "offer",
+      "reason": "Changing viewport size is a normal UI action that may reveal responsive or clipped controls without bypassing the interface."
+    },
+    "browser_console_messages": {
+      "description": "Return all browser console messages.",
+      "decision": "withhold",
+      "reason": "Console logs expose application internals that a normal operator cannot see and are unnecessary for completing the documented workflows."
+    },
+    "browser_handle_dialog": {
+      "description": "Handle a native browser dialog.",
+      "decision": "offer",
+      "reason": "The simulated final submission uses a native confirmation dialog. Accepting it is separately gated by scenario authorization."
+    },
+    "browser_evaluate": {
+      "description": "Evaluate a JavaScript expression on the page or an element.",
+      "decision": "withhold",
+      "reason": "Arbitrary page JavaScript can read or change state without using the visible UI, defeating the purpose of the computer-use experiment."
+    },
+    "browser_file_upload": {
+      "description": "Upload one or multiple local files.",
+      "decision": "withhold",
+      "reason": "The target app has no upload workflow, and exposing local file paths would add unnecessary filesystem authority."
+    },
+    "browser_drop": {
+      "description": "Drop local files or MIME-typed data onto an element.",
+      "decision": "withhold",
+      "reason": "The target app has no external file or data-drop workflow; this would add filesystem and arbitrary-data input that no scenario needs."
+    },
+    "browser_find": {
+      "description": "Search the current accessibility snapshot for text or a regular expression.",
+      "decision": "offer",
+      "reason": "Searching the accessibility snapshot is still observation of the visible UI and may reduce tokens on large legacy pages."
+    },
+    "browser_fill_form": {
+      "description": "Fill multiple form fields in one browser action.",
+      "decision": "offer",
+      "reason": "Several target workflows contain multi-field forms, and grouped field entry remains a visible UI interaction."
+    },
+    "browser_press_key": {
+      "description": "Press a keyboard key.",
+      "decision": "offer",
+      "reason": "Keyboard interaction may be required by legacy controls or function-key-style navigation."
+    },
+    "browser_type": {
+      "description": "Type text into an editable element.",
+      "decision": "offer",
+      "reason": "Entering member numbers, nicknames, and deposit amounts is required by the documented workflows."
+    },
+    "browser_navigate": {
+      "description": "Navigate to a URL.",
+      "decision": "offer",
+      "reason": "The agent must open the target application. The runner separately restricts direct navigation to the configured origin."
+    },
+    "browser_navigate_back": {
+      "description": "Go back to the previous page in browser history.",
+      "decision": "offer",
+      "reason": "Back navigation is an ordinary browser action that may be needed to recover from a wrong path."
+    },
+    "browser_network_requests": {
+      "description": "List network requests made since the page loaded.",
+      "decision": "withhold",
+      "reason": "Network inspection exposes non-visible implementation details and could encourage API-level automation instead of UI interaction."
+    },
+    "browser_network_request": {
+      "description": "Return headers or body details for one recorded network request.",
+      "decision": "withhold",
+      "reason": "Reading request headers or bodies can expose sensitive technical data and bypass the user-visible interface."
+    },
+    "browser_run_code_unsafe": {
+      "description": "Run an arbitrary Playwright JavaScript snippet in the MCP server process.",
+      "decision": "withhold",
+      "reason": "This tool is explicitly RCE-equivalent and allows arbitrary code in the Playwright server process; no target scenario justifies that authority."
+    },
+    "browser_take_screenshot": {
+      "description": "Capture an image of the current page.",
+      "decision": "offer",
+      "reason": "Screenshots provide visual evidence and can help when accessibility snapshots omit important presentation details. Model-provided filenames are rewritten into the current run directory."
+    },
+    "browser_snapshot": {
+      "description": "Capture the structured accessibility representation of the current page.",
+      "decision": "offer",
+      "reason": "Accessibility snapshots are the primary structured observation used to understand and verify the visible page. Model-provided filenames are rewritten into the current run directory."
+    },
+    "browser_click": {
+      "description": "Click a visible page element.",
+      "decision": "offer",
+      "reason": "Links and buttons drive every documented workflow. Final-submission clicks are separately gated by scenario authorization."
+    },
+    "browser_drag": {
+      "description": "Drag from one visible page element to another.",
+      "decision": "offer",
+      "reason": "Dragging between visible elements is a normal UI actuator and is safe to leave available even though the current target may not need it."
+    },
+    "browser_hover": {
+      "description": "Hover over a visible page element.",
+      "decision": "offer",
+      "reason": "Hovering may reveal otherwise hidden UI information without accessing application internals."
+    },
+    "browser_select_option": {
+      "description": "Select one or more options in a dropdown.",
+      "decision": "offer",
+      "reason": "Product and statement choices use dropdown or selection controls in the account-opening workflow."
+    },
+    "browser_tabs": {
+      "description": "List, create, close, or select a browser tab.",
+      "decision": "offer",
+      "reason": "Tab selection is a normal browser operation that may be needed if a workflow opens a new page; new-tab URLs remain origin-restricted."
+    },
+    "browser_wait_for": {
+      "description": "Wait for text, disappearance, or a specified duration.",
+      "decision": "offer",
+      "reason": "Explicit waiting may be required for redirects, transient screens, or delayed UI state. Repeated runs will show whether it is actually needed."
+    }
+  }
+}
