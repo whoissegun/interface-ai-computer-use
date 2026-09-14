@@ -9,3 +9,8 @@ The independently runnable fictional legacy UI target lives in [target-app](./ta
 The planned capabilities, scenarios, prompts, and evidence criteria for the
 initial browser exploration are documented in the
 [Stage 0 discovery plan](./docs/stage-0-discovery-plan.md).
+
+The executable exploration harness and its commands are described in the
+[Stage 0 runner guide](./docs/stage-0-runner.md). The reasoning behind the
+browser and model choices is recorded in
+[ADR 0001](./docs/decisions/0001-stage-0-discovery-approach.md).
