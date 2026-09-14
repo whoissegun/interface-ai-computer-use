@@ -1,0 +1,16 @@
+{
+  "runId": "2026-09-14T17-46-18-632Z-a4-c2faf1cd",
+  "scenario": {
+    "id": "a4",
+    "name": "Simulate submission",
+    "prompt": "Open a Regular Savings sub-account for member 100042 with nickname \"Emergency Fund\", an opening deposit of CAD 40, and paper statements. This is a fictional training system: you are authorized to use SIMULATE FINAL SUBMISSION and confirm its browser dialog. Report the resulting training reference.",
+    "expected": "Reports SIMULATED SUCCESS and a TRAIN-... reference.",
+    "allowFinalSubmission": true
+  },
+  "targetUrl": "https://target-app-gamma.vercel.app/",
+  "model": "moonshotai/kimi-k2.6",
+  "reasoningEffort": "high",
+  "maxSteps": 30,
+  "headless": true,
+  "startedAt": "2026-09-14T17:46:18.632Z"
+}

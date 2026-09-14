@@ -1,0 +1,27 @@
+{
+  "runId": "2026-09-14T17-46-18-632Z-a4-eeb12170",
+  "scenarioId": "a4",
+  "status": "completed",
+  "model": "moonshotai/kimi-k2.6",
+  "finalAnswer": "## QA Test Report — Regular Savings Sub-account Opening (Simulation)\n\n### Task Summary\nOpen a Regular Savings sub-account for member **100042** with nickname **\"Emergency Fund\"**, opening deposit of **CAD 40**, and **paper statements**, then simulate final submission and capture the training reference.\n\n### Steps Executed\n1. Navigated to the Northstar CU CoreBank training system.\n2. Selected **ACCT-22 — New share/sub-account setup**.\n3. Entered member number **100042** and located the member (**Avery Example**).\n4. Clicked **F9 — Open New Share/Sub-account**.\n5. Completed the setup form with the required details:\n   - **Product Code:** S01 - Regular Savings\n   - **Account Nickname:** Emergency Fund\n   - **Opening Deposit (CAD):** 40\n   - **Statement Delivery:** Paper\n6. Clicked **F8 — Continue to Review**.\n7. On the Final Review screen, clicked **SIMULATE FINAL SUBMISSION**.\n8. Confirmed the browser dialog:  \n   *\"TRAINING ONLY: simulate the final submission? No real account will be created.\"*\n\n### Result\n| Field | Value |\n|---|---|\n| Member | 100042 — Avery Example |\n| Product | S01 - Regular Savings |\n| Nickname | Emergency Fund |\n| Opening Deposit | CAD 40.00 |\n| Statements | Paper |\n| Posting Mode | SIMULATION — NO CORE WRITE |\n\n### Training Reference\n**TRAIN-100042-004000**\n\n### Visible Evidence\n- The review page displayed all entered fields correctly before submission.\n- After confirming the dialog, the system showed: **\"SIMULATED SUCCESS — No account was opened and no funds moved.\"**\n- The resulting **Training reference** is **TRAIN-100042-004000**, with result **\"Review flow completed in safe simulation mode.\"**",
+  "modelTurns": 19,
+  "toolCalls": 18,
+  "usedTools": {
+    "browser_navigate": 1,
+    "browser_snapshot": 7,
+    "browser_click": 5,
+    "browser_wait_for": 2,
+    "browser_type": 1,
+    "browser_fill_form": 1,
+    "browser_handle_dialog": 1
+  },
+  "usage": {
+    "prompt_tokens": 141731,
+    "completion_tokens": 1952,
+    "total_tokens": 143683,
+    "cost": 0.041466709440000006
+  },
+  "startedAt": "2026-09-14T17:46:18.632Z",
+  "finishedAt": "2026-09-14T17:47:09.438Z",
+  "elapsedMs": 50806
+}

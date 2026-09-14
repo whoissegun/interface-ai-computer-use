@@ -1,0 +1,17 @@
+- generic [ref=f7e1]:
+  - text: MBR-10 Member Inquiry COREBANK / TELLER 7.4
+  - generic [ref=f7e2]: VALIDATION V10Member number is required.
+  - generic [ref=f7e3]:
+    - text: Member Number
+    - textbox [active] [ref=f7e4]
+    - text: Search Scope
+    - combobox [ref=f7e5]:
+      - option "All relationships" [selected]
+      - option "Deposit only"
+    - button "F6 - Locate" [ref=f7e6]
+    - button "Clear" [ref=f7e7]
+  - paragraph [ref=f7e8]: Enter the full member number. Name search is unavailable during nightly indexing.
+  - paragraph [ref=f7e9]:
+    - link "F3 - Return to menu" [ref=f7e10] [cursor=pointer]:
+      - /url: /app/home
+  - generic [ref=f7e11]: Northstar Community Credit Union — TRAINING SYSTEM — fictitious data only

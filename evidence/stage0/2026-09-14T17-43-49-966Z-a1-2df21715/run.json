@@ -1,0 +1,16 @@
+{
+  "runId": "2026-09-14T17-43-49-966Z-a1-2df21715",
+  "scenario": {
+    "id": "a1",
+    "name": "Find a member",
+    "prompt": "In the Northstar training system, find member 100042. Report the member's displayed name and stop without opening an account or starting another operation.",
+    "expected": "Reports Avery Example.",
+    "allowFinalSubmission": false
+  },
+  "targetUrl": "https://target-app-gamma.vercel.app/",
+  "model": "moonshotai/kimi-k2.6",
+  "reasoningEffort": "high",
+  "maxSteps": 30,
+  "headless": true,
+  "startedAt": "2026-09-14T17:43:49.966Z"
+}

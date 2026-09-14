@@ -1,0 +1,16 @@
+{
+  "runId": "2026-09-14T17-52-19-164Z-e1-6bf36578",
+  "scenario": {
+    "id": "e1",
+    "name": "Member not found business outcome",
+    "prompt": "In the Northstar training system, try to find member 999999. Report the exact visible outcome and whether the page describes it as a system error. Stop after reporting the lookup result.",
+    "expected": "Reports BUSINESS RESULT N04 as an expected not-found outcome, not a system error.",
+    "allowFinalSubmission": false
+  },
+  "targetUrl": "https://target-app-gamma.vercel.app/",
+  "model": "moonshotai/kimi-k2.6",
+  "reasoningEffort": "high",
+  "maxSteps": 30,
+  "headless": true,
+  "startedAt": "2026-09-14T17:52:19.164Z"
+}

@@ -1,0 +1,24 @@
+{
+  "runId": "2026-09-14T17-43-49-966Z-a1-2df21715",
+  "scenarioId": "a1",
+  "status": "completed",
+  "model": "moonshotai/kimi-k2.6",
+  "finalAnswer": "**QA Report: Member 100042 Lookup**\n\n- **Member Number:** 100042\n- **Displayed Name:** Avery Example\n\n**Visible Evidence:**  \nThe Member Relationship Summary page shows the following details after searching for member 100042:\n\n| Field | Value |\n|-------|-------|\n| Member # | 100042 |\n| Name | **Avery Example** |\n| Status | Active |\n| Member since | 2018-04-17 |\n| Address | 42 Fiction Lane, Sampleton, ON A1A 1A1 |\n| Telephone | (555) 010-0042 |\n\nI stopped at the summary screen and did not open any account or start another operation.",
+  "modelTurns": 9,
+  "toolCalls": 8,
+  "usedTools": {
+    "browser_navigate": 1,
+    "browser_snapshot": 4,
+    "browser_click": 2,
+    "browser_type": 1
+  },
+  "usage": {
+    "prompt_tokens": 30752,
+    "completion_tokens": 717,
+    "total_tokens": 31469,
+    "cost": 0.00984637997
+  },
+  "startedAt": "2026-09-14T17:43:49.966Z",
+  "finishedAt": "2026-09-14T17:44:11.163Z",
+  "elapsedMs": 21197
+}

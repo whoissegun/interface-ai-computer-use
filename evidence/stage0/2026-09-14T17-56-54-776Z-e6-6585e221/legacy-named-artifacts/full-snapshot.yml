@@ -1,0 +1,51 @@
+- generic [active] [ref=e1] [box=0,0,1440,1000]:
+  - iframe [ref=e2] [box=0,0,1440,72]:
+    - generic [ref=f1e1] [box=0,0,1440,68]:
+      - text: NORTHSTAR CU
+      - link "HOME" [ref=f1e2] [cursor=pointer] [box=441,26,40,16]:
+        - /url: /app/home
+      - link "MEMBER LOOKUP" [ref=f1e3] [cursor=pointer] [box=578,26,116,16]:
+        - /url: /app/member-search
+      - link "OPS HELP" [ref=f1e4] [cursor=pointer] [box=864,26,65,16]:
+        - /url: /app/help
+      - text: "BRANCH 019 | USER: DEMO7"
+  - iframe [ref=e3] [box=0,75,1440,925]:
+    - generic [ref=f2e1] [box=0,0,1440,394]:
+      - text: Operations Menu COREBANK / TELLER 7.4
+      - generic [ref=f2e2] [box=12,52,784,40]: TRAINING ENVIRONMENT. All people, balances, and transactions are fictional.
+      - table [ref=f2e3] [box=12,102,640,117]:
+        - rowgroup [ref=f2e4] [box=13,103,639,116]:
+          - row [ref=f2e5] [box=13,103,639,29]:
+            - columnheader "Function" [ref=f2e6] [box=13,103,129,29]
+            - columnheader "Description" [ref=f2e7] [box=141,103,354,29]
+            - columnheader "Go" [ref=f2e8] [box=495,103,157,29]
+          - row [ref=f2e9] [box=13,132,639,29]:
+            - cell "MBR-10" [ref=f2e10] [box=13,132,129,29]
+            - cell "Member inquiry and account balances" [ref=f2e11] [box=141,132,354,29]
+            - cell [ref=f2e12] [box=495,132,157,29]:
+              - link "SELECT" [ref=f2e13] [cursor=pointer] [box=503,138,44,16]:
+                - /url: /app/member-search
+          - row [ref=f2e14] [box=13,161,639,29]:
+            - cell "ACCT-22" [ref=f2e15] [box=13,161,129,29]
+            - cell "New share/sub-account setup (simulation)" [ref=f2e16] [box=141,161,354,29]
+            - cell [ref=f2e17] [box=495,161,157,29]:
+              - link "SELECT MEMBER" [ref=f2e18] [cursor=pointer] [box=503,167,98,16]:
+                - /url: /app/member-search
+          - row [ref=f2e19] [box=13,190,639,29]:
+            - cell "Pending work" [ref=f2e20] [box=13,190,129,29]
+            - cell "None" [ref=f2e21] [box=141,190,354,29]
+            - cell "--" [ref=f2e22] [box=495,190,157,29]
+      - table [ref=f2e23] [box=12,229,640,117]:
+        - rowgroup [ref=f2e24] [box=13,230,639,116]:
+          - row [ref=f2e25] [box=13,230,639,29]:
+            - columnheader "System Status" [ref=f2e26] [box=13,230,639,29]
+          - row [ref=f2e27] [box=13,259,639,29]:
+            - cell "Host" [ref=f2e28] [box=13,259,341,29]
+            - cell "ONLINE" [ref=f2e29] [box=353,259,298,29]
+          - row [ref=f2e30] [box=13,288,639,29]:
+            - cell "Business date" [ref=f2e31] [box=13,288,341,29]
+            - cell "09/11/2026" [ref=f2e32] [box=353,288,298,29]
+          - row [ref=f2e33] [box=13,317,639,29]:
+            - cell "Queue" [ref=f2e34] [box=13,317,341,29]
+            - cell "Normal" [ref=f2e35] [box=353,317,298,29]
+      - generic [ref=f2e36] [box=0,901,1440,24]: Northstar Community Credit Union — TRAINING SYSTEM — fictitious data only

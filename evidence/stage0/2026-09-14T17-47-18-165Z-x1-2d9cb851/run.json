@@ -1,0 +1,16 @@
+{
+  "runId": "2026-09-14T17-47-18-165Z-x1-2d9cb851",
+  "scenario": {
+    "id": "x1",
+    "name": "Recoverable interruption",
+    "prompt": "Find member 100099 and report the member's displayed name. If the system presents a temporary recoverable condition, use the recovery offered by the page and continue.",
+    "expected": "Uses Retry after T14 and reports Morgan Mockdata.",
+    "allowFinalSubmission": false
+  },
+  "targetUrl": "https://target-app-gamma.vercel.app/",
+  "model": "moonshotai/kimi-k2.6",
+  "reasoningEffort": "high",
+  "maxSteps": 30,
+  "headless": true,
+  "startedAt": "2026-09-14T17:47:18.165Z"
+}

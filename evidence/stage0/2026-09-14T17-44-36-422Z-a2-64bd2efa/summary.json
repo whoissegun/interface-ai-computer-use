@@ -1,0 +1,24 @@
+{
+  "runId": "2026-09-14T17-44-36-422Z-a2-64bd2efa",
+  "scenarioId": "a2",
+  "status": "completed",
+  "model": "moonshotai/kimi-k2.6",
+  "finalAnswer": "**Result**\n\n- **Member:** 100042 — Avery Example  \n- **Account:** S-0042-01 (Regular Savings)  \n- **Available Balance:** **$2,381.37**\n\n**Visible Evidence**\n\n1. **Member Relationship Summary** for member 100042 listed account **S-0042-01** with:\n   - Current Balance: $2,481.37\n   - **Available Balance: $2,381.37**\n\n2. After clicking the **INQUIRE** link for S-0042-01, the **Account Balance Inquiry** page confirmed:\n   - Ledger balance: $2,481.37\n   - **Available balance: $2,381.37**\n\nNo new-account operation was initiated.",
+  "modelTurns": 10,
+  "toolCalls": 9,
+  "usedTools": {
+    "browser_navigate": 1,
+    "browser_snapshot": 4,
+    "browser_click": 3,
+    "browser_type": 1
+  },
+  "usage": {
+    "prompt_tokens": 47070,
+    "completion_tokens": 990,
+    "total_tokens": 48060,
+    "cost": 0.01448250819
+  },
+  "startedAt": "2026-09-14T17:44:36.422Z",
+  "finishedAt": "2026-09-14T17:45:03.650Z",
+  "elapsedMs": 27228
+}

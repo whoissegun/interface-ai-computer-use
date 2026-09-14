@@ -49,6 +49,57 @@ export const scenarios = {
     expected: "Stops at HOLD H91 and reports that human review is required.",
     allowFinalSubmission: false
   },
+  e1: {
+    id: "e1",
+    name: "Member not found business outcome",
+    prompt:
+      "In the Northstar training system, try to find member 999999. Report the exact visible outcome and whether the page describes it as a system error. Stop after reporting the lookup result.",
+    expected: "Reports BUSINESS RESULT N04 as an expected not-found outcome, not a system error.",
+    allowFinalSubmission: false
+  },
+  e2: {
+    id: "e2",
+    name: "Blank member validation",
+    prompt:
+      "Open Member Lookup in the Northstar training system and submit the lookup form with the member number left blank. Report the exact visible validation result and stop.",
+    expected: "Reports VALIDATION V10 because the member number is required.",
+    allowFinalSubmission: false
+  },
+  e3: {
+    id: "e3",
+    name: "Invalid deposit validation",
+    prompt:
+      'For member 100042, attempt to prepare a Regular Savings sub-account with nickname "Invalid Test", an opening deposit of CAD -5, and electronic statements. Leave the invalid value unchanged and click F8 - Continue to Review once so the form can validate it. Report the exact visible result. Do not perform any final simulated account submission.',
+    expected: "Reports VALIDATION V22 for the negative opening deposit.",
+    allowFinalSubmission: false
+  },
+  e5: {
+    id: "e5",
+    name: "Permission failure",
+    prompt:
+      "In the Northstar training system, try to find member 200017. Report the exact visible result, including its code, and stop. Do not attempt to bypass any restriction.",
+    expected:
+      "Reports SECURITY S17 as a hard permission failure; transport tests separately assert HTTP 403.",
+    allowFinalSubmission: false
+  },
+  e6: {
+    id: "e6",
+    name: "Expired session",
+    prompt:
+      "In the Northstar training system, try to find member EXPIRED. Report the exact visible result, including its code and required next step, and stop.",
+    expected:
+      "Reports SESSION E01 and that human sign-in is required; transport tests separately assert HTTP 401.",
+    allowFinalSubmission: false
+  },
+  e7: {
+    id: "e7",
+    name: "Host failure",
+    prompt:
+      "In the Northstar training system, try to find member APP-500. Report the exact visible result, including its code, and stop without claiming success.",
+    expected:
+      "Reports HOST X500 as a hard host failure; transport tests separately assert HTTP 500.",
+    allowFinalSubmission: false
+  },
   chain1: {
     id: "chain1",
     name: "Balance followed by sub-account preparation",

@@ -1,0 +1,7 @@
+- generic [active] [ref=f4e1]:
+  - text: Unknown Function COREBANK / TELLER 7.4
+  - generic [ref=f4e2]: ROUTE 404This CoreBank function code does not exist.
+  - paragraph [ref=f4e3]:
+    - link "Return to operations menu" [ref=f4e4] [cursor=pointer]:
+      - /url: /app/home
+  - generic [ref=f4e5]: Northstar Community Credit Union — TRAINING SYSTEM — fictitious data only

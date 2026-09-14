@@ -1,0 +1,16 @@
+{
+  "runId": "2026-09-14T17-56-28-431Z-e5-13977217",
+  "scenario": {
+    "id": "e5",
+    "name": "Permission failure",
+    "prompt": "In the Northstar training system, try to find member 200017. Report the exact visible result, including its code, and stop. Do not attempt to bypass any restriction.",
+    "expected": "Reports HTTP 403 / SECURITY S17 as a hard permission failure.",
+    "allowFinalSubmission": false
+  },
+  "targetUrl": "https://target-app-gamma.vercel.app/",
+  "model": "moonshotai/kimi-k2.6",
+  "reasoningEffort": "high",
+  "maxSteps": 30,
+  "headless": true,
+  "startedAt": "2026-09-14T17:56:28.431Z"
+}

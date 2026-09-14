@@ -1,0 +1,25 @@
+{
+  "runId": "2026-09-14T17-52-19-165Z-e1-b1939114",
+  "scenarioId": "e1",
+  "status": "completed",
+  "model": "moonshotai/kimi-k2.6",
+  "finalAnswer": "## Lookup Result for Member 999999\n\n**Exact visible outcome:**\n> BUSINESS RESULT N04No member relationship matched 999999. No system error occurred.\n\n**Is it described as a system error?**\nNo — the page explicitly states **\"No system error occurred.\"** The outcome is presented as a business result (code N04) indicating that no member relationship matched the entered number.",
+  "modelTurns": 10,
+  "toolCalls": 9,
+  "usedTools": {
+    "browser_navigate": 1,
+    "browser_snapshot": 3,
+    "browser_click": 2,
+    "browser_wait_for": 2,
+    "browser_type": 1
+  },
+  "usage": {
+    "prompt_tokens": 41494,
+    "completion_tokens": 754,
+    "total_tokens": 42248,
+    "cost": 0.012384648460000001
+  },
+  "startedAt": "2026-09-14T17:52:19.165Z",
+  "finishedAt": "2026-09-14T17:52:43.919Z",
+  "elapsedMs": 24754
+}

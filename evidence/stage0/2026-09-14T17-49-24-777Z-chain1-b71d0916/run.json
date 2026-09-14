@@ -1,0 +1,16 @@
+{
+  "runId": "2026-09-14T17-49-24-777Z-chain1-b71d0916",
+  "scenario": {
+    "id": "chain1",
+    "name": "Balance followed by sub-account preparation",
+    "prompt": "In the Northstar training system, find member 100042 and report the available balance of savings account S-0042-01. Then prepare a Holiday Savings sub-account for the same member with nickname \"Rainy Day\", an opening deposit of CAD 25, and electronic statements. Stop at the final review screen without submitting. Report both the available balance and every displayed review detail.",
+    "expected": "Reports $2,381.37 and reaches the correct final review without submitting.",
+    "allowFinalSubmission": false
+  },
+  "targetUrl": "https://target-app-gamma.vercel.app/",
+  "model": "moonshotai/kimi-k2.6",
+  "reasoningEffort": "high",
+  "maxSteps": 30,
+  "headless": true,
+  "startedAt": "2026-09-14T17:49:24.777Z"
+}

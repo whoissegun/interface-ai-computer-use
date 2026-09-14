@@ -1,0 +1,16 @@
+{
+  "runId": "2026-09-14T17-56-54-776Z-e6-b861706c",
+  "scenario": {
+    "id": "e6",
+    "name": "Expired session",
+    "prompt": "In the Northstar training system, try to find member EXPIRED. Report the exact visible result, including its code and required next step, and stop.",
+    "expected": "Reports HTTP 401 / SESSION E01 and that human sign-in is required.",
+    "allowFinalSubmission": false
+  },
+  "targetUrl": "https://target-app-gamma.vercel.app/",
+  "model": "moonshotai/kimi-k2.6",
+  "reasoningEffort": "high",
+  "maxSteps": 30,
+  "headless": true,
+  "startedAt": "2026-09-14T17:56:54.776Z"
+}

@@ -1,0 +1,16 @@
+{
+  "runId": "2026-09-14T17-54-55-192Z-e3-a3de49f8",
+  "scenario": {
+    "id": "e3",
+    "name": "Invalid deposit validation",
+    "prompt": "For member 100042, attempt to prepare a Regular Savings sub-account with nickname \"Invalid Test\", an opening deposit of CAD -5, and electronic statements. Report the exact visible result and stop without changing the invalid value or submitting anything.",
+    "expected": "Reports VALIDATION V22 for the negative opening deposit.",
+    "allowFinalSubmission": false
+  },
+  "targetUrl": "https://target-app-gamma.vercel.app/",
+  "model": "moonshotai/kimi-k2.6",
+  "reasoningEffort": "high",
+  "maxSteps": 30,
+  "headless": true,
+  "startedAt": "2026-09-14T17:54:55.192Z"
+}

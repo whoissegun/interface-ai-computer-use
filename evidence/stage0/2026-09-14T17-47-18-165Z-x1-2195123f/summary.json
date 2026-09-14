@@ -1,0 +1,25 @@
+{
+  "runId": "2026-09-14T17-47-18-165Z-x1-2195123f",
+  "scenarioId": "x1",
+  "status": "completed",
+  "model": "moonshotai/kimi-k2.6",
+  "finalAnswer": "**QA Report: Member 100099 Lookup**\n\n- **Member Number:** 100099  \n- **Displayed Name:** Morgan Mockdata  \n\n**Recovery Event:**  \nAfter entering member number `100099` and clicking **F6 - Locate**, the system presented a temporary recoverable condition with the message: *“Wait briefly, then retry the same inquiry.”*  \nI used the page’s offered recovery action by clicking the **F5 - Retry host request** link, after which the member record loaded successfully.  \n\n**Visible Evidence:**  \nThe member details table shows:\n- Member # `100099`\n- Status `Active`\n- Name `Morgan Mockdata`\n- Member since `2021-11-03`",
+  "modelTurns": 13,
+  "toolCalls": 12,
+  "usedTools": {
+    "browser_navigate": 1,
+    "browser_find": 6,
+    "browser_click": 3,
+    "browser_snapshot": 1,
+    "browser_fill_form": 1
+  },
+  "usage": {
+    "prompt_tokens": 48618,
+    "completion_tokens": 980,
+    "total_tokens": 49598,
+    "cost": 0.01511986815
+  },
+  "startedAt": "2026-09-14T17:47:18.165Z",
+  "finishedAt": "2026-09-14T17:47:47.438Z",
+  "elapsedMs": 29273
+}

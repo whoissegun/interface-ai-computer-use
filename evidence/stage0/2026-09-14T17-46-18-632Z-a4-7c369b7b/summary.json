@@ -1,0 +1,25 @@
+{
+  "runId": "2026-09-14T17-46-18-632Z-a4-7c369b7b",
+  "scenarioId": "a4",
+  "status": "completed",
+  "model": "moonshotai/kimi-k2.6",
+  "finalAnswer": "## QA Task Complete\n\n**Training reference:** `TRAIN-100042-004000`\n\n**Visible evidence of successful completion:**\n\n1. **Member lookup:** Located member `100042 — Avery Example`\n2. **Product selection:** `S01 - Regular Savings`\n3. **Nickname:** `Emergency Fund`\n4. **Opening deposit:** `CAD 40.00`\n5. **Statement delivery:** `Paper`\n6. **Review page:** Displayed all fields correctly under \"SIMULATION — NO CORE WRITE\" mode\n7. **Final submission:** Clicked **SIMULATE FINAL SUBMISSION**, confirmed the browser dialog:  \n   *\"TRAINING ONLY: simulate the final submission? No real account will be created.\"*\n8. **Result page:** Shows \"SIMULATED SUCCESS — No account was opened and no funds moved\" with the resulting **Training reference: `TRAIN-100042-004000`**",
+  "modelTurns": 18,
+  "toolCalls": 17,
+  "usedTools": {
+    "browser_navigate": 1,
+    "browser_snapshot": 7,
+    "browser_click": 6,
+    "browser_fill_form": 2,
+    "browser_handle_dialog": 1
+  },
+  "usage": {
+    "prompt_tokens": 126194,
+    "completion_tokens": 1513,
+    "total_tokens": 127707,
+    "cost": 0.03754781184
+  },
+  "startedAt": "2026-09-14T17:46:18.632Z",
+  "finishedAt": "2026-09-14T17:46:58.105Z",
+  "elapsedMs": 39473
+}

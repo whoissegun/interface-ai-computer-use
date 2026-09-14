@@ -1,0 +1,16 @@
+{
+  "runId": "2026-09-14T17-52-55-992Z-e2-404fa31a",
+  "scenario": {
+    "id": "e2",
+    "name": "Blank member validation",
+    "prompt": "Open Member Lookup in the Northstar training system and submit the lookup form with the member number left blank. Report the exact visible validation result and stop.",
+    "expected": "Reports VALIDATION V10 because the member number is required.",
+    "allowFinalSubmission": false
+  },
+  "targetUrl": "https://target-app-gamma.vercel.app/",
+  "model": "moonshotai/kimi-k2.6",
+  "reasoningEffort": "high",
+  "maxSteps": 30,
+  "headless": true,
+  "startedAt": "2026-09-14T17:52:55.992Z"
+}

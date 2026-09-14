@@ -1,0 +1,2 @@
+[    4197ms] [INFO] Autofocus processing was blocked because a document already has a focused element. @ https://target-app-gamma.vercel.app/:0
+[    9030ms] [ERROR] Failed to load resource: the server responded with a status of 403 () @ https://target-app-gamma.vercel.app/app/member/200017:0

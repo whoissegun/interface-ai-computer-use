@@ -1,0 +1,27 @@
+{
+  "runId": "2026-09-14T17-54-55-192Z-e3-a3de49f8",
+  "scenarioId": "e3",
+  "status": "completed",
+  "model": "moonshotai/kimi-k2.6",
+  "finalAnswer": "**QA Test Report**\n\n| Step | Detail |\n|------|--------|\n| **Member** | 100042 (Avery Example) |\n| **Product selected** | S01 – Regular Savings |\n| **Nickname entered** | `Invalid Test` |\n| **Opening deposit entered** | `CAD -5` |\n| **Statement delivery** | Electronic (pre-selected) |\n| **Action taken** | Clicked **F8 – Continue to Review** while the invalid deposit value remained in the field. |\n\n**Exact visible result**\n\nA validation banner appears directly below the page heading with the text:\n\n> **VALIDATION V22Opening deposit must be a non-negative number.**\n\nThe form fields remain unchanged (nickname still shows `Invalid Test`, deposit field still shows `-5`, and Electronic is still selected). No final submission was performed.\n\n**Evidence**\n- Full-page screenshot captured: [`validation_result.png`](./validation_result.png) shows the validation banner and the untouched form fields.  \n- Accessibility snapshot also records the exact message text: `VALIDATION V22Opening deposit must be a non-negative number.`\n\n**Status:** Test stopped as instructed; invalid value was not corrected and nothing was submitted.",
+  "modelTurns": 21,
+  "toolCalls": 20,
+  "usedTools": {
+    "browser_navigate": 1,
+    "browser_snapshot": 7,
+    "browser_click": 5,
+    "browser_find": 2,
+    "browser_type": 3,
+    "browser_select_option": 1,
+    "browser_take_screenshot": 1
+  },
+  "usage": {
+    "prompt_tokens": 146017,
+    "completion_tokens": 3367,
+    "total_tokens": 149384,
+    "cost": 0.04620666832
+  },
+  "startedAt": "2026-09-14T17:54:55.192Z",
+  "finishedAt": "2026-09-14T17:55:56.415Z",
+  "elapsedMs": 61223
+}
