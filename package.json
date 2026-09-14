@@ -1,0 +1,24 @@
+{
+  "name": "interface-ai-computer-use",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "stage0": "tsx src/stage0/cli.ts",
+    "test": "tsx --test 'src/**/*.test.ts'",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.30.0",
+    "dotenv": "17.4.2"
+  },
+  "devDependencies": {
+    "@playwright/mcp": "0.0.80",
+    "@types/node": "22.20.2",
+    "tsx": "4.23.13",
+    "typescript": "5.9.3"
+  }
+}
