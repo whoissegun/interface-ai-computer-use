@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { classifyTools, policyDenial, toolPolicy } from "./policy.js";
+import { classifyTools, policyDenial, resultShowsHumanBoundary, toolPolicy } from "./policy.js";
 import { getScenario } from "./scenarios.js";
 
 const target = new URL("https://target-app-gamma.vercel.app/");
@@ -28,6 +28,37 @@ test("final submission actions require scenario authorization", () => {
     }),
     null
   );
+});
+
+test("supervisor acknowledgement is always reserved for a human", () => {
+  assert.match(
+    policyDenial(getScenario("x2"), target, "browser_click", {
+      element: "Supervisor: acknowledge review",
+      target: "e4"
+    }) ?? "",
+    /live human handoff/
+  );
+});
+
+test("a visible human-review boundary freezes model-driven browser changes", () => {
+  const scenario = getScenario("x2");
+  assert.equal(
+    resultShowsHumanBoundary(
+      { content: [{ type: "text", text: "HUMAN REVIEW REQUIRED — HOLD H91" }] },
+      scenario
+    ),
+    true
+  );
+  assert.match(
+    policyDenial(scenario, target, "browser_click", { element: "Continue", target: "e99" }, true) ?? "",
+    /Only a human may change/
+  );
+  assert.match(
+    policyDenial(scenario, target, "browser_press_key", { key: "Enter" }, true) ?? "",
+    /Only a human may change/
+  );
+  assert.equal(policyDenial(scenario, target, "browser_snapshot", {}, true), null);
+  assert.equal(policyDenial(scenario, target, "browser_take_screenshot", {}, true), null);
 });
 
 test("unneeded high-power tools are denied", () => {

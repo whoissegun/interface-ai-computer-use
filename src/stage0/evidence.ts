@@ -11,6 +11,7 @@ type EvidenceConfig = {
   reasoningEffort: string;
   maxSteps: number;
   headless: boolean;
+  waitForHuman?: boolean;
   secrets?: string[];
 };
 
@@ -57,6 +58,7 @@ export class EvidenceRecorder {
           reasoningEffort: config.reasoningEffort,
           maxSteps: config.maxSteps,
           headless: config.headless,
+          waitForHuman: config.waitForHuman ?? false,
           startedAt: startedAt.toISOString()
         },
         null,

@@ -1,5 +1,5 @@
 import { readFileSync } from "node:fs";
-import type { BrowserTool, JsonObject, Scenario } from "./types.js";
+import type { BrowserTool, BrowserToolResult, JsonObject, Scenario } from "./types.js";
 
 export type ToolDecision = {
   description: string;
@@ -22,6 +22,19 @@ export const offeredToolNames = new Set(
     .filter(([, policy]) => policy.decision === "offer")
     .map(([name]) => name)
 );
+
+const readOnlyHandoffTools = new Set(["browser_snapshot", "browser_take_screenshot"]);
+
+export function resultShowsHumanBoundary(result: BrowserToolResult, scenario: Scenario): boolean {
+  const triggerText = scenario.humanHandoff?.triggerText;
+  if (!triggerText) return false;
+
+  return (result.content ?? []).some((item) => {
+    if (!item || typeof item !== "object") return false;
+    const block = item as Record<string, unknown>;
+    return block.type === "text" && typeof block.text === "string" && block.text.includes(triggerText);
+  });
+}
 
 export function classifyTools(tools: BrowserTool[]): {
   offered: BrowserTool[];
@@ -46,10 +59,15 @@ export function policyDenial(
   scenario: Scenario,
   targetUrl: URL,
   toolName: string,
-  args: JsonObject
+  args: JsonObject,
+  humanBoundaryActive = false
 ): string | null {
   if (!offeredToolNames.has(toolName)) {
     return `Tool ${toolName} is outside the Stage 0 browser-action allowlist.`;
+  }
+
+  if (humanBoundaryActive && !readOnlyHandoffTools.has(toolName)) {
+    return `The ${scenario.humanHandoff?.reasonCode ?? "human-review"} boundary is active. Only a human may change the browser until it is resolved.`;
   }
 
   if (toolName === "browser_navigate") {
@@ -75,6 +93,14 @@ export function policyDenial(
     if (requested.origin !== targetUrl.origin) {
       return `New-tab navigation is restricted to ${targetUrl.origin}.`;
     }
+  }
+
+  if (
+    toolName === "browser_click" &&
+    typeof args.element === "string" &&
+    /supervisor\s*:\s*acknowledge review/i.test(args.element)
+  ) {
+    return "Supervisor acknowledgement is reserved for the live human handoff.";
   }
 
   if (!scenario.allowFinalSubmission) {
