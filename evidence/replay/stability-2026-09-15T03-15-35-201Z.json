@@ -1,0 +1,134 @@
+{
+  "targetOrigin": "https://target-app-gamma.vercel.app",
+  "repetitions": 3,
+  "llmInDecisionLoop": false,
+  "cases": [
+    {
+      "name": "find-member",
+      "consistent": true,
+      "runIds": [
+        "2026-09-15T03-14-54-676Z-northstar-find-member-0078ecb4",
+        "2026-09-15T03-14-57-236Z-northstar-find-member-704fb893",
+        "2026-09-15T03-14-59-380Z-northstar-find-member-d5c34813"
+      ],
+      "stableResult": {
+        "capabilityId": "northstar.find-member",
+        "capabilityVersion": "1.0.0",
+        "status": "success",
+        "completedSteps": [
+          "open_application",
+          "open_member_lookup",
+          "enter_member_number",
+          "submit_member_lookup"
+        ],
+        "recoveries": [],
+        "humanHandoffs": [],
+        "output": {
+          "memberNumber": "100042",
+          "displayedName": "Avery Example",
+          "memberStatus": "Active"
+        }
+      }
+    },
+    {
+      "name": "read-balance",
+      "consistent": true,
+      "runIds": [
+        "2026-09-15T03-15-01-548Z-northstar-read-balance-a9a77b5a",
+        "2026-09-15T03-15-04-248Z-northstar-read-balance-a99923af",
+        "2026-09-15T03-15-06-908Z-northstar-read-balance-59c68100"
+      ],
+      "stableResult": {
+        "capabilityId": "northstar.read-balance",
+        "capabilityVersion": "1.0.0",
+        "status": "success",
+        "completedSteps": [
+          "open_application",
+          "open_member_lookup",
+          "enter_member_number",
+          "submit_member_lookup",
+          "open_requested_account"
+        ],
+        "recoveries": [],
+        "humanHandoffs": [],
+        "output": {
+          "memberNumber": "100042",
+          "accountNumber": "S-0042-01",
+          "product": "Regular Savings",
+          "ledgerBalance": 2481.37,
+          "availableBalance": 2381.37
+        }
+      }
+    },
+    {
+      "name": "prepare-subaccount",
+      "consistent": true,
+      "runIds": [
+        "2026-09-15T03-15-09-737Z-northstar-prepare-subaccount-252a1f60",
+        "2026-09-15T03-15-13-649Z-northstar-prepare-subaccount-af09fef7",
+        "2026-09-15T03-15-17-641Z-northstar-prepare-subaccount-6b8e6490"
+      ],
+      "stableResult": {
+        "capabilityId": "northstar.prepare-subaccount",
+        "capabilityVersion": "1.0.0",
+        "status": "success",
+        "completedSteps": [
+          "open_application",
+          "open_member_lookup",
+          "enter_member_number",
+          "submit_member_lookup",
+          "open_subaccount_form",
+          "select_product",
+          "enter_nickname",
+          "enter_opening_deposit",
+          "choose_statement_delivery",
+          "continue_to_review"
+        ],
+        "recoveries": [],
+        "humanHandoffs": [],
+        "output": {
+          "memberNumber": "100042",
+          "product": "HOLIDAY_SAVINGS",
+          "nickname": "Rainy Day",
+          "openingDeposit": 25,
+          "statementDelivery": "ELECTRONIC"
+        }
+      }
+    },
+    {
+      "name": "simulate-subaccount",
+      "consistent": true,
+      "runIds": [
+        "2026-09-15T03-15-21-555Z-northstar-simulate-subaccount-48f065ec",
+        "2026-09-15T03-15-25-974Z-northstar-simulate-subaccount-584354b8",
+        "2026-09-15T03-15-30-646Z-northstar-simulate-subaccount-48e47303"
+      ],
+      "stableResult": {
+        "capabilityId": "northstar.simulate-subaccount",
+        "capabilityVersion": "1.0.0",
+        "status": "success",
+        "completedSteps": [
+          "open_application",
+          "open_member_lookup",
+          "enter_member_number",
+          "submit_member_lookup",
+          "open_subaccount_form",
+          "select_product",
+          "enter_nickname",
+          "enter_opening_deposit",
+          "choose_statement_delivery",
+          "continue_to_review",
+          "verify_review_fields",
+          "start_final_simulation",
+          "confirm_final_simulation"
+        ],
+        "recoveries": [],
+        "humanHandoffs": [],
+        "output": {
+          "trainingReference": "TRAIN-100042-004000",
+          "result": "Review flow completed in safe simulation mode"
+        }
+      }
+    }
+  ]
+}

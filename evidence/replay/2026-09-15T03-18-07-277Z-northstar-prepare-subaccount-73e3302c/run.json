@@ -1,0 +1,18 @@
+{
+  "runId": "2026-09-15T03-18-07-277Z-northstar-prepare-subaccount-73e3302c",
+  "capability": {
+    "id": "northstar.prepare-subaccount",
+    "version": "1.0.0"
+  },
+  "targetOrigin": "https://target-app-gamma.vercel.app",
+  "inputs": {
+    "memberNumber": "***0099",
+    "product": "YOUTH_SAVINGS",
+    "nickname": "[REDACTED]",
+    "openingDeposit": "[REDACTED]",
+    "statementDelivery": "ELECTRONIC"
+  },
+  "headless": true,
+  "llmInDecisionLoop": false,
+  "startedAt": "2026-09-15T03:18:07.277Z"
+}

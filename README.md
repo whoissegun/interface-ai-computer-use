@@ -18,3 +18,26 @@ browser and model choices is recorded in
 The same-session human-review design, safety boundary, alternatives, and
 validation are recorded in
 [ADR 0002](./docs/decisions/0002-live-human-handoff.md).
+
+Four production-style artifacts cover every core operation in the target:
+member lookup, balance inquiry, prepare-to-review, and safe final simulation.
+Run the first deterministically, without an LLM or API key, with:
+
+```bash
+npm run replay:find-member -- --member-number 100042
+```
+
+The replay commands and outcome examples are in the
+[deterministic replay guide](./docs/deterministic-replay.md). The artifact,
+locator, checkpoint, error-taxonomy, and redaction decisions are recorded in
+[ADR 0003](./docs/decisions/0003-versioned-capability-and-deterministic-replay.md).
+The multi-capability composition, final-action gate, same-session H91 behavior,
+and stability criteria are recorded in
+[ADR 0004](./docs/decisions/0004-deterministic-capability-set-and-safety-gates.md).
+
+The checked-in live stability report contains three consistent fresh replays
+of each capability:
+
+```bash
+npm run replay:stability
+```

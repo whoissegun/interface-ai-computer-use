@@ -1,0 +1,37 @@
+{
+  "runId": "2026-09-15T03-13-59-937Z-northstar-prepare-subaccount-9980432b",
+  "capabilityId": "northstar.prepare-subaccount",
+  "capabilityVersion": "1.0.0",
+  "startedAt": "2026-09-15T03:13:59.939Z",
+  "finishedAt": "2026-09-15T03:14:04.610Z",
+  "elapsedMs": 4671,
+  "completedSteps": [
+    "open_application",
+    "open_member_lookup",
+    "enter_member_number",
+    "submit_member_lookup",
+    "open_subaccount_form",
+    "select_product",
+    "enter_nickname",
+    "enter_opening_deposit",
+    "choose_statement_delivery",
+    "continue_to_review"
+  ],
+  "recoveries": [],
+  "humanHandoffs": [
+    {
+      "code": "H91",
+      "requestedAt": "2026-09-15T03:14:03.997Z",
+      "resolvedAt": "2026-09-15T03:14:04.558Z",
+      "checks": 1
+    }
+  ],
+  "status": "success",
+  "output": {
+    "memberNumber": "***0088",
+    "product": "REGULAR_SAVINGS",
+    "nickname": "[REDACTED]",
+    "openingDeposit": "[REDACTED]",
+    "statementDelivery": "PAPER"
+  }
+}

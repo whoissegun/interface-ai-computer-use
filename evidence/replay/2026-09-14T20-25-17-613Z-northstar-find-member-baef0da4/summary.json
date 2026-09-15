@@ -1,0 +1,21 @@
+{
+  "runId": "2026-09-14T20-25-17-613Z-northstar-find-member-baef0da4",
+  "capabilityId": "northstar.find-member",
+  "capabilityVersion": "1.0.0",
+  "startedAt": "2026-09-14T20:25:17.617Z",
+  "finishedAt": "2026-09-14T20:25:20.393Z",
+  "elapsedMs": 2776,
+  "completedSteps": [
+    "open_application",
+    "open_member_lookup",
+    "enter_member_number",
+    "submit_member_lookup"
+  ],
+  "recoveries": [],
+  "status": "success",
+  "output": {
+    "memberNumber": "***0042",
+    "displayedName": "[REDACTED]",
+    "memberStatus": "Active"
+  }
+}

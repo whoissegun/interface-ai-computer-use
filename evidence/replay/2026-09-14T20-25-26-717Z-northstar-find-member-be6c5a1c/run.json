@@ -1,0 +1,14 @@
+{
+  "runId": "2026-09-14T20-25-26-717Z-northstar-find-member-be6c5a1c",
+  "capability": {
+    "id": "northstar.find-member",
+    "version": "1.0.0"
+  },
+  "targetOrigin": "https://target-app-gamma.vercel.app",
+  "inputs": {
+    "memberNumber": "***9999"
+  },
+  "headless": true,
+  "llmInDecisionLoop": false,
+  "startedAt": "2026-09-14T20:25:26.717Z"
+}

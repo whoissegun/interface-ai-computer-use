@@ -1,0 +1,19 @@
+{
+  "runId": "2026-09-14T20-25-26-717Z-northstar-find-member-be6c5a1c",
+  "capabilityId": "northstar.find-member",
+  "capabilityVersion": "1.0.0",
+  "startedAt": "2026-09-14T20:25:26.725Z",
+  "finishedAt": "2026-09-14T20:25:29.741Z",
+  "elapsedMs": 3016,
+  "completedSteps": [
+    "open_application",
+    "open_member_lookup",
+    "enter_member_number",
+    "submit_member_lookup"
+  ],
+  "recoveries": [],
+  "status": "business_outcome",
+  "code": "N04",
+  "message": "No member relationship matched the supplied member number.",
+  "stepId": "evaluate_lookup_result"
+}

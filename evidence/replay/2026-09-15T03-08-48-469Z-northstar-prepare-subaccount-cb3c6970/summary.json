@@ -1,0 +1,26 @@
+{
+  "runId": "2026-09-15T03-08-48-469Z-northstar-prepare-subaccount-cb3c6970",
+  "capabilityId": "northstar.prepare-subaccount",
+  "capabilityVersion": "1.0.0",
+  "startedAt": "2026-09-15T03:08:48.472Z",
+  "finishedAt": "2026-09-15T03:08:52.415Z",
+  "elapsedMs": 3943,
+  "completedSteps": [
+    "open_application",
+    "open_member_lookup",
+    "enter_member_number",
+    "submit_member_lookup",
+    "open_subaccount_form",
+    "select_product",
+    "enter_nickname",
+    "enter_opening_deposit",
+    "choose_statement_delivery",
+    "continue_to_review"
+  ],
+  "recoveries": [],
+  "humanHandoffs": [],
+  "status": "business_outcome",
+  "code": "V22",
+  "message": "The application rejected one or more sub-account fields.",
+  "stepId": "verify_completion"
+}

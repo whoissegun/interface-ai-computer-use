@@ -1,0 +1,18 @@
+{
+  "runId": "2026-09-15T03-08-59-071Z-northstar-simulate-subaccount-49bb5204",
+  "capability": {
+    "id": "northstar.simulate-subaccount",
+    "version": "1.0.0"
+  },
+  "targetOrigin": "https://target-app-gamma.vercel.app",
+  "inputs": {
+    "memberNumber": "***0042",
+    "product": "REGULAR_SAVINGS",
+    "nickname": "[REDACTED]",
+    "openingDeposit": "[REDACTED]",
+    "statementDelivery": "PAPER"
+  },
+  "headless": true,
+  "llmInDecisionLoop": false,
+  "startedAt": "2026-09-15T03:08:59.071Z"
+}

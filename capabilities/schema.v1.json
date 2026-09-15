@@ -1,0 +1,431 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/interface-ai/computer-use-capability.schema.v1.json",
+  "title": "Computer-use capability artifact v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "kind",
+    "id",
+    "version",
+    "name",
+    "description",
+    "provenance",
+    "surface",
+    "risk",
+    "inputs",
+    "outputs",
+    "steps",
+    "completion"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": { "const": 1 },
+    "kind": { "const": "computer_use_capability" },
+    "id": { "type": "string", "minLength": 1 },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "name": { "type": "string", "minLength": 1 },
+    "description": { "type": "string", "minLength": 1 },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["discoveryScenario", "discoveryRunIds", "compiledBy"],
+      "properties": {
+        "discoveryScenario": { "type": "string", "minLength": 1 },
+        "discoveryRunIds": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "compiledBy": { "const": "human_reviewed" }
+      }
+    },
+    "surface": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "application", "applicationVersion", "allowedOrigins"],
+      "properties": {
+        "kind": { "const": "web_accessibility" },
+        "application": { "type": "string", "minLength": 1 },
+        "applicationVersion": { "type": "string", "minLength": 1 },
+        "allowedOrigins": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "format": "uri" }
+        }
+      }
+    },
+    "risk": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["level", "requiresConfirmation", "allowedActions"],
+      "properties": {
+        "level": { "enum": ["read_only", "reversible_write", "simulated_irreversible"] },
+        "requiresConfirmation": { "type": "boolean" },
+        "allowedActions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "navigate",
+              "find",
+              "click",
+              "type",
+              "select_option",
+              "click_choice",
+              "verify",
+              "handle_dialog",
+              "snapshot",
+              "screenshot"
+            ]
+          }
+        }
+      }
+    },
+    "inputs": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": { "$ref": "#/$defs/input" }
+    },
+    "outputs": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": { "$ref": "#/$defs/output" }
+    },
+    "steps": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/step" }
+    },
+    "completion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["checkpoint", "outcomes", "assertions"],
+      "properties": {
+        "checkpoint": { "$ref": "#/$defs/checkpoint" },
+        "outcomes": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/outcome" }
+        },
+        "assertions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["kind", "output", "input"],
+            "properties": {
+              "kind": { "const": "output_equals_input" },
+              "output": { "type": "string", "minLength": 1 },
+              "input": { "type": "string", "minLength": 1 }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "logPolicy": { "enum": ["plain", "last4", "redact"] },
+    "input": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type", "description", "logPolicy"],
+          "properties": {
+            "type": { "const": "string" },
+            "description": { "type": "string", "minLength": 1 },
+            "minLength": { "type": "integer", "minimum": 0 },
+            "maxLength": { "type": "integer", "minimum": 1 },
+            "pattern": { "type": "string" },
+            "enum": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": { "type": "string" }
+            },
+            "logPolicy": { "$ref": "#/$defs/logPolicy" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type", "description", "logPolicy"],
+          "properties": {
+            "type": { "const": "number" },
+            "description": { "type": "string", "minLength": 1 },
+            "minimum": { "type": "number" },
+            "maximum": { "type": "number" },
+            "logPolicy": { "$ref": "#/$defs/logPolicy" }
+          }
+        }
+      ]
+    },
+    "output": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "description", "extract", "logPolicy"],
+      "properties": {
+        "type": { "enum": ["string", "number"] },
+        "description": { "type": "string", "minLength": 1 },
+        "extract": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "label"],
+          "properties": {
+            "kind": { "const": "accessibility_table_row" },
+            "label": { "type": "string", "minLength": 1 },
+            "pattern": { "type": "string" },
+            "visibleToValue": {
+              "type": "object",
+              "additionalProperties": { "type": "string" }
+            },
+            "numberFormat": { "const": "currency" }
+          }
+        },
+        "logPolicy": { "$ref": "#/$defs/logPolicy" }
+      }
+    },
+    "checkpoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "text"],
+      "properties": {
+        "kind": { "const": "visible_text" },
+        "text": { "type": "string", "minLength": 1 }
+      }
+    },
+    "locator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "role", "exact", "rationale"],
+      "oneOf": [
+        {
+          "required": ["name"],
+          "properties": { "name": {}, "nearText": false }
+        },
+        {
+          "required": ["nearText"],
+          "properties": { "nearText": {}, "name": false }
+        }
+      ],
+      "properties": {
+        "kind": { "const": "accessibility" },
+        "role": { "enum": ["link", "button", "textbox", "combobox", "radio"] },
+        "name": { "type": "string", "minLength": 1 },
+        "nearText": { "type": "string", "minLength": 1 },
+        "withinRowInput": { "type": "string", "minLength": 1 },
+        "exact": { "type": "boolean" },
+        "rationale": { "type": "string", "minLength": 1 }
+      }
+    },
+    "navigateStep": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "action", "path", "expect"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "action": { "const": "navigate" },
+        "path": { "type": "string", "minLength": 1 },
+        "expect": { "$ref": "#/$defs/checkpoint" }
+      }
+    },
+    "onMissing": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["classification", "code", "message"],
+          "properties": {
+            "classification": { "const": "business_outcome" },
+            "code": { "type": "string", "minLength": 1 },
+            "message": { "type": "string", "minLength": 1 }
+          }
+    },
+    "clickStep": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "action", "locator"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "action": { "const": "click" },
+        "locator": { "$ref": "#/$defs/locator" },
+        "expect": { "$ref": "#/$defs/checkpoint" },
+        "expectDialogText": { "type": "string", "minLength": 1 },
+        "onMissing": { "$ref": "#/$defs/onMissing" }
+      }
+    },
+    "typeStep": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "action", "locator", "input"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "action": { "const": "type" },
+        "locator": { "$ref": "#/$defs/locator" },
+        "input": { "type": "string", "minLength": 1 }
+      }
+    },
+    "selectOptionStep": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "action", "locator", "input", "options"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "action": { "const": "select_option" },
+        "locator": { "$ref": "#/$defs/locator" },
+        "input": { "type": "string", "minLength": 1 },
+        "options": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": { "type": "string" }
+        }
+      }
+    },
+    "clickChoiceStep": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "action", "input", "choices"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "action": { "const": "click_choice" },
+        "input": { "type": "string", "minLength": 1 },
+        "choices": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": { "$ref": "#/$defs/locator" }
+        }
+      }
+    },
+    "verifyStep": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "action", "checkpoint", "fields"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "action": { "const": "verify" },
+        "checkpoint": { "$ref": "#/$defs/checkpoint" },
+        "fields": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["label", "input", "comparison"],
+            "properties": {
+              "label": { "type": "string", "minLength": 1 },
+              "input": { "type": "string", "minLength": 1 },
+              "comparison": { "enum": ["exact", "starts_with", "number"] },
+              "inputToVisible": {
+                "type": "object",
+                "additionalProperties": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "handleDialogStep": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "action", "accept"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "action": { "const": "handle_dialog" },
+        "accept": { "const": true }
+      }
+    },
+    "step": {
+      "oneOf": [
+        { "$ref": "#/$defs/navigateStep" },
+        { "$ref": "#/$defs/clickStep" },
+        { "$ref": "#/$defs/typeStep" },
+        { "$ref": "#/$defs/selectOptionStep" },
+        { "$ref": "#/$defs/clickChoiceStep" },
+        { "$ref": "#/$defs/verifyStep" },
+        { "$ref": "#/$defs/handleDialogStep" }
+      ]
+    },
+    "baseOutcome": {
+      "type": "object",
+      "required": ["classification", "code", "marker", "message"],
+      "properties": {
+        "classification": { "type": "string" },
+        "code": { "type": "string", "minLength": 1 },
+        "marker": { "type": "string", "minLength": 1 },
+        "message": { "type": "string", "minLength": 1 }
+      }
+    },
+    "outcome": {
+      "oneOf": [
+        {
+          "type": "object",
+          "allOf": [
+            { "$ref": "#/$defs/baseOutcome" },
+            {
+              "type": "object",
+              "properties": { "classification": { "const": "business_outcome" } }
+            }
+          ],
+          "unevaluatedProperties": false
+        },
+        {
+          "type": "object",
+          "allOf": [
+            { "$ref": "#/$defs/baseOutcome" },
+            {
+              "type": "object",
+              "properties": {
+                "classification": { "const": "human_required" },
+                "handoff": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["instructions", "resumeCheckpoint"],
+                  "properties": {
+                    "instructions": { "type": "string", "minLength": 1 },
+                    "resumeCheckpoint": { "$ref": "#/$defs/checkpoint" },
+                    "authorizedAction": { "$ref": "#/$defs/locator" }
+                  }
+                }
+              }
+            }
+          ],
+          "unevaluatedProperties": false
+        },
+        {
+          "type": "object",
+          "allOf": [
+            { "$ref": "#/$defs/baseOutcome" },
+            {
+              "type": "object",
+              "required": ["failureKind"],
+              "properties": {
+                "classification": { "const": "failure" },
+                "failureKind": { "enum": ["permission_denied", "application_error"] }
+              }
+            }
+          ],
+          "unevaluatedProperties": false
+        },
+        {
+          "type": "object",
+          "allOf": [
+            { "$ref": "#/$defs/baseOutcome" },
+            {
+              "type": "object",
+              "required": ["maxAttempts", "recovery"],
+              "properties": {
+                "classification": { "const": "recoverable" },
+                "maxAttempts": { "type": "integer", "minimum": 1 },
+                "recovery": { "$ref": "#/$defs/clickStep" }
+              }
+            }
+          ],
+          "unevaluatedProperties": false
+        }
+      ]
+    }
+  }
+}

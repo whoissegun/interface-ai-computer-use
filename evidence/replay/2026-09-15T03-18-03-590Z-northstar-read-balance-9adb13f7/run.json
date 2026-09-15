@@ -1,0 +1,15 @@
+{
+  "runId": "2026-09-15T03-18-03-590Z-northstar-read-balance-9adb13f7",
+  "capability": {
+    "id": "northstar.read-balance",
+    "version": "1.0.0"
+  },
+  "targetOrigin": "https://target-app-gamma.vercel.app",
+  "inputs": {
+    "memberNumber": "***0099",
+    "accountNumber": "***9-02"
+  },
+  "headless": true,
+  "llmInDecisionLoop": false,
+  "startedAt": "2026-09-15T03:18:03.590Z"
+}

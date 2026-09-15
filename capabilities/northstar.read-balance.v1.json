@@ -1,0 +1,207 @@
+{
+  "$schema": "./schema.v1.json",
+  "schemaVersion": 1,
+  "kind": "computer_use_capability",
+  "id": "northstar.read-balance",
+  "version": "1.0.0",
+  "name": "Read a Northstar account balance",
+  "description": "Find a member, open one of the member's listed deposit accounts, and return its displayed balances.",
+  "provenance": {
+    "discoveryScenario": "a2",
+    "discoveryRunIds": [
+      "2026-09-14T17-44-36-422Z-a2-132b7928",
+      "2026-09-14T17-44-36-422Z-a2-64bd2efa",
+      "2026-09-14T17-44-36-422Z-a2-84c852fb"
+    ],
+    "compiledBy": "human_reviewed"
+  },
+  "surface": {
+    "kind": "web_accessibility",
+    "application": "northstar-corebank",
+    "applicationVersion": "7.4",
+    "allowedOrigins": [
+      "https://target-app-gamma.vercel.app",
+      "http://localhost:4173"
+    ]
+  },
+  "risk": {
+    "level": "read_only",
+    "requiresConfirmation": false,
+    "allowedActions": ["navigate", "find", "click", "type", "snapshot", "screenshot"]
+  },
+  "inputs": {
+    "memberNumber": {
+      "type": "string",
+      "description": "Exact member number.",
+      "minLength": 1,
+      "maxLength": 16,
+      "pattern": "^[A-Za-z0-9-]+$",
+      "logPolicy": "last4"
+    },
+    "accountNumber": {
+      "type": "string",
+      "description": "Exact deposit account number listed under the member.",
+      "minLength": 1,
+      "maxLength": 24,
+      "pattern": "^[A-Za-z0-9-]+$",
+      "logPolicy": "last4"
+    }
+  },
+  "outputs": {
+    "memberNumber": {
+      "type": "string",
+      "description": "Member number confirmed on the account page.",
+      "extract": {
+        "kind": "accessibility_table_row",
+        "label": "Member",
+        "pattern": "^([^\\s]+)"
+      },
+      "logPolicy": "last4"
+    },
+    "accountNumber": {
+      "type": "string",
+      "description": "Account number confirmed on the account page.",
+      "extract": { "kind": "accessibility_table_row", "label": "Account" },
+      "logPolicy": "last4"
+    },
+    "product": {
+      "type": "string",
+      "description": "Displayed account product.",
+      "extract": { "kind": "accessibility_table_row", "label": "Product" },
+      "logPolicy": "plain"
+    },
+    "ledgerBalance": {
+      "type": "number",
+      "description": "Displayed ledger balance in CAD.",
+      "extract": {
+        "kind": "accessibility_table_row",
+        "label": "Ledger balance",
+        "numberFormat": "currency"
+      },
+      "logPolicy": "redact"
+    },
+    "availableBalance": {
+      "type": "number",
+      "description": "Displayed available balance in CAD.",
+      "extract": {
+        "kind": "accessibility_table_row",
+        "label": "Available balance",
+        "numberFormat": "currency"
+      },
+      "logPolicy": "redact"
+    }
+  },
+  "steps": [
+    {
+      "id": "open_application",
+      "action": "navigate",
+      "path": "/",
+      "expect": { "kind": "visible_text", "text": "Operations Menu" }
+    },
+    {
+      "id": "open_member_lookup",
+      "action": "click",
+      "locator": {
+        "kind": "accessibility",
+        "role": "link",
+        "name": "MEMBER LOOKUP",
+        "exact": true,
+        "rationale": "Resolve the unique persistent navigation label in the current accessibility tree."
+      },
+      "expect": { "kind": "visible_text", "text": "MBR-10 Member Inquiry" }
+    },
+    {
+      "id": "enter_member_number",
+      "action": "type",
+      "locator": {
+        "kind": "accessibility",
+        "role": "textbox",
+        "nearText": "Member Number",
+        "exact": true,
+        "rationale": "Anchor the unlabeled legacy input to its adjacent stable visible label."
+      },
+      "input": "memberNumber"
+    },
+    {
+      "id": "submit_member_lookup",
+      "action": "click",
+      "locator": {
+        "kind": "accessibility",
+        "role": "button",
+        "name": "F6 - Locate",
+        "exact": true,
+        "rationale": "Use the unique operator-facing function-key caption."
+      }
+    },
+    {
+      "id": "open_requested_account",
+      "action": "click",
+      "locator": {
+        "kind": "accessibility",
+        "role": "link",
+        "name": "INQUIRE",
+        "withinRowInput": "accountNumber",
+        "exact": true,
+        "rationale": "Resolve INQUIRE only inside the row whose account cell equals the requested account number."
+      },
+      "onMissing": {
+        "classification": "business_outcome",
+        "code": "ACCOUNT_NOT_LISTED",
+        "message": "The requested account is not listed under this member."
+      }
+    }
+  ],
+  "completion": {
+    "checkpoint": { "kind": "visible_text", "text": "Account Balance Inquiry" },
+    "outcomes": [
+      {
+        "classification": "business_outcome",
+        "code": "N04",
+        "marker": "BUSINESS RESULT N04",
+        "message": "No member relationship matched the supplied member number."
+      },
+      {
+        "classification": "recoverable",
+        "code": "T14",
+        "marker": "RECOVERABLE HOST CONDITION T14",
+        "message": "The relationship index timed out; retry the same inquiry once.",
+        "maxAttempts": 1,
+        "recovery": {
+          "id": "retry_member_lookup",
+          "action": "click",
+          "locator": {
+            "kind": "accessibility",
+            "role": "link",
+            "name": "F5 - Retry host request",
+            "exact": true,
+            "rationale": "Use the application's dedicated retry action, preserving member context."
+          }
+        }
+      },
+      {
+        "classification": "failure",
+        "code": "S17",
+        "marker": "SECURITY S17",
+        "failureKind": "permission_denied",
+        "message": "The operator is not permitted to view this relationship."
+      },
+      {
+        "classification": "human_required",
+        "code": "E01",
+        "marker": "SESSION E01",
+        "message": "The session expired and a human operator must sign in again."
+      },
+      {
+        "classification": "failure",
+        "code": "X500",
+        "marker": "HOST X500",
+        "failureKind": "application_error",
+        "message": "CoreBank returned an unrecoverable host failure."
+      }
+    ],
+    "assertions": [
+      { "kind": "output_equals_input", "output": "memberNumber", "input": "memberNumber" },
+      { "kind": "output_equals_input", "output": "accountNumber", "input": "accountNumber" }
+    ]
+  }
+}
