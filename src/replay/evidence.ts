@@ -10,7 +10,12 @@ function timestampForPath(date: Date): string {
 function mask(
   value: CapabilityValue,
   policy: "plain" | "last4" | "redact"
-): CapabilityValue | string {
+): CapabilityValue | string;
+function mask(value: unknown, policy: "plain" | "last4" | "redact"): unknown;
+function mask(
+  value: unknown,
+  policy: "plain" | "last4" | "redact"
+): unknown {
   if (policy === "plain") return value;
   if (policy === "last4") return `***${String(value).slice(-4)}`;
   return "[REDACTED]";
@@ -37,7 +42,7 @@ export class ReplayEvidenceRecorder {
   static async create(options: {
     rootDirectory: string;
     artifact: CapabilityArtifact;
-    inputs: Record<string, CapabilityValue>;
+    inputs: Record<string, unknown>;
     targetUrl: string;
     headless: boolean;
     startedAt?: Date;

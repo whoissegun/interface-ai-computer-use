@@ -1,0 +1,18 @@
+{
+  "runId": "2026-09-15T04-01-18-210Z-northstar-prepare-subaccount-d32a5167",
+  "capability": {
+    "id": "northstar.prepare-subaccount",
+    "version": "1.0.0"
+  },
+  "targetOrigin": "https://target-app-gamma.vercel.app",
+  "inputs": {
+    "memberNumber": "***0042",
+    "product": "HOLIDAY_SAVINGS",
+    "nickname": "[REDACTED]",
+    "openingDeposit": "[REDACTED]",
+    "statementDelivery": "ELECTRONIC"
+  },
+  "headless": true,
+  "llmInDecisionLoop": false,
+  "startedAt": "2026-09-15T04:01:18.210Z"
+}

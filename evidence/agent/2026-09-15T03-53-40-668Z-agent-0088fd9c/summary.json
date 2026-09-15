@@ -1,0 +1,25 @@
+{
+  "runId": "2026-09-15T03-53-40-668Z-agent-0088fd9c",
+  "status": "completed",
+  "model": "moonshotai/kimi-k2.6",
+  "finalAnswer": "The name on member 100042 is **Avery Example**.",
+  "modelTurns": 2,
+  "capabilityCallCount": 1,
+  "capabilityCalls": [
+    {
+      "callNumber": 1,
+      "toolName": "find_member",
+      "status": "success",
+      "runId": "2026-09-15T03-53-43-544Z-northstar-find-member-7fa1e992"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 1595,
+    "completion_tokens": 139,
+    "total_tokens": 1734,
+    "cost": 0.001030212
+  },
+  "startedAt": "2026-09-15T03:53:40.668Z",
+  "finishedAt": "2026-09-15T03:53:48.483Z",
+  "elapsedMs": 7815
+}

@@ -1,0 +1,27 @@
+{
+  "runId": "2026-09-15T04-00-57-348Z-agent-a9bc267b",
+  "task": "Read the available balance of S-0042-01 for member 100042, then prepare a Holiday Savings sub-account for that member with nickname Rainy Day, a CAD 25 opening deposit, and electronic statements. Stop at review.",
+  "model": "moonshotai/kimi-k2.6",
+  "maxCapabilityCalls": 3,
+  "riskyActionApproved": false,
+  "offeredCapabilities": [
+    {
+      "toolName": "find_member",
+      "artifactId": "northstar.find-member",
+      "artifactVersion": "1.0.0"
+    },
+    {
+      "toolName": "read_balance",
+      "artifactId": "northstar.read-balance",
+      "artifactVersion": "1.0.0"
+    },
+    {
+      "toolName": "prepare_subaccount",
+      "artifactId": "northstar.prepare-subaccount",
+      "artifactVersion": "1.0.0"
+    }
+  ],
+  "modelChoosesCapability": true,
+  "llmInReplayDecisionLoop": false,
+  "startedAt": "2026-09-15T04:00:57.348Z"
+}

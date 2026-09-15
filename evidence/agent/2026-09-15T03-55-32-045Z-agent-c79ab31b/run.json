@@ -1,0 +1,27 @@
+{
+  "runId": "2026-09-15T03-55-32-045Z-agent-c79ab31b",
+  "task": "Prepare Regular Savings for member 300088, nickname Reserve, CAD 50 opening deposit, and paper statements. Stop if a supervisor is needed.",
+  "model": "moonshotai/kimi-k2.6",
+  "maxCapabilityCalls": 3,
+  "riskyActionApproved": false,
+  "offeredCapabilities": [
+    {
+      "toolName": "find_member",
+      "artifactId": "northstar.find-member",
+      "artifactVersion": "1.0.0"
+    },
+    {
+      "toolName": "read_balance",
+      "artifactId": "northstar.read-balance",
+      "artifactVersion": "1.0.0"
+    },
+    {
+      "toolName": "prepare_subaccount",
+      "artifactId": "northstar.prepare-subaccount",
+      "artifactVersion": "1.0.0"
+    }
+  ],
+  "modelChoosesCapability": true,
+  "llmInReplayDecisionLoop": false,
+  "startedAt": "2026-09-15T03:55:32.045Z"
+}

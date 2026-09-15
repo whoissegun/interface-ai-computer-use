@@ -1,0 +1,18 @@
+{
+  "runId": "2026-09-15T03-54-37-369Z-agent-f20e339a",
+  "status": "completed",
+  "model": "moonshotai/kimi-k2.6",
+  "finalAnswer": "I see two different opening deposits for the same sub-account: CAD 25 and CAD 40. Which opening deposit amount should I use?",
+  "modelTurns": 1,
+  "capabilityCallCount": 0,
+  "capabilityCalls": [],
+  "usage": {
+    "prompt_tokens": 768,
+    "completion_tokens": 178,
+    "total_tokens": 946,
+    "cost": 0.000683152
+  },
+  "startedAt": "2026-09-15T03:54:37.369Z",
+  "finishedAt": "2026-09-15T03:54:42.573Z",
+  "elapsedMs": 5204
+}

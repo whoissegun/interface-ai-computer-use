@@ -1,0 +1,27 @@
+{
+  "runId": "2026-09-15T04-00-43-017Z-agent-1bcb1e23",
+  "task": "for 100042 prep holiday savings nick Rainy Day start it w 25 bucks e statements, jus stop at review dont submit",
+  "model": "moonshotai/kimi-k2.6",
+  "maxCapabilityCalls": 3,
+  "riskyActionApproved": false,
+  "offeredCapabilities": [
+    {
+      "toolName": "find_member",
+      "artifactId": "northstar.find-member",
+      "artifactVersion": "1.0.0"
+    },
+    {
+      "toolName": "read_balance",
+      "artifactId": "northstar.read-balance",
+      "artifactVersion": "1.0.0"
+    },
+    {
+      "toolName": "prepare_subaccount",
+      "artifactId": "northstar.prepare-subaccount",
+      "artifactVersion": "1.0.0"
+    }
+  ],
+  "modelChoosesCapability": true,
+  "llmInReplayDecisionLoop": false,
+  "startedAt": "2026-09-15T04:00:43.017Z"
+}

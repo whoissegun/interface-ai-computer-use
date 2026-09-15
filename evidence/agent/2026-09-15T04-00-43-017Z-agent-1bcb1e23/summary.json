@@ -1,0 +1,25 @@
+{
+  "runId": "2026-09-15T04-00-43-017Z-agent-1bcb1e23",
+  "status": "completed",
+  "model": "moonshotai/kimi-k2.6",
+  "finalAnswer": "Done. For member **100042**, I’ve prepared a **Holiday Savings** sub-account review:\n\n- **Nickname:** Rainy Day  \n- **Opening deposit:** $25.00 CAD  \n- **Statements:** Electronic  \n\nIt’s stopped at the final review screen and has **not** been submitted.",
+  "modelTurns": 2,
+  "capabilityCallCount": 1,
+  "capabilityCalls": [
+    {
+      "callNumber": 1,
+      "toolName": "prepare_subaccount",
+      "status": "success",
+      "runId": "2026-09-15T04-00-48-130Z-northstar-prepare-subaccount-9fe4c878"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 1663,
+    "completion_tokens": 346,
+    "total_tokens": 2009,
+    "cost": 0.001405964
+  },
+  "startedAt": "2026-09-15T04:00:43.017Z",
+  "finishedAt": "2026-09-15T04:00:57.343Z",
+  "elapsedMs": 14326
+}

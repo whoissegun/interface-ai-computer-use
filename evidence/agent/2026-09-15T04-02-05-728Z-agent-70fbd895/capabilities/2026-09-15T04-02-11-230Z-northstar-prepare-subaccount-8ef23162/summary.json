@@ -1,0 +1,27 @@
+{
+  "runId": "2026-09-15T04-02-11-230Z-northstar-prepare-subaccount-8ef23162",
+  "capabilityId": "northstar.prepare-subaccount",
+  "capabilityVersion": "1.0.0",
+  "startedAt": "2026-09-15T04:02:11.232Z",
+  "finishedAt": "2026-09-15T04:02:15.251Z",
+  "elapsedMs": 4019,
+  "completedSteps": [
+    "open_application",
+    "open_member_lookup",
+    "enter_member_number",
+    "submit_member_lookup",
+    "open_subaccount_form",
+    "select_product",
+    "enter_nickname",
+    "enter_opening_deposit",
+    "choose_statement_delivery",
+    "continue_to_review"
+  ],
+  "recoveries": [],
+  "humanHandoffs": [],
+  "status": "human_required",
+  "code": "H91",
+  "message": "An authorized supervisor must review this prepared request in the live session.",
+  "stepId": "verify_completion",
+  "evidenceArtifact": "failure.png"
+}

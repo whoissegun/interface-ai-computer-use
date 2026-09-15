@@ -1,0 +1,51 @@
+- generic [active] [ref=e1]:
+  - iframe [ref=e2]:
+    - generic [ref=f1e1]:
+      - text: NORTHSTAR CU
+      - link "HOME" [ref=f1e2] [cursor=pointer]:
+        - /url: /app/home
+      - link "MEMBER LOOKUP" [ref=f1e3] [cursor=pointer]:
+        - /url: /app/member-search
+      - link "OPS HELP" [ref=f1e4] [cursor=pointer]:
+        - /url: /app/help
+      - text: "BRANCH 019 | USER: DEMO7"
+  - iframe [ref=e3]:
+    - generic [ref=f2e1]:
+      - text: Operations Menu COREBANK / TELLER 7.4
+      - generic [ref=f2e2]: TRAINING ENVIRONMENT. All people, balances, and transactions are fictional.
+      - table [ref=f2e3]:
+        - rowgroup [ref=f2e4]:
+          - row [ref=f2e5]:
+            - columnheader "Function" [ref=f2e6]
+            - columnheader "Description" [ref=f2e7]
+            - columnheader "Go" [ref=f2e8]
+          - row [ref=f2e9]:
+            - cell "MBR-10" [ref=f2e10]
+            - cell "Member inquiry and account balances" [ref=f2e11]
+            - cell [ref=f2e12]:
+              - link "SELECT" [ref=f2e13] [cursor=pointer]:
+                - /url: /app/member-search
+          - row [ref=f2e14]:
+            - cell "ACCT-22" [ref=f2e15]
+            - cell "New share/sub-account setup (simulation)" [ref=f2e16]
+            - cell [ref=f2e17]:
+              - link "SELECT MEMBER" [ref=f2e18] [cursor=pointer]:
+                - /url: /app/member-search
+          - row [ref=f2e19]:
+            - cell "Pending work" [ref=f2e20]
+            - cell "None" [ref=f2e21]
+            - cell "--" [ref=f2e22]
+      - table [ref=f2e23]:
+        - rowgroup [ref=f2e24]:
+          - row [ref=f2e25]:
+            - columnheader "System Status" [ref=f2e26]
+          - row [ref=f2e27]:
+            - cell "Host" [ref=f2e28]
+            - cell "ONLINE" [ref=f2e29]
+          - row [ref=f2e30]:
+            - cell "Business date" [ref=f2e31]
+            - cell "09/11/2026" [ref=f2e32]
+          - row [ref=f2e33]:
+            - cell "Queue" [ref=f2e34]
+            - cell "Normal" [ref=f2e35]
+      - generic [ref=f2e36]: Northstar Community Credit Union — TRAINING SYSTEM — fictitious data only

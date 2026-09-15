@@ -1,0 +1,25 @@
+{
+  "runId": "2026-09-15T03-55-47-973Z-agent-0e5dad87",
+  "status": "completed",
+  "model": "moonshotai/kimi-k2.6",
+  "finalAnswer": "Simulation completed successfully for member 100042.\n\n- Result: Review flow completed in safe simulation mode  \n- Training reference: **TRAIN-100042-004000**",
+  "modelTurns": 2,
+  "capabilityCallCount": 1,
+  "capabilityCalls": [
+    {
+      "callNumber": 1,
+      "toolName": "simulate_subaccount",
+      "status": "success",
+      "runId": "2026-09-15T03-55-53-489Z-northstar-simulate-subaccount-4c3ddf82"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 2070,
+    "completion_tokens": 262,
+    "total_tokens": 2332,
+    "cost": 0.00159028
+  },
+  "startedAt": "2026-09-15T03:55:47.973Z",
+  "finishedAt": "2026-09-15T03:56:00.830Z",
+  "elapsedMs": 12857
+}

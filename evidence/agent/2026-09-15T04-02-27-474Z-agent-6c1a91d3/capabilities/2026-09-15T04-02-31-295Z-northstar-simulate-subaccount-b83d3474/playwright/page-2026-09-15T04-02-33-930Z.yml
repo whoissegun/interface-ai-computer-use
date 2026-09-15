@@ -1,0 +1,45 @@
+- generic [ref=e1]:
+  - iframe [ref=e2]:
+    - generic [ref=f1e1]:
+      - text: NORTHSTAR CU
+      - link "HOME" [ref=f1e2] [cursor=pointer]:
+        - /url: /app/home
+      - link "MEMBER LOOKUP" [ref=f1e3] [cursor=pointer]:
+        - /url: /app/member-search
+      - link "OPS HELP" [ref=f1e4] [cursor=pointer]:
+        - /url: /app/help
+      - text: "BRANCH 019 | USER: DEMO7"
+  - iframe [active] [ref=e3]:
+    - generic [active] [ref=f2e1]:
+      - text: ACCT-22 New Share/Sub-account COREBANK / TELLER 7.4
+      - table [ref=f2e2]:
+        - rowgroup [ref=f2e3]:
+          - row [ref=f2e4]:
+            - rowheader "Member" [ref=f2e5]
+            - cell "100042 — Avery Example" [ref=f2e6]
+          - row [ref=f2e7]:
+            - rowheader "Mode" [ref=f2e8]
+            - cell "PREPARE / NO POST" [ref=f2e9]
+      - generic [ref=f2e10]:
+        - text: Product Code
+        - combobox [ref=f2e11]:
+          - option "-- choose --"
+          - option "S01 - Regular Savings" [selected]
+          - option "S14 - Holiday Savings"
+          - option "S27 - Youth Savings"
+        - text: Account Nickname
+        - textbox [ref=f2e12]
+        - text: Opening Deposit (CAD)
+        - textbox [ref=f2e13]: "0.00"
+        - text: Statement Delivery
+        - generic [ref=f2e14]:
+          - radio "Electronic" [checked] [ref=f2e15]
+          - text: Electronic
+        - generic [ref=f2e16]:
+          - radio "Paper" [ref=f2e17]
+          - text: Paper
+        - button "F8 - Continue to Review" [ref=f2e18]
+        - link "Cancel" [ref=f2e19] [cursor=pointer]:
+          - /url: /app/member/100042
+      - generic [ref=f2e20]: Amounts of CAD 5,000.00 or more and flagged relationships require human supervisor review.
+      - generic [ref=f2e21]: Northstar Community Credit Union — TRAINING SYSTEM — fictitious data only
