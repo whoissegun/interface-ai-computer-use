@@ -1,0 +1,328 @@
+{
+  "$schema": "./schema.v1.json",
+  "schemaVersion": 1,
+  "kind": "computer_use_capability",
+  "id": "northstar.simulate-subaccount",
+  "version": "1.0.0",
+  "name": "Simulate opening a Northstar savings sub-account",
+  "description": "Prepare, verify, and perform the target's explicitly fictional final-submission simulation.",
+  "provenance": {
+    "discoveryScenario": "a4",
+    "discoveryRunIds": [
+      "2026-09-14T17-46-18-632Z-a4-7c369b7b",
+      "2026-09-14T17-46-18-632Z-a4-c2faf1cd",
+      "2026-09-14T17-46-18-632Z-a4-eeb12170"
+    ],
+    "compiledBy": "human_reviewed"
+  },
+  "surface": {
+    "kind": "web_accessibility",
+    "application": "northstar-corebank",
+    "applicationVersion": "7.4",
+    "allowedOrigins": ["https://target-app-gamma.vercel.app", "http://localhost:4173"]
+  },
+  "risk": {
+    "level": "simulated_irreversible",
+    "requiresConfirmation": true,
+    "allowedActions": [
+      "navigate",
+      "find",
+      "click",
+      "type",
+      "select_option",
+      "click_choice",
+      "verify",
+      "handle_dialog",
+      "snapshot",
+      "screenshot"
+    ]
+  },
+  "inputs": {
+    "memberNumber": {
+      "type": "string",
+      "description": "Exact member number.",
+      "minLength": 1,
+      "maxLength": 16,
+      "pattern": "^[A-Za-z0-9-]+$",
+      "logPolicy": "last4"
+    },
+    "product": {
+      "type": "string",
+      "description": "Canonical savings product code.",
+      "enum": ["REGULAR_SAVINGS", "HOLIDAY_SAVINGS", "YOUTH_SAVINGS"],
+      "logPolicy": "plain"
+    },
+    "nickname": {
+      "type": "string",
+      "description": "Account nickname, from 1 to 24 characters.",
+      "minLength": 1,
+      "maxLength": 24,
+      "logPolicy": "redact"
+    },
+    "openingDeposit": {
+      "type": "number",
+      "description": "Opening deposit in CAD; the application owns business-rule validation.",
+      "logPolicy": "redact"
+    },
+    "statementDelivery": {
+      "type": "string",
+      "description": "Statement delivery choice.",
+      "enum": ["ELECTRONIC", "PAPER"],
+      "logPolicy": "plain"
+    }
+  },
+  "outputs": {
+    "trainingReference": {
+      "type": "string",
+      "description": "Fictional training reference returned after the safe simulation.",
+      "extract": { "kind": "accessibility_table_row", "label": "Training reference" },
+      "logPolicy": "plain"
+    },
+    "result": {
+      "type": "string",
+      "description": "Target-reported simulation outcome.",
+      "extract": { "kind": "accessibility_table_row", "label": "Result" },
+      "logPolicy": "plain"
+    }
+  },
+  "steps": [
+    {
+      "id": "open_application",
+      "action": "navigate",
+      "path": "/",
+      "expect": { "kind": "visible_text", "text": "Operations Menu" }
+    },
+    {
+      "id": "open_member_lookup",
+      "action": "click",
+      "locator": {
+        "kind": "accessibility",
+        "role": "link",
+        "name": "MEMBER LOOKUP",
+        "exact": true,
+        "rationale": "Resolve the unique persistent navigation label."
+      },
+      "expect": { "kind": "visible_text", "text": "MBR-10 Member Inquiry" }
+    },
+    {
+      "id": "enter_member_number",
+      "action": "type",
+      "locator": {
+        "kind": "accessibility",
+        "role": "textbox",
+        "nearText": "Member Number",
+        "exact": true,
+        "rationale": "Anchor the unlabeled legacy input to its adjacent visible label."
+      },
+      "input": "memberNumber"
+    },
+    {
+      "id": "submit_member_lookup",
+      "action": "click",
+      "locator": {
+        "kind": "accessibility",
+        "role": "button",
+        "name": "F6 - Locate",
+        "exact": true,
+        "rationale": "Use the unique operator-facing function-key caption."
+      }
+    },
+    {
+      "id": "open_subaccount_form",
+      "action": "click",
+      "locator": {
+        "kind": "accessibility",
+        "role": "button",
+        "name": "F9 - Open New Share/Sub-account",
+        "exact": true,
+        "rationale": "Use the unique member-summary action."
+      },
+      "expect": { "kind": "visible_text", "text": "ACCT-22 New Share/Sub-account" }
+    },
+    {
+      "id": "select_product",
+      "action": "select_option",
+      "locator": {
+        "kind": "accessibility",
+        "role": "combobox",
+        "nearText": "Product Code",
+        "exact": true,
+        "rationale": "Anchor the legacy select to its adjacent visible label."
+      },
+      "input": "product",
+      "options": {
+        "REGULAR_SAVINGS": "S01 - Regular Savings",
+        "HOLIDAY_SAVINGS": "S14 - Holiday Savings",
+        "YOUTH_SAVINGS": "S27 - Youth Savings"
+      }
+    },
+    {
+      "id": "enter_nickname",
+      "action": "type",
+      "locator": {
+        "kind": "accessibility",
+        "role": "textbox",
+        "nearText": "Account Nickname",
+        "exact": true,
+        "rationale": "Anchor the unlabeled input to its visible field label."
+      },
+      "input": "nickname"
+    },
+    {
+      "id": "enter_opening_deposit",
+      "action": "type",
+      "locator": {
+        "kind": "accessibility",
+        "role": "textbox",
+        "nearText": "Opening Deposit (CAD)",
+        "exact": true,
+        "rationale": "Anchor the amount input to the exact visible currency label."
+      },
+      "input": "openingDeposit"
+    },
+    {
+      "id": "choose_statement_delivery",
+      "action": "click_choice",
+      "input": "statementDelivery",
+      "choices": {
+        "ELECTRONIC": {
+          "kind": "accessibility",
+          "role": "radio",
+          "name": "Electronic",
+          "exact": true,
+          "rationale": "Use the unique accessible radio name."
+        },
+        "PAPER": {
+          "kind": "accessibility",
+          "role": "radio",
+          "name": "Paper",
+          "exact": true,
+          "rationale": "Use the unique accessible radio name."
+        }
+      }
+    },
+    {
+      "id": "continue_to_review",
+      "action": "click",
+      "locator": {
+        "kind": "accessibility",
+        "role": "button",
+        "name": "F8 - Continue to Review",
+        "exact": true,
+        "rationale": "Prepare the draft and advance to the review boundary."
+      }
+    },
+    {
+      "id": "verify_review_fields",
+      "action": "verify",
+      "checkpoint": { "kind": "visible_text", "text": "REVIEW CHECKPOINT" },
+      "fields": [
+        { "label": "Member", "input": "memberNumber", "comparison": "starts_with" },
+        {
+          "label": "Product",
+          "input": "product",
+          "comparison": "exact",
+          "inputToVisible": {
+            "REGULAR_SAVINGS": "S01 - Regular Savings",
+            "HOLIDAY_SAVINGS": "S14 - Holiday Savings",
+            "YOUTH_SAVINGS": "S27 - Youth Savings"
+          }
+        },
+        { "label": "Nickname", "input": "nickname", "comparison": "exact" },
+        { "label": "Opening deposit", "input": "openingDeposit", "comparison": "number" },
+        {
+          "label": "Statements",
+          "input": "statementDelivery",
+          "comparison": "exact",
+          "inputToVisible": { "ELECTRONIC": "Electronic", "PAPER": "Paper" }
+        }
+      ]
+    },
+    {
+      "id": "start_final_simulation",
+      "action": "click",
+      "locator": {
+        "kind": "accessibility",
+        "role": "button",
+        "name": "SIMULATE FINAL SUBMISSION",
+        "exact": true,
+        "rationale": "This is the explicitly approved fictional submission control, used only after every review field is verified."
+      },
+      "expectDialogText": "TRAINING ONLY: simulate the final submission? No real account will be created."
+    },
+    { "id": "confirm_final_simulation", "action": "handle_dialog", "accept": true }
+  ],
+  "completion": {
+    "checkpoint": { "kind": "visible_text", "text": "SIMULATED SUCCESS" },
+    "outcomes": [
+      {
+        "classification": "business_outcome",
+        "code": "N04",
+        "marker": "BUSINESS RESULT N04",
+        "message": "No member relationship matched the supplied member number."
+      },
+      {
+        "classification": "business_outcome",
+        "code": "V22",
+        "marker": "VALIDATION V22",
+        "message": "The application rejected one or more sub-account fields."
+      },
+      {
+        "classification": "recoverable",
+        "code": "T14",
+        "marker": "RECOVERABLE HOST CONDITION T14",
+        "message": "The relationship index timed out; retry the same inquiry once.",
+        "maxAttempts": 1,
+        "recovery": {
+          "id": "retry_member_lookup",
+          "action": "click",
+          "locator": {
+            "kind": "accessibility",
+            "role": "link",
+            "name": "F5 - Retry host request",
+            "exact": true,
+            "rationale": "Use the application's dedicated bounded retry action."
+          }
+        }
+      },
+      {
+        "classification": "failure",
+        "code": "S17",
+        "marker": "SECURITY S17",
+        "failureKind": "permission_denied",
+        "message": "The operator is not permitted to view this relationship."
+      },
+      {
+        "classification": "human_required",
+        "code": "E01",
+        "marker": "SESSION E01",
+        "message": "The session expired and a human operator must sign in again."
+      },
+      {
+        "classification": "failure",
+        "code": "X500",
+        "marker": "HOST X500",
+        "failureKind": "application_error",
+        "message": "CoreBank returned an unrecoverable host failure."
+      },
+      {
+        "classification": "human_required",
+        "code": "H91",
+        "marker": "HUMAN REVIEW REQUIRED — HOLD H91",
+        "message": "An authorized supervisor must review this request before simulation.",
+        "handoff": {
+          "instructions": "Review the displayed draft, then select Supervisor: acknowledge review in this same browser session.",
+          "resumeCheckpoint": { "kind": "visible_text", "text": "REVIEW CHECKPOINT" },
+          "authorizedAction": {
+            "kind": "accessibility",
+            "role": "button",
+            "name": "Supervisor: acknowledge review",
+            "exact": true,
+            "rationale": "This control is reserved for a human supervisor or a controller acting only after explicit human approval."
+          }
+        }
+      }
+    ],
+    "assertions": []
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "runId": "2026-09-14T20-25-26-724Z-northstar-find-member-1f413b7b",
+  "capabilityId": "northstar.find-member",
+  "capabilityVersion": "1.0.0",
+  "startedAt": "2026-09-14T20:25:26.730Z",
+  "finishedAt": "2026-09-14T20:25:29.700Z",
+  "elapsedMs": 2970,
+  "completedSteps": [
+    "open_application",
+    "open_member_lookup",
+    "enter_member_number",
+    "submit_member_lookup"
+  ],
+  "recoveries": [],
+  "status": "failure",
+  "failureKind": "permission_denied",
+  "code": "S17",
+  "message": "The operator is not permitted to view this relationship.",
+  "stepId": "evaluate_lookup_result",
+  "evidenceArtifact": "failure.png"
+}

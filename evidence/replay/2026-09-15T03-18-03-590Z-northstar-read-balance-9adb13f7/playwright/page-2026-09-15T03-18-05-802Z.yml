@@ -1,0 +1,27 @@
+- generic [ref=e1]:
+  - iframe [ref=e2]:
+    - generic [ref=f1e1]:
+      - text: NORTHSTAR CU
+      - link "HOME" [ref=f1e2] [cursor=pointer]:
+        - /url: /app/home
+      - link "MEMBER LOOKUP" [ref=f1e3] [cursor=pointer]:
+        - /url: /app/member-search
+      - link "OPS HELP" [ref=f1e4] [cursor=pointer]:
+        - /url: /app/help
+      - text: "BRANCH 019 | USER: DEMO7"
+  - iframe [active] [ref=e3]:
+    - generic [active] [ref=f2e1]:
+      - text: Host Response Delayed COREBANK / TELLER 7.4
+      - generic [ref=f2e2]: RECOVERABLE HOST CONDITION T14The relationship index did not answer before the teller timeout. No changes were made.
+      - table [ref=f2e3]:
+        - rowgroup [ref=f2e4]:
+          - row [ref=f2e5]:
+            - rowheader "Requested member" [ref=f2e6]
+            - cell "100099" [ref=f2e7]
+          - row [ref=f2e8]:
+            - rowheader "Operator action" [ref=f2e9]
+            - cell "Wait briefly, then retry the same inquiry." [ref=f2e10]
+      - paragraph [ref=f2e11]:
+        - link "F5 - Retry host request" [ref=f2e12] [cursor=pointer]:
+          - /url: /app/member/100099?retry=1
+      - generic [ref=f2e13]: Northstar Community Credit Union — TRAINING SYSTEM — fictitious data only

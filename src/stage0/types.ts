@@ -1,4 +1,14 @@
-export type JsonObject = Record<string, unknown>;
+import type {
+  SurfaceArguments,
+  SurfaceClient,
+  SurfaceTool,
+  SurfaceToolResult
+} from "../surface/types.js";
+
+export type JsonObject = SurfaceArguments;
+export type BrowserTool = SurfaceTool;
+export type BrowserToolResult = SurfaceToolResult;
+export type BrowserClient = SurfaceClient;
 
 export type ToolCall = {
   id: string;
@@ -49,24 +59,6 @@ export type ModelRequest = {
 
 export interface ModelClient {
   complete(request: ModelRequest): Promise<ModelResponse>;
-}
-
-export type BrowserTool = {
-  name: string;
-  description?: string;
-  inputSchema: JsonObject;
-};
-
-export type BrowserToolResult = JsonObject & {
-  content?: unknown[];
-  isError?: boolean;
-};
-
-export interface BrowserClient {
-  connect(): Promise<void>;
-  listTools(): Promise<BrowserTool[]>;
-  callTool(name: string, args: JsonObject): Promise<BrowserToolResult>;
-  close(): Promise<void>;
 }
 
 export type Scenario = {

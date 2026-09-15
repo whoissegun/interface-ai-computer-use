@@ -9,11 +9,18 @@
   "scripts": {
     "stage0": "tsx src/stage0/cli.ts",
     "stage0:hitl": "npm run stage0 -- --scenario x2 --headed --wait-for-human",
+    "replay:find-member": "tsx src/replay/cli.ts --artifact capabilities/northstar.find-member.v1.json",
+    "replay:read-balance": "tsx src/replay/cli.ts --artifact capabilities/northstar.read-balance.v1.json",
+    "replay:prepare-subaccount": "tsx src/replay/cli.ts --artifact capabilities/northstar.prepare-subaccount.v1.json",
+    "replay:simulate-subaccount": "tsx src/replay/cli.ts --artifact capabilities/northstar.simulate-subaccount.v1.json",
+    "replay:stability": "tsx src/replay/stability.ts",
     "test": "tsx --test 'src/**/*.test.ts'",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "1.30.0",
+    "ajv": "^8.20.0",
+    "ajv-formats": "^3.0.1",
     "dotenv": "17.4.2"
   },
   "devDependencies": {

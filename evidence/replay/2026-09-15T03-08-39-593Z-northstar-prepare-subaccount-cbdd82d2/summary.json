@@ -1,0 +1,30 @@
+{
+  "runId": "2026-09-15T03-08-39-593Z-northstar-prepare-subaccount-cbdd82d2",
+  "capabilityId": "northstar.prepare-subaccount",
+  "capabilityVersion": "1.0.0",
+  "startedAt": "2026-09-15T03:08:39.596Z",
+  "finishedAt": "2026-09-15T03:08:43.550Z",
+  "elapsedMs": 3954,
+  "completedSteps": [
+    "open_application",
+    "open_member_lookup",
+    "enter_member_number",
+    "submit_member_lookup",
+    "open_subaccount_form",
+    "select_product",
+    "enter_nickname",
+    "enter_opening_deposit",
+    "choose_statement_delivery",
+    "continue_to_review"
+  ],
+  "recoveries": [],
+  "humanHandoffs": [],
+  "status": "success",
+  "output": {
+    "memberNumber": "***0042",
+    "product": "HOLIDAY_SAVINGS",
+    "nickname": "[REDACTED]",
+    "openingDeposit": "[REDACTED]",
+    "statementDelivery": "ELECTRONIC"
+  }
+}

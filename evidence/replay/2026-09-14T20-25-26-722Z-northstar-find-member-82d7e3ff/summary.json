@@ -1,0 +1,20 @@
+{
+  "runId": "2026-09-14T20-25-26-722Z-northstar-find-member-82d7e3ff",
+  "capabilityId": "northstar.find-member",
+  "capabilityVersion": "1.0.0",
+  "startedAt": "2026-09-14T20:25:26.729Z",
+  "finishedAt": "2026-09-14T20:25:29.750Z",
+  "elapsedMs": 3021,
+  "completedSteps": [
+    "open_application",
+    "open_member_lookup",
+    "enter_member_number",
+    "submit_member_lookup"
+  ],
+  "recoveries": [],
+  "status": "human_required",
+  "code": "E01",
+  "message": "The session expired and a human operator must sign in again.",
+  "stepId": "evaluate_lookup_result",
+  "evidenceArtifact": "failure.png"
+}

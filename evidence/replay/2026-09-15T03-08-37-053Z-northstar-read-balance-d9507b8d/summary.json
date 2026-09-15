@@ -1,0 +1,20 @@
+{
+  "runId": "2026-09-15T03-08-37-053Z-northstar-read-balance-d9507b8d",
+  "capabilityId": "northstar.read-balance",
+  "capabilityVersion": "1.0.0",
+  "startedAt": "2026-09-15T03:08:37.055Z",
+  "finishedAt": "2026-09-15T03:08:39.263Z",
+  "elapsedMs": 2208,
+  "completedSteps": [
+    "open_application",
+    "open_member_lookup",
+    "enter_member_number",
+    "submit_member_lookup"
+  ],
+  "recoveries": [],
+  "humanHandoffs": [],
+  "status": "business_outcome",
+  "code": "ACCOUNT_NOT_LISTED",
+  "message": "The requested account is not listed under this member.",
+  "stepId": "open_requested_account"
+}
