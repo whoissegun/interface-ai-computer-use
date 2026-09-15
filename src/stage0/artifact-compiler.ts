@@ -133,6 +133,48 @@ function accessibleName(element: string, suffix: RegExp): string {
   return name;
 }
 
+function escapeRegExp(value: string): string {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function memberInputElement(call: RecordedToolCall, events: StoredEvent[]): string {
+  if (typeof call.arguments.element === "string" && call.arguments.element.trim()) {
+    const element = call.arguments.element;
+    if (!/member number.*textbox/i.test(element)) {
+      throw new Error(`browser_type targeted an unrecognized element: ${element}`);
+    }
+    return element;
+  }
+
+  // Playwright MCP's human-readable `element` hint is optional. If it is
+  // absent, accept only the exact target ref previously observed beside the
+  // reviewed Member Number label. The ref is used as trace evidence only and
+  // is never persisted into the capability.
+  const target = requireString(
+    call.arguments.target ?? call.arguments.ref,
+    "browser_type.target"
+  );
+  const priorObservations = JSON.stringify(
+    events
+      .filter((event) => {
+        if (event.type !== "tool_result" || !isObject(event.data)) return false;
+        const observedCallNumber = event.data.toolCallNumber;
+        return typeof observedCallNumber === "number" && observedCallNumber < call.callNumber;
+      })
+      .map((event) => event.data)
+  );
+  const recordedTextbox = new RegExp(
+    `text:\\s*Member Number[\\s\\S]{0,300}textbox \\[ref=${escapeRegExp(target)}\\]`,
+    "i"
+  );
+  if (!recordedTextbox.test(priorObservations)) {
+    throw new Error(
+      "browser_type omitted its element hint and its target was not the recorded Member Number textbox."
+    );
+  }
+  return "Member Number textbox";
+}
+
 function observedText(events: StoredEvent[]): string {
   return JSON.stringify(
     events.filter((event) => event.type === "tool_result").map((event) => event.data)
@@ -180,7 +222,7 @@ export async function buildCapabilityFromDiscoveryRun(
 
   const navigate = expectTool(actions[0], "browser_navigate");
   const openLookup = expectTool(actions[1], "browser_click", /member lookup.*link/i);
-  const enterMember = expectTool(actions[2], "browser_type", /member number.*textbox/i);
+  const enterMember = expectTool(actions[2], "browser_type");
   const submitLookup = expectTool(actions[3], "browser_click", /f6\s*-\s*locate.*button/i);
 
   const navigatedUrl = new URL(requireString(navigate.arguments.url, "browser_navigate.url"));
@@ -200,7 +242,7 @@ export async function buildCapabilityFromDiscoveryRun(
   }
 
   const lookupElement = requireString(openLookup.arguments.element, "open lookup element");
-  const memberElement = requireString(enterMember.arguments.element, "member input element");
+  const memberElement = memberInputElement(enterMember, events);
   const submitElement = requireString(submitLookup.arguments.element, "submit lookup element");
   const steps: ReplayStep[] = [
     {

@@ -35,18 +35,24 @@ ignored by Git.
 npm run stage0 -- --list
 ```
 
-## Run one scenario
+## Run a natural-language goal
 
-The first atomic task runs by default:
+Pass the requested work with `--goal`. The scenario is a reviewed safety
+profile: it defines permissions and any handoff boundary, while the goal tells
+the model what to do. Goal text cannot widen those permissions.
 
 ```bash
-npm run stage0 -- --scenario a1
+npm run stage0 -- \
+  --scenario a1 \
+  --goal "Find member 100042 and return the displayed name and status. Do not open an account."
 ```
+
+Omit `--goal` to use the safety profile's built-in evaluation prompt.
 
 Use `--headed` to watch the browser:
 
 ```bash
-npm run stage0 -- --scenario a1 --headed
+npm run stage0 -- --scenario a1 --goal "Find member 100042." --headed
 ```
 
 ## Record and compile a capability
@@ -64,6 +70,7 @@ Use `--artifact-output` when a second copy is needed at a predictable path:
 ```bash
 npm run stage0 -- \
   --scenario a1 \
+  --goal "Find member 100042 and return the displayed name and status." \
   --emit-artifact \
   --artifact-output tmp/generated/northstar.find-member.json
 ```
@@ -106,10 +113,11 @@ visible in that exact browser session. It verifies and stops there; it does not
 perform the final simulated submission. The default handoff timeout is 15
 minutes; use `--human-timeout-ms` and `--human-poll-ms` to override it.
 
-Override the model without changing code:
+Kimi K2.6 with high reasoning is the reproducible default. Override the model
+without changing code:
 
 ```bash
-npm run stage0 -- --scenario a1 --model moonshotai/kimi-k2.6
+npm run stage0 -- --scenario a1 --model <openrouter-model-id>
 ```
 
 Other useful controls are `--reasoning-effort`, `--max-steps`, `--max-tokens`,
@@ -150,7 +158,8 @@ time. The runner redacts the configured API key from evidence and logs.
 - Direct navigation is restricted to the configured target origin.
 - Arbitrary JavaScript evaluation and file upload are not offered to the
   model.
-- Only scenario `a4` authorizes accepting the fake final-submission dialog.
+- `--goal` text cannot change the selected profile's safety permissions.
+- Only safety profile `a4` authorizes accepting the fake final-submission dialog.
 - Supervisor acknowledgement is always blocked from model tool calls and must
   be clicked by a person in the live browser.
 - Tool calls are capped, and each run has a model-response timeout.

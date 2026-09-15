@@ -5,15 +5,16 @@ import { EvidenceRecorder } from "./evidence.js";
 import { OpenRouterClient } from "./openrouter.js";
 import { PlaywrightMcpClient } from "./playwright-mcp.js";
 import { runDiscovery } from "./runner.js";
-import { getScenario, scenarios } from "./scenarios.js";
+import { scenarioForGoal, scenarios } from "./scenarios.js";
 import { compileDiscoveryRun, supportsArtifactCompilation } from "./artifact-compiler.js";
 
 const parsed = parseArgs({
   options: {
     scenario: { type: "string", short: "s", default: "a1" },
+    goal: { type: "string" },
     model: {
       type: "string",
-      default: process.env.OPENROUTER_MODEL ?? "anthropic/claude-opus-5"
+      default: process.env.OPENROUTER_MODEL ?? "moonshotai/kimi-k2.6"
     },
     "reasoning-effort": {
       type: "string",
@@ -48,14 +49,14 @@ if (!apiKey) {
   throw new Error("OPENROUTER_API_KEY is missing. Copy .env.example to .env and add the local key.");
 }
 
-const scenario = getScenario(parsed.values.scenario ?? "a1");
+const scenario = scenarioForGoal(parsed.values.scenario ?? "a1", parsed.values.goal);
 const emitArtifact = Boolean(parsed.values["emit-artifact"] || parsed.values["artifact-output"]);
 if (emitArtifact && !supportsArtifactCompilation(scenario.id)) {
   throw new Error(
     `--emit-artifact currently supports scenario a1; ${scenario.id} has no reviewed compiler profile.`
   );
 }
-const model = parsed.values.model ?? "anthropic/claude-opus-5";
+const model = parsed.values.model ?? "moonshotai/kimi-k2.6";
 const reasoningEffort = parsed.values["reasoning-effort"] ?? "high";
 const targetUrl = new URL(parsed.values["target-url"] ?? "https://target-app-gamma.vercel.app/").toString();
 const maxSteps = Number.parseInt(parsed.values["max-steps"] ?? "30", 10);
@@ -103,7 +104,8 @@ const browser = new PlaywrightMcpClient({
 });
 
 console.log(`Run: ${evidence.runId}`);
-console.log(`Scenario: ${scenario.id} — ${scenario.name}`);
+console.log(`Safety profile: ${scenario.id} — ${scenario.name}`);
+console.log(`Goal: ${scenario.prompt}`);
 console.log(`Model: ${model} (${reasoningEffort} reasoning)`);
 console.log(`Evidence: ${evidence.runDirectory}`);
 if (waitForHuman) console.log(`Live human handoff: enabled (${humanTimeoutMs} ms timeout)`);
