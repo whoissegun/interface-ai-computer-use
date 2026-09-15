@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "kind": "discovery_artifact_compilation",
+  "status": "compiled",
+  "compilerProfile": "northstar.find-member@1",
+  "sourceRunId": "2026-09-12T04-42-43-561Z-a1-3ba9b18a",
+  "sourceScenario": "a1",
+  "sourceTargetOrigin": "https://target-app-gamma.vercel.app",
+  "recognizedActions": [
+    {
+      "callNumber": 1,
+      "toolName": "browser_navigate",
+      "compiledAction": "navigate"
+    },
+    {
+      "callNumber": 3,
+      "toolName": "browser_click",
+      "compiledAction": "click"
+    },
+    {
+      "callNumber": 6,
+      "toolName": "browser_type",
+      "compiledAction": "type"
+    },
+    {
+      "callNumber": 7,
+      "toolName": "browser_click",
+      "compiledAction": "click"
+    }
+  ],
+  "ignoredObservationCalls": [
+    {
+      "callNumber": 2,
+      "toolName": "browser_snapshot"
+    },
+    {
+      "callNumber": 4,
+      "toolName": "browser_wait_for"
+    },
+    {
+      "callNumber": 5,
+      "toolName": "browser_snapshot"
+    },
+    {
+      "callNumber": 8,
+      "toolName": "browser_wait_for"
+    },
+    {
+      "callNumber": 9,
+      "toolName": "browser_snapshot"
+    }
+  ],
+  "validation": "passed",
+  "ephemeralTargetsPersisted": false,
+  "sampleInputValuesPersisted": false,
+  "artifactPath": "capability.json"
+}

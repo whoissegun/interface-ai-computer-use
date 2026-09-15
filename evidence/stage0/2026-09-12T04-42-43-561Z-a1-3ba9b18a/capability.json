@@ -1,0 +1,182 @@
+{
+  "schemaVersion": 1,
+  "kind": "computer_use_capability",
+  "id": "northstar.find-member",
+  "version": "1.0.0",
+  "name": "Find a Northstar member",
+  "description": "Find a member relationship by its exact member number and return the displayed identity summary.",
+  "provenance": {
+    "discoveryScenario": "a1",
+    "discoveryRunIds": [
+      "2026-09-12T04-42-43-561Z-a1-3ba9b18a"
+    ],
+    "compiledBy": "reviewed_trace_compiler"
+  },
+  "surface": {
+    "kind": "web_accessibility",
+    "application": "northstar-corebank",
+    "applicationVersion": "7.4",
+    "allowedOrigins": [
+      "https://target-app-gamma.vercel.app"
+    ]
+  },
+  "risk": {
+    "level": "read_only",
+    "requiresConfirmation": false,
+    "allowedActions": [
+      "navigate",
+      "find",
+      "click",
+      "type",
+      "snapshot",
+      "screenshot"
+    ]
+  },
+  "inputs": {
+    "memberNumber": {
+      "type": "string",
+      "description": "Exact member number shown in CoreBank, up to 16 letters, digits, or hyphens.",
+      "minLength": 1,
+      "maxLength": 16,
+      "pattern": "^[A-Za-z0-9-]+$",
+      "logPolicy": "last4"
+    }
+  },
+  "outputs": {
+    "memberNumber": {
+      "type": "string",
+      "description": "Member number confirmed on the relationship summary.",
+      "extract": {
+        "kind": "accessibility_table_row",
+        "label": "Member #"
+      },
+      "logPolicy": "last4"
+    },
+    "displayedName": {
+      "type": "string",
+      "description": "Member name displayed by CoreBank.",
+      "extract": {
+        "kind": "accessibility_table_row",
+        "label": "Name"
+      },
+      "logPolicy": "redact"
+    },
+    "memberStatus": {
+      "type": "string",
+      "description": "Relationship status displayed by CoreBank.",
+      "extract": {
+        "kind": "accessibility_table_row",
+        "label": "Status"
+      },
+      "logPolicy": "plain"
+    }
+  },
+  "steps": [
+    {
+      "id": "open_application",
+      "action": "navigate",
+      "path": "/",
+      "expect": {
+        "kind": "visible_text",
+        "text": "Operations Menu"
+      }
+    },
+    {
+      "id": "open_member_lookup",
+      "action": "click",
+      "locator": {
+        "kind": "accessibility",
+        "role": "link",
+        "name": "MEMBER LOOKUP",
+        "exact": true,
+        "rationale": "Compiled from the recorded operator-facing link name; temporary Playwright refs are deliberately discarded and resolved fresh during replay."
+      },
+      "expect": {
+        "kind": "visible_text",
+        "text": "MBR-10 Member Inquiry"
+      }
+    },
+    {
+      "id": "enter_member_number",
+      "action": "type",
+      "locator": {
+        "kind": "accessibility",
+        "role": "textbox",
+        "nearText": "Member Number",
+        "exact": true,
+        "rationale": "Compiled from the visible label next to the legacy textbox because the control has no programmatic name."
+      },
+      "input": "memberNumber"
+    },
+    {
+      "id": "submit_member_lookup",
+      "action": "click",
+      "locator": {
+        "kind": "accessibility",
+        "role": "button",
+        "name": "F6 - Locate",
+        "exact": true,
+        "rationale": "Compiled from the unique function-key caption observed during the successful discovery run."
+      }
+    }
+  ],
+  "completion": {
+    "checkpoint": {
+      "kind": "visible_text",
+      "text": "Member Relationship Summary"
+    },
+    "outcomes": [
+      {
+        "classification": "business_outcome",
+        "code": "N04",
+        "marker": "BUSINESS RESULT N04",
+        "message": "No member relationship matched the supplied member number."
+      },
+      {
+        "classification": "recoverable",
+        "code": "T14",
+        "marker": "RECOVERABLE HOST CONDITION T14",
+        "message": "The relationship index timed out; retry the same inquiry once.",
+        "maxAttempts": 1,
+        "recovery": {
+          "id": "retry_member_lookup",
+          "action": "click",
+          "locator": {
+            "kind": "accessibility",
+            "role": "link",
+            "name": "F5 - Retry host request",
+            "exact": true,
+            "rationale": "The reviewed compiler profile permits only the dedicated retry link that preserves member context."
+          }
+        }
+      },
+      {
+        "classification": "failure",
+        "code": "S17",
+        "marker": "SECURITY S17",
+        "failureKind": "permission_denied",
+        "message": "The operator is not permitted to view this relationship."
+      },
+      {
+        "classification": "human_required",
+        "code": "E01",
+        "marker": "SESSION E01",
+        "message": "The session expired and a human operator must sign in again."
+      },
+      {
+        "classification": "failure",
+        "code": "X500",
+        "marker": "HOST X500",
+        "failureKind": "application_error",
+        "message": "CoreBank returned an unrecoverable host failure."
+      }
+    ],
+    "assertions": [
+      {
+        "kind": "output_equals_input",
+        "output": "memberNumber",
+        "input": "memberNumber"
+      }
+    ]
+  }
+}

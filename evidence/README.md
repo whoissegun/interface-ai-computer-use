@@ -20,7 +20,11 @@ browser snapshots, screenshot, or final result.
    [39-run discovery summary](./stage0/stability-2026-09-14.md). It covers four
    business tasks, runtime errors, transient recovery, policy enforcement, and
    a chained task across three fresh sessions per scenario.
-3. **Typed capability.** Review
+3. **Discovery becomes a typed capability.** Read the
+   [discovery-to-artifact report](./stage0/discovery-to-artifact-2026-09-15.md),
+   inspect the generated
+   [`capability.json`](./stage0/2026-09-12T04-42-43-561Z-a1-3ba9b18a/capability.json),
+   and compare it with the reviewed checked-in
    [`northstar.find-member@1.0.0`](../capabilities/northstar.find-member.v1.json)
    alongside the shared
    [artifact schema](../capabilities/schema.v1.json). The other checked-in

@@ -168,7 +168,7 @@ export type CapabilityArtifact = {
   provenance: {
     discoveryScenario: string;
     discoveryRunIds: string[];
-    compiledBy: "human_reviewed";
+    compiledBy: "human_reviewed" | "reviewed_trace_compiler";
   };
   surface: {
     kind: "web_accessibility";

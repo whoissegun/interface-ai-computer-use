@@ -10,6 +10,10 @@ The repeated 39-run experiment is summarized in
 The three same-session supervisor handoff runs are summarized in
 [Stage 0 Live Human Handoff Experiment — 2026-09-14](./hitl-2026-09-14.md).
 
+The executable bridge from a retained genuine discovery run to a generated,
+schema-valid capability and its successful no-LLM replay is summarized in
+[Discovery-to-Artifact Compilation — 2026-09-15](./discovery-to-artifact-2026-09-15.md).
+
 ## First atomic task: A1
 
 | Run | Model | Outcome | Finding |

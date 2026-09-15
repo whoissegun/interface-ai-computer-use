@@ -21,6 +21,13 @@ validation are recorded in
 
 Four production-style artifacts cover every core operation in the target:
 member lookup, balance inquiry, prepare-to-review, and safe final simulation.
+The A1 discovery runner can also compile its successful recorded trajectory
+into a validated member-lookup capability:
+
+```bash
+npm run stage0 -- --scenario a1 --emit-artifact
+```
+
 Run the first deterministically, without an LLM or API key, with:
 
 ```bash
@@ -55,3 +62,6 @@ Usage, safety behavior, and examples are in the
 [capability-agent guide](./docs/capability-agent.md). The orchestration boundary
 and three-call ceiling are recorded in
 [ADR 0005](./docs/decisions/0005-bounded-natural-language-capability-routing.md).
+The fail-closed trace compiler and its reviewed-profile boundary are recorded
+in
+[ADR 0006](./docs/decisions/0006-conservative-discovery-trace-compilation.md).

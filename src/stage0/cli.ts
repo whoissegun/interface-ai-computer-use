@@ -1,11 +1,12 @@
 import "dotenv/config";
 import { parseArgs } from "node:util";
-import { resolve } from "node:path";
+import { relative, resolve } from "node:path";
 import { EvidenceRecorder } from "./evidence.js";
 import { OpenRouterClient } from "./openrouter.js";
 import { PlaywrightMcpClient } from "./playwright-mcp.js";
 import { runDiscovery } from "./runner.js";
 import { getScenario, scenarios } from "./scenarios.js";
+import { compileDiscoveryRun, supportsArtifactCompilation } from "./artifact-compiler.js";
 
 const parsed = parseArgs({
   options: {
@@ -28,6 +29,8 @@ const parsed = parseArgs({
     "wait-for-human": { type: "boolean", default: false },
     "human-timeout-ms": { type: "string", default: "900000" },
     "human-poll-ms": { type: "string", default: "1000" },
+    "emit-artifact": { type: "boolean", default: false },
+    "artifact-output": { type: "string" },
     list: { type: "boolean", default: false }
   },
   strict: true
@@ -46,6 +49,12 @@ if (!apiKey) {
 }
 
 const scenario = getScenario(parsed.values.scenario ?? "a1");
+const emitArtifact = Boolean(parsed.values["emit-artifact"] || parsed.values["artifact-output"]);
+if (emitArtifact && !supportsArtifactCompilation(scenario.id)) {
+  throw new Error(
+    `--emit-artifact currently supports scenario a1; ${scenario.id} has no reviewed compiler profile.`
+  );
+}
 const model = parsed.values.model ?? "anthropic/claude-opus-5";
 const reasoningEffort = parsed.values["reasoning-effort"] ?? "high";
 const targetUrl = new URL(parsed.values["target-url"] ?? "https://target-app-gamma.vercel.app/").toString();
@@ -122,6 +131,25 @@ try {
     onProgress: console.log
   });
   await Promise.allSettled(pendingStderr);
+  if (emitArtifact) {
+    if (summary.status !== "completed") {
+      throw new Error(`Cannot emit an artifact from a discovery run with status ${summary.status}.`);
+    }
+    const compilation = await compileDiscoveryRun({
+      runDirectory: evidence.runDirectory,
+      ...(parsed.values["artifact-output"]
+        ? { outputPath: resolve(parsed.values["artifact-output"]) }
+        : {})
+    });
+    await evidence.record("artifact_compiled", {
+      compilerProfile: compilation.report.compilerProfile,
+      artifactPath: relative(evidence.runDirectory, compilation.artifactPath),
+      reportPath: relative(evidence.runDirectory, compilation.reportPath),
+      validation: compilation.report.validation
+    });
+    console.log(`Artifact: ${compilation.artifactPath}`);
+    console.log(`Compilation report: ${compilation.reportPath}`);
+  }
   console.log(JSON.stringify(summary, null, 2));
   process.exitCode = summary.status === "completed" ? 0 : 1;
 } catch (error) {
