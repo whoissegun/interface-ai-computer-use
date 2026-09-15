@@ -1,0 +1,27 @@
+{
+  "runId": "2026-09-15T03-49-43-273Z-agent-f8b623c1",
+  "task": "For member 100042, read the available balance of account S-0042-01.",
+  "model": "moonshotai/kimi-k2.6",
+  "maxCapabilityCalls": 3,
+  "riskyActionApproved": false,
+  "offeredCapabilities": [
+    {
+      "toolName": "find_member",
+      "artifactId": "northstar.find-member",
+      "artifactVersion": "1.0.0"
+    },
+    {
+      "toolName": "read_balance",
+      "artifactId": "northstar.read-balance",
+      "artifactVersion": "1.0.0"
+    },
+    {
+      "toolName": "prepare_subaccount",
+      "artifactId": "northstar.prepare-subaccount",
+      "artifactVersion": "1.0.0"
+    }
+  ],
+  "modelChoosesCapability": true,
+  "llmInReplayDecisionLoop": false,
+  "startedAt": "2026-09-15T03:49:43.273Z"
+}

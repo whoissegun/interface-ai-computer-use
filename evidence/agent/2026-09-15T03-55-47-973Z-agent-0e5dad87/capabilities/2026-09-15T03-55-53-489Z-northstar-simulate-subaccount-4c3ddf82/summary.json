@@ -1,0 +1,30 @@
+{
+  "runId": "2026-09-15T03-55-53-489Z-northstar-simulate-subaccount-4c3ddf82",
+  "capabilityId": "northstar.simulate-subaccount",
+  "capabilityVersion": "1.0.0",
+  "startedAt": "2026-09-15T03:55:53.496Z",
+  "finishedAt": "2026-09-15T03:55:58.056Z",
+  "elapsedMs": 4560,
+  "completedSteps": [
+    "open_application",
+    "open_member_lookup",
+    "enter_member_number",
+    "submit_member_lookup",
+    "open_subaccount_form",
+    "select_product",
+    "enter_nickname",
+    "enter_opening_deposit",
+    "choose_statement_delivery",
+    "continue_to_review",
+    "verify_review_fields",
+    "start_final_simulation",
+    "confirm_final_simulation"
+  ],
+  "recoveries": [],
+  "humanHandoffs": [],
+  "status": "success",
+  "output": {
+    "trainingReference": "TRAIN-100042-004000",
+    "result": "Review flow completed in safe simulation mode"
+  }
+}

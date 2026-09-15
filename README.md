@@ -41,3 +41,17 @@ of each capability:
 ```bash
 npm run replay:stability
 ```
+
+The natural-language layer exposes those artifacts as four business tools to a
+bounded routing model. Browser actions and human handoff remain deterministic
+and are never offered to that model:
+
+```bash
+npm run agent -- --task \
+  "For member 100042, read the available balance of account S-0042-01."
+```
+
+Usage, safety behavior, and examples are in the
+[capability-agent guide](./docs/capability-agent.md). The orchestration boundary
+and three-call ceiling are recorded in
+[ADR 0005](./docs/decisions/0005-bounded-natural-language-capability-routing.md).

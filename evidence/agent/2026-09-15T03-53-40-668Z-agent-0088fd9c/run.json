@@ -1,0 +1,27 @@
+{
+  "runId": "2026-09-15T03-53-40-668Z-agent-0088fd9c",
+  "task": "yo can u find mbr 100042 n lmk the name thats on it pls",
+  "model": "moonshotai/kimi-k2.6",
+  "maxCapabilityCalls": 3,
+  "riskyActionApproved": false,
+  "offeredCapabilities": [
+    {
+      "toolName": "find_member",
+      "artifactId": "northstar.find-member",
+      "artifactVersion": "1.0.0"
+    },
+    {
+      "toolName": "read_balance",
+      "artifactId": "northstar.read-balance",
+      "artifactVersion": "1.0.0"
+    },
+    {
+      "toolName": "prepare_subaccount",
+      "artifactId": "northstar.prepare-subaccount",
+      "artifactVersion": "1.0.0"
+    }
+  ],
+  "modelChoosesCapability": true,
+  "llmInReplayDecisionLoop": false,
+  "startedAt": "2026-09-15T03:53:40.668Z"
+}

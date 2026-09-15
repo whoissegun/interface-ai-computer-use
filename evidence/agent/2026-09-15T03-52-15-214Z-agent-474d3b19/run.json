@@ -1,0 +1,32 @@
+{
+  "runId": "2026-09-15T03-52-15-214Z-agent-474d3b19",
+  "task": "Simulate final submission for member 100042: Regular Savings, nickname Emergency Fund, CAD 40 opening deposit, paper statements.",
+  "model": "moonshotai/kimi-k2.6",
+  "maxCapabilityCalls": 3,
+  "riskyActionApproved": true,
+  "offeredCapabilities": [
+    {
+      "toolName": "find_member",
+      "artifactId": "northstar.find-member",
+      "artifactVersion": "1.0.0"
+    },
+    {
+      "toolName": "read_balance",
+      "artifactId": "northstar.read-balance",
+      "artifactVersion": "1.0.0"
+    },
+    {
+      "toolName": "prepare_subaccount",
+      "artifactId": "northstar.prepare-subaccount",
+      "artifactVersion": "1.0.0"
+    },
+    {
+      "toolName": "simulate_subaccount",
+      "artifactId": "northstar.simulate-subaccount",
+      "artifactVersion": "1.0.0"
+    }
+  ],
+  "modelChoosesCapability": true,
+  "llmInReplayDecisionLoop": false,
+  "startedAt": "2026-09-15T03:52:15.214Z"
+}

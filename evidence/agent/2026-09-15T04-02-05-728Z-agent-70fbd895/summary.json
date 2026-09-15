@@ -1,0 +1,26 @@
+{
+  "runId": "2026-09-15T04-02-05-728Z-agent-70fbd895",
+  "status": "completed",
+  "model": "moonshotai/kimi-k2.6",
+  "finalAnswer": "Stopped: preparing this Regular Savings subaccount requires an authorized supervisor review.",
+  "modelTurns": 2,
+  "capabilityCallCount": 1,
+  "capabilityCalls": [
+    {
+      "callNumber": 1,
+      "toolName": "prepare_subaccount",
+      "status": "human_required",
+      "runId": "2026-09-15T04-02-11-230Z-northstar-prepare-subaccount-8ef23162",
+      "code": "H91"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 1133,
+    "completion_tokens": 422,
+    "total_tokens": 1555,
+    "cost": 0.001724452
+  },
+  "startedAt": "2026-09-15T04:02:05.728Z",
+  "finishedAt": "2026-09-15T04:02:27.470Z",
+  "elapsedMs": 21742
+}

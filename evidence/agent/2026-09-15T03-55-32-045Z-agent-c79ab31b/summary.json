@@ -1,0 +1,26 @@
+{
+  "runId": "2026-09-15T03-55-32-045Z-agent-c79ab31b",
+  "status": "completed",
+  "model": "moonshotai/kimi-k2.6",
+  "finalAnswer": "Stopped: A supervisor is required to review this prepared request in the live session (code H91). No further action was taken.",
+  "modelTurns": 2,
+  "capabilityCallCount": 1,
+  "capabilityCalls": [
+    {
+      "callNumber": 1,
+      "toolName": "prepare_subaccount",
+      "status": "human_required",
+      "runId": "2026-09-15T03-55-37-283Z-northstar-prepare-subaccount-4239028e",
+      "code": "H91"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 1133,
+    "completion_tokens": 308,
+    "total_tokens": 1441,
+    "cost": 0.001336852
+  },
+  "startedAt": "2026-09-15T03:55:32.045Z",
+  "finishedAt": "2026-09-15T03:55:47.966Z",
+  "elapsedMs": 15921
+}

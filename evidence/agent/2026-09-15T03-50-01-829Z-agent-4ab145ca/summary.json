@@ -1,0 +1,25 @@
+{
+  "runId": "2026-09-15T03-50-01-829Z-agent-4ab145ca",
+  "status": "completed",
+  "model": "moonshotai/kimi-k2.6",
+  "finalAnswer": "Your Holiday Savings sub-account is ready for final review:\n\n- **Member:** 100042  \n- **Product:** HOLIDAY_SAVINGS  \n- **Nickname:** Rainy Day  \n- **Opening Deposit:** $25.00  \n- **Statements:** ELECTRONIC  \n\nIt’s stopped at the verified review screen without submission, as requested.",
+  "modelTurns": 2,
+  "capabilityCallCount": 1,
+  "capabilityCalls": [
+    {
+      "callNumber": 1,
+      "toolName": "prepare_subaccount",
+      "status": "success",
+      "runId": "2026-09-15T03-50-09-046Z-northstar-prepare-subaccount-86b097a8"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 1663,
+    "completion_tokens": 283,
+    "total_tokens": 1946,
+    "cost": 0.0015592520000000001
+  },
+  "startedAt": "2026-09-15T03:50:01.829Z",
+  "finishedAt": "2026-09-15T03:50:16.225Z",
+  "elapsedMs": 14396
+}

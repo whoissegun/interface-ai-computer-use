@@ -1,0 +1,25 @@
+{
+  "runId": "2026-09-15T04-00-20-000Z-northstar-read-balance-ea7a7aa3",
+  "capabilityId": "northstar.read-balance",
+  "capabilityVersion": "1.0.0",
+  "startedAt": "2026-09-15T04:00:20.003Z",
+  "finishedAt": "2026-09-15T04:00:22.990Z",
+  "elapsedMs": 2987,
+  "completedSteps": [
+    "open_application",
+    "open_member_lookup",
+    "enter_member_number",
+    "submit_member_lookup",
+    "open_requested_account"
+  ],
+  "recoveries": [],
+  "humanHandoffs": [],
+  "status": "success",
+  "output": {
+    "memberNumber": "***0042",
+    "accountNumber": "***2-01",
+    "product": "Regular Savings",
+    "ledgerBalance": "[REDACTED]",
+    "availableBalance": "[REDACTED]"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "runId": "2026-09-15T04-00-16-209Z-agent-ec7f5738",
+  "status": "completed",
+  "model": "moonshotai/kimi-k2.6",
+  "finalAnswer": "The available balance for account **S-0042-01** (Regular Savings) under member **100042** is **$2,381.37**. The ledger balance is $2,481.37.",
+  "modelTurns": 2,
+  "capabilityCallCount": 1,
+  "capabilityCalls": [
+    {
+      "callNumber": 1,
+      "toolName": "read_balance",
+      "status": "success",
+      "runId": "2026-09-15T04-00-20-000Z-northstar-read-balance-ea7a7aa3"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 1626,
+    "completion_tokens": 261,
+    "total_tokens": 1887,
+    "cost": 0.0014629920000000002
+  },
+  "startedAt": "2026-09-15T04:00:16.209Z",
+  "finishedAt": "2026-09-15T04:00:27.156Z",
+  "elapsedMs": 10947
+}

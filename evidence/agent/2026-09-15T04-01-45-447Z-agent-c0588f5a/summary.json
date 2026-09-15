@@ -1,0 +1,18 @@
+{
+  "runId": "2026-09-15T04-01-45-447Z-agent-c0588f5a",
+  "status": "completed",
+  "model": "moonshotai/kimi-k2.6",
+  "finalAnswer": "I can prepare that sub-account to the final review screen with those details, but I don't have a capability that performs the final submission. Would you like me to proceed with the preparation step instead?",
+  "modelTurns": 1,
+  "capabilityCallCount": 0,
+  "capabilityCalls": [],
+  "usage": {
+    "prompt_tokens": 761,
+    "completion_tokens": 913,
+    "total_tokens": 1674,
+    "cost": 0.003178092
+  },
+  "startedAt": "2026-09-15T04:01:45.447Z",
+  "finishedAt": "2026-09-15T04:02:05.722Z",
+  "elapsedMs": 20275
+}

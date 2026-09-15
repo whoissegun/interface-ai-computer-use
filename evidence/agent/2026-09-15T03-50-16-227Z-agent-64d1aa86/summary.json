@@ -1,0 +1,31 @@
+{
+  "runId": "2026-09-15T03-50-16-227Z-agent-64d1aa86",
+  "status": "completed",
+  "model": "moonshotai/kimi-k2.6",
+  "finalAnswer": "Account **S-0042-01** for member **100042** has an available balance of **CAD 2,381.37** (ledger balance: CAD 2,481.37).\n\nThe **Holiday Savings** sub-account for member **100042** has been prepared with:\n- Nickname: **Rainy Day**\n- Opening deposit: **CAD 25**\n- Statement delivery: **Electronic**\n\nThe application is stopped at the final review screen, ready for your verification.",
+  "modelTurns": 2,
+  "capabilityCallCount": 2,
+  "capabilityCalls": [
+    {
+      "callNumber": 1,
+      "toolName": "read_balance",
+      "status": "success",
+      "runId": "2026-09-15T03-50-22-555Z-northstar-read-balance-055d2a0d"
+    },
+    {
+      "callNumber": 2,
+      "toolName": "prepare_subaccount",
+      "status": "success",
+      "runId": "2026-09-15T03-50-25-364Z-northstar-prepare-subaccount-da9b2558"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 1817,
+    "completion_tokens": 516,
+    "total_tokens": 2333,
+    "cost": 0.002073284
+  },
+  "startedAt": "2026-09-15T03:50:16.227Z",
+  "finishedAt": "2026-09-15T03:50:47.042Z",
+  "elapsedMs": 30815
+}

@@ -1,0 +1,25 @@
+{
+  "runId": "2026-09-15T03-53-30-749Z-agent-9fedfcfd",
+  "status": "completed",
+  "model": "moonshotai/kimi-k2.6",
+  "finalAnswer": "For member 100042, account S-0042-01 (Regular Savings) has an available balance of **$2,381.37**.",
+  "modelTurns": 2,
+  "capabilityCallCount": 1,
+  "capabilityCalls": [
+    {
+      "callNumber": 1,
+      "toolName": "read_balance",
+      "status": "success",
+      "runId": "2026-09-15T03-53-34-757Z-northstar-read-balance-45a3bd64"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 1626,
+    "completion_tokens": 182,
+    "total_tokens": 1808,
+    "cost": 0.000826904
+  },
+  "startedAt": "2026-09-15T03:53:30.749Z",
+  "finishedAt": "2026-09-15T03:53:40.662Z",
+  "elapsedMs": 9913
+}

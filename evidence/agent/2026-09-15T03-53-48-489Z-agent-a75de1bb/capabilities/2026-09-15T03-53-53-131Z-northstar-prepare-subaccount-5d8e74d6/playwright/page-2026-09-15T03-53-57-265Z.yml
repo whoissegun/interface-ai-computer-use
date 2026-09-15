@@ -1,0 +1,42 @@
+- generic [ref=e1]:
+  - iframe [ref=e2]:
+    - generic [ref=f1e1]:
+      - text: NORTHSTAR CU
+      - link "HOME" [ref=f1e2] [cursor=pointer]:
+        - /url: /app/home
+      - link "MEMBER LOOKUP" [ref=f1e3] [cursor=pointer]:
+        - /url: /app/member-search
+      - link "OPS HELP" [ref=f1e4] [cursor=pointer]:
+        - /url: /app/help
+      - text: "BRANCH 019 | USER: DEMO7"
+  - iframe [active] [ref=e3]:
+    - generic [active] [ref=f2e1]:
+      - text: New Sub-account — Final Review COREBANK / TELLER 7.4
+      - generic [ref=f2e2]: REVIEW CHECKPOINT. Verify all fields. No account exists yet.
+      - table [ref=f2e3]:
+        - rowgroup [ref=f2e4]:
+          - row [ref=f2e5]:
+            - rowheader "Member" [ref=f2e6]
+            - cell "100042 — Avery Example" [ref=f2e7]
+          - row [ref=f2e8]:
+            - rowheader "Product" [ref=f2e9]
+            - cell "S14 - Holiday Savings" [ref=f2e10]
+          - row [ref=f2e11]:
+            - rowheader "Nickname" [ref=f2e12]
+            - cell "Rainy Day" [ref=f2e13]
+          - row [ref=f2e14]:
+            - rowheader "Opening deposit" [ref=f2e15]
+            - cell "CAD 25.00" [ref=f2e16]
+          - row [ref=f2e17]:
+            - rowheader "Statements" [ref=f2e18]
+            - cell "Electronic" [ref=f2e19]
+          - row [ref=f2e20]:
+            - rowheader "Posting mode" [ref=f2e21]
+            - cell "SIMULATION — NO CORE WRITE" [ref=f2e22]
+      - button "SIMULATE FINAL SUBMISSION" [ref=f2e24]
+      - paragraph [ref=f2e25]:
+        - link "F4 - Correct entry" [ref=f2e26] [cursor=pointer]:
+          - /url: /app/subaccount/new?member=100042
+        - link "Cancel request" [ref=f2e27] [cursor=pointer]:
+          - /url: /app/member/100042
+      - generic [ref=f2e28]: Northstar Community Credit Union — TRAINING SYSTEM — fictitious data only
