@@ -24,7 +24,8 @@ We will:
 2. Give every scenario a fresh isolated Chrome browser context.
 3. Connect Playwright MCP to OpenRouter with a small tool-calling loop written
    in this repository.
-4. Default Stage 0 discovery to `anthropic/claude-opus-5` with high reasoning.
+4. Use `moonshotai/kimi-k2.6` with high reasoning as the reproducible Stage 0
+   default, while retaining the original Opus comparison evidence.
 5. Keep the model configurable so the same scenarios can later compare Opus,
    Kimi K2.6, and other tool-capable models.
 6. Save the prompt, offered tools, model turns, tool calls, tool results,
@@ -53,7 +54,7 @@ Sources:
 - [Playwright MCP getting-started documentation](https://github.com/microsoft/playwright/blob/main/docs/src/getting-started-mcp.md)
 - [MCP TypeScript client documentation](https://github.com/modelcontextprotocol/typescript-sdk/blob/main/docs/get-started/first-client.md)
 
-## Why Claude Opus 5 for initial discovery
+## Why Claude Opus 5 was the initial candidate
 
 Our initial model choice favors tool-use reliability and unfamiliar UI
 reasoning over cost. Anthropic reports that Opus 5 leads its computer-use
@@ -62,8 +63,8 @@ leaderboard remains useful independent context, although newly announced model
 results can appear in provider reports before the public table is updated.
 OpenRouter confirms that its Opus 5 route accepts images and tool calls.
 
-This evidence supports Opus 5 as our first discovery model; it does not prove
-that Opus 5 is the best production choice for every task or price point.
+This evidence supported trying Opus 5 first; it did not prove that Opus 5 was
+the best usable choice for this target or provider route.
 
 Sources:
 
@@ -86,7 +87,8 @@ Benefits:
 
 Trade-offs:
 
-- Opus 5 costs more than candidate production models.
+- Discovery still spends model tokens and its output must be reviewed before
+  it becomes executable.
 - Accessibility snapshots may miss visual-only information; screenshots remain
   available as evidence or a fallback.
 - Playwright MCP is an exploration dependency, not automatically the final
@@ -108,6 +110,10 @@ the fictional member-lookup task triggered Anthropic's cyber-content filter.
 The same harness and task then completed successfully with configurable model
 `moonshotai/kimi-k2.6`.
 
-This does not erase the reasoning behind the initial choice; it is new runtime
-evidence that may change it. We are retaining both trajectories and will decide
-whether to replace the default after reviewing this first result.
+This did not erase the reasoning behind the initial choice, but it was direct
+runtime evidence against making that route the reproducible default. Kimi K2.6
+then produced the expected outcome in 37 of 39 isolated scenario runs. The two
+misses exposed one screenshot limitation and one ambiguous prompt; one miss
+also exercised the navigation guardrail correctly. We therefore changed the
+checked-in Stage 0 default to `moonshotai/kimi-k2.6` with high reasoning. Model
+selection remains configurable, and the retained report documents both misses.

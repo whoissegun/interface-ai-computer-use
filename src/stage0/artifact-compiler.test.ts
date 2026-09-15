@@ -46,6 +46,57 @@ test("the compiler writes both the artifact and an inspectable compilation repor
   assert.equal(report.sampleInputValuesPersisted, false);
 });
 
+test("an optional Playwright element hint can be recovered from the recorded target", async () => {
+  const directory = await mkdtemp(join(tmpdir(), "discovery-compiler-target-"));
+  await cp(successfulRun, directory, { recursive: true });
+  const eventsPath = join(directory, "events.ndjson");
+  const events = (await readFile(eventsPath, "utf8"))
+    .split("\n")
+    .filter(Boolean)
+    .map((line) => {
+      const event = JSON.parse(line) as {
+        type: string;
+        data?: { toolName?: string; arguments?: Record<string, unknown> };
+      };
+      if (event.type === "tool_requested" && event.data?.toolName === "browser_type") {
+        delete event.data.arguments?.element;
+      }
+      return JSON.stringify(event);
+    })
+    .join("\n");
+  await writeFile(eventsPath, `${events}\n`);
+
+  const { artifact } = await buildCapabilityFromDiscoveryRun(directory);
+  assert.equal(artifact.steps[2]?.action, "type");
+  if (artifact.steps[2]?.action === "type") {
+    assert.equal(artifact.steps[2].locator.nearText, "Member Number");
+  }
+
+  const wrongDirectory = await mkdtemp(join(tmpdir(), "discovery-compiler-wrong-target-"));
+  await cp(successfulRun, wrongDirectory, { recursive: true });
+  const wrongEventsPath = join(wrongDirectory, "events.ndjson");
+  const wrongEvents = (await readFile(wrongEventsPath, "utf8"))
+    .split("\n")
+    .filter(Boolean)
+    .map((line) => {
+      const event = JSON.parse(line) as {
+        type: string;
+        data?: { toolName?: string; arguments?: Record<string, unknown> };
+      };
+      if (event.type === "tool_requested" && event.data?.toolName === "browser_type") {
+        delete event.data.arguments?.element;
+        if (event.data.arguments) event.data.arguments.target = "f2e4";
+      }
+      return JSON.stringify(event);
+    })
+    .join("\n");
+  await writeFile(wrongEventsPath, `${wrongEvents}\n`);
+  await assert.rejects(
+    buildCapabilityFromDiscoveryRun(wrongDirectory),
+    /not the recorded Member Number textbox/
+  );
+});
+
 test("failed or unrecognized discovery trajectories fail closed", async () => {
   const failedDirectory = await mkdtemp(join(tmpdir(), "discovery-compiler-failed-"));
   await cp(successfulRun, failedDirectory, { recursive: true });

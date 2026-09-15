@@ -126,3 +126,17 @@ export function getScenario(id: string): Scenario {
   }
   return scenario;
 }
+
+/**
+ * Apply a caller-supplied goal without allowing natural language to change the
+ * scenario's reviewed safety policy.
+ */
+export function scenarioForGoal(id: string, goal?: string): Scenario {
+  const scenario = getScenario(id);
+  if (goal === undefined) return scenario;
+
+  const prompt = goal.trim();
+  if (!prompt) throw new Error("--goal must contain a non-empty natural-language task.");
+
+  return { ...scenario, prompt };
+}
