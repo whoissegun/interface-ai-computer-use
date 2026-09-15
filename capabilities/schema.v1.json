@@ -41,7 +41,9 @@
           "minItems": 1,
           "items": { "type": "string", "minLength": 1 }
         },
-        "compiledBy": { "const": "human_reviewed" }
+        "compiledBy": {
+          "enum": ["human_reviewed", "reviewed_trace_compiler"]
+        }
       }
     },
     "surface": {

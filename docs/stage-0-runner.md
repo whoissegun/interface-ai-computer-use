@@ -2,8 +2,9 @@
 
 The Stage 0 runner connects an OpenRouter model to the official Playwright MCP
 server. It records an inspectable browser trajectory for one scenario at a
-time. It does not yet create a reusable capability or perform deterministic
-replay.
+time. For the end-to-end `a1` vertical slice, it can compile a successful
+trajectory into a validated reusable capability. Deterministic replay remains
+a separate execution path.
 
 ## Setup
 
@@ -48,6 +49,45 @@ Use `--headed` to watch the browser:
 npm run stage0 -- --scenario a1 --headed
 ```
 
+## Record and compile a capability
+
+Add `--emit-artifact` to compile a successful `a1` discovery trajectory. The
+generated `capability.json` and `artifact-compilation.json` are written inside
+the new evidence run:
+
+```bash
+npm run stage0 -- --scenario a1 --emit-artifact
+```
+
+Use `--artifact-output` when a second copy is needed at a predictable path:
+
+```bash
+npm run stage0 -- \
+  --scenario a1 \
+  --emit-artifact \
+  --artifact-output tmp/generated/northstar.find-member.json
+```
+
+Compilation is deterministic and deliberately conservative. It recognizes the
+reviewed A1 action pattern, derives stable accessible names from the recorded
+operator-facing element descriptions, parameterizes the sample member number,
+discards temporary Playwright refs, verifies the observed checkpoint, and then
+validates the artifact against `capabilities/schema.v1.json`. A failed run,
+unknown action, reordered flow, missing checkpoint, or unsupported scenario
+produces no artifact.
+
+An already-recorded run can be compiled without another model call:
+
+```bash
+npm run artifact:compile -- \
+  --run-dir evidence/stage0/2026-09-12T04-42-43-561Z-a1-3ba9b18a
+```
+
+The compiler currently supports only A1. Adding another operation requires a
+new reviewed contract profile for its typed inputs, outputs, outcomes,
+checkpoint, and risk policy; the system does not guess those safety-relevant
+details from a single successful trace.
+
 ## Run the live human handoff
 
 Scenario `x2` can pause at `HOLD H91` and keep its exact headed browser session
@@ -87,6 +127,8 @@ evidence/stage0/<timestamp>-<scenario>-<id>/
 ├── withheld-tools.json
 ├── events.ndjson
 ├── summary.json
+├── capability.json             # when --emit-artifact is used
+├── artifact-compilation.json   # recognized/ignored calls and validation
 ├── playwright-mcp.stderr.log
 ├── tool-*.png                  # when an image-producing tool is used
 └── playwright/                 # Playwright MCP session artifacts
